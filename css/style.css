@@ -14,12 +14,8 @@
 	text-align: right;
 	margin-bottom: 10px;
 }
-/*
-* styles for settings page
-*/
-.tstmnls_code {
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
-    font-size: 14px;
-    margin: 0 1px;
-    padding: 3px 5px 2px;
+/* admin styles */
+#tstmnls_author,
+#tstmnls_company_name {
+	width: 100%;
 }

@@ -1,10 +1,10 @@
 === Testimonials by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
-Tags: plugin, wordpress, testimonial, widget, custom post type, add testimonials, display testimonials, testimonials plugin, testimonial shortcode, testimonials widget, testimonial code, testinonial, testemonial, tastemonial, testimoneal, testemoneal, testimonila, author data, company data, multiple testimonials. 
-Requires at least: 3.5
-Tested up to: 4.2.3
-Stable tag: 0.1.3
+Tags: add testimonial, add testimonials plugin, add testimonials free plugin, add testimonials, author data, company data, create testimonials, custom post type, display testimonials, free, free plugin, free testimonials plugin, multiple testimonials, plugin, testimonial, testimonial shortcode, Testimonials plugin, testimonials widget, widget, wordpress, wp, wp plugin, wp free plugin, wp testimonials, wp testimonials plugin, wp simple testimonials plugin, wp free testimonials, wp free testimonials plugin, wordpress plugin, wordpress free plugin, wordpress testimonials, wordpress testimonials plugin, wordpress simple testimonials plugin, wordpress free testimonials, wordpress free testimonials plugin
+Requires at least: 3.8
+Tested up to: 4.3.1
+Stable tag: 0.1.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,18 +19,18 @@ This plugin allows creating and displaying a Testimonial on your website. This t
 
 http://www.youtube.com/watch?v=y-9_ThXTUS8
 
-<a href="http://www.youtube.com/watch?v=YMPuEmLELfk" target="_blank">Video instruction on Installation</a>
+<a href="http://www.youtube.com/watch?v=YMPuEmLELfk" target="_blank">Testimonials by BestWebSoft Video instruction on Installation</a>
 
-<a href="http://wordpress.org/plugins/bws-testimonials/faq/" target="_blank">FAQ</a>
+<a href="http://wordpress.org/plugins/bws-testimonials/faq/" target="_blank">Testimonials by BestWebSoft FAQ</a>
 
-<a href="http://support.bestwebsoft.com" target="_blank">Support</a>
+<a href="http://support.bestwebsoft.com" target="_blank">Testimonials by BestWebSoft Support</a>
 
 = Features =
 
-* Actions: Create a testimonial via custom post type.
-* Actions: Add author and company data to each testimonial.
-* Display: An option to display testimonials through the widget. 
-* Display: Choose a number of testimonials to be displayed.
+* Create a testimonial via custom post type.
+* Add author and company data to each testimonial.
+* Display testimonials through the widget or using the shortcode. 
+* Choose a number of testimonials to be displayed.
 
 = Recommended Plugins =
 
@@ -41,6 +41,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 
 = Translation =
 
+* Hungarian (hu_HU) (thanks to <a href="mailto:solarside09@gmail.com">Peter Aprily</a> www.aprily.com)
 * Russian (ru_RU)
 * Ukrainian (uk)
 
@@ -98,10 +99,15 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 1. Testimonials Settings page.
 2. Testimonials Widget in WordPress admin panel.
 3. 'Add New Testimonial' page in WordPress admin panel.
-4. Testimonials Widget display with a standard theme.
-5. Testimonials Widget display with a custom theme.
+4. Testimonials Widget display.
 
 == Changelog ==
+
+= V0.1.4 - 03.11.2015 =
+* NEW : A button for Testimonials shortcode inserting to the content was added.
+* NEW : Hungarian language file is added to the plugin.
+* Update : Textdomain was changed.
+* Update : We updated all functionality for wordpress 4.3.1.
 
 = V0.1.3 - 31.07.2015 =
 * New : Ability to restore settings to defaults. 
@@ -121,6 +127,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.1.4 =
+A button for Testimonials shortcode inserting to the content was added. Hungarian language file is added to the plugin. Textdomain was changed. We updated all functionality for wordpress 4.3.1.
 
 = V0.1.3 = 
 Ability to restore settings to defaults. We fixed the bug with widgets translation in the Admin Panel. Input maxlength is added. We updated all functionality for wordpress 4.2.3

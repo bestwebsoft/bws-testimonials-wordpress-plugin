@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 12:22+0300\n"
-"PO-Revision-Date: 2015-07-31 16:20+0300\n"
+"POT-Creation-Date: 2015-10-30 13:07+0200\n"
+"PO-Revision-Date: 2015-10-30 13:08+0200\n"
 "Last-Translator: plugin@bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -13,82 +13,66 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bws-testimonials.php:32
+#: bws-testimonials.php:35
 msgid "Testimonials Settings"
 msgstr "Настройки Testimonials"
 
-#: bws-testimonials.php:62
-msgid "Testimonials Info"
-msgstr "Информация об отзывах"
-
-#: bws-testimonials.php:73 bws-testimonials.php:104
-msgid "Testimonials"
-msgstr "Отзывы "
-
-#: bws-testimonials.php:74
-msgid "Testimonial"
-msgstr "Отзыв"
-
-#: bws-testimonials.php:82
-msgid "Add a new testimonial"
-msgstr "Добавить новый отзыв"
-
-#: bws-testimonials.php:83
-msgid "Edit testimonials"
-msgstr "Редактировать отзыв"
-
-#: bws-testimonials.php:84
-msgid "New testimonial"
-msgstr "Новый отзыв"
-
-#: bws-testimonials.php:85
-msgid "View testimonials"
-msgstr "Просмотреть отзывы"
-
-#: bws-testimonials.php:86
-msgid "Search testimonials"
-msgstr "Поиск отзывов"
-
-#: bws-testimonials.php:87
-msgid "No testimonials found"
-msgstr "Ни одного отзыва не найдено"
-
-#: bws-testimonials.php:88
-msgid "No testimonials found in Trash"
-msgstr "Ни одного отзыва в Корзине не найдено"
-
-#: bws-testimonials.php:136
-msgid "Settings saved"
-msgstr "Настройки сохранены."
-
-#: bws-testimonials.php:142
-msgid "All plugin settings were restored."
-msgstr "Все настройки плагина восстановлены."
-
-#: bws-testimonials.php:150 bws-testimonials.php:369 bws-testimonials.php:382
+#: bws-testimonials.php:38 bws-testimonials.php:391 bws-testimonials.php:404
 msgid "Settings"
 msgstr "Настройки"
 
-#: bws-testimonials.php:151 bws-testimonials.php:383
-msgid "FAQ"
-msgstr "FAQ"
+#: bws-testimonials.php:83
+msgid "Testimonials Info"
+msgstr "Информация об отзывах"
 
-#: bws-testimonials.php:153
-msgid "Notice:"
-msgstr "Обратите внимание:"
+#: bws-testimonials.php:97 bws-testimonials.php:128
+msgid "Testimonials"
+msgstr "Отзывы "
 
-#: bws-testimonials.php:153
-msgid ""
-"The plugin's settings have been changed. In order to save them please don't "
-"forget to click the 'Save Changes' button."
-msgstr ""
-"Настройки плагина были изменены. Чтобы сохранить их, пожалуйста, не забудьте "
-"нажать кнопку 'Сохранить изменения'."
+#: bws-testimonials.php:98
+msgid "Testimonial"
+msgstr "Отзыв"
 
-#: bws-testimonials.php:163
+#: bws-testimonials.php:106
+msgid "Add a new testimonial"
+msgstr "Добавить новый отзыв"
+
+#: bws-testimonials.php:107
+msgid "Edit testimonials"
+msgstr "Редактировать отзыв"
+
+#: bws-testimonials.php:108
+msgid "New testimonial"
+msgstr "Новый отзыв"
+
+#: bws-testimonials.php:109
+msgid "View testimonials"
+msgstr "Просмотреть отзывы"
+
+#: bws-testimonials.php:110
+msgid "Search testimonials"
+msgstr "Поиск отзывов"
+
+#: bws-testimonials.php:111
+msgid "No testimonials found"
+msgstr "Ни одного отзыва не найдено"
+
+#: bws-testimonials.php:112
+msgid "No testimonials found in Trash"
+msgstr "Ни одного отзыва в Корзине не найдено"
+
+#: bws-testimonials.php:162
+msgid "Settings saved"
+msgstr "Настройки сохранены."
+
+#: bws-testimonials.php:168
+msgid "All plugin settings were restored."
+msgstr "Все настройки плагина восстановлены."
+
+#: bws-testimonials.php:182
 msgid ""
 "If you would like to display testimonials with a widget, you need to add the "
 "widget"
@@ -96,57 +80,87 @@ msgstr ""
 "Если вы хотите, чтобы отзывы отображались при помощи виджета, вам нужно "
 "добавить этот виджет"
 
-#: bws-testimonials.php:164 bws-testimonials.php:254
+#: bws-testimonials.php:183 bws-testimonials.php:284
 msgid "Testimonials Widget"
 msgstr "Виджет \"Отзывы\""
 
-#: bws-testimonials.php:165
+#: bws-testimonials.php:184
 msgid "on the Widgets tab"
 msgstr "на вкладке виджетов"
 
-#: bws-testimonials.php:168
+#: bws-testimonials.php:188
+#, php-format
 msgid ""
-"If you would like to add testimonials to your website, just copy and paste "
-"this shortcode into your post or page:"
+"If you would like to add testimonials to your page or post, please use %s "
+"button"
 msgstr ""
-"Если вы хотите добавить отзывы на свой сайт, вам нужно скопировать и "
-"вставить шорткод в контент страницы или поста:"
+"Если вы хотите добавить отзывы на вашу страницу или пост, то используйте "
+"кнопку %s"
 
-#: bws-testimonials.php:171
+#: bws-testimonials.php:193
+#, php-format
+msgid ""
+"You can add testimonials to your page or post by clicking on %s button in "
+"the content edit block using the Visual mode. If the button isn't displayed, "
+"please use the shortcode %s"
+msgstr ""
+"Вы можете добавить отзывы на вашу страницу или пост, нажав на кнопку %s в "
+"блоке редактирования контента в режиме Visual. Если кнопка не отображается, "
+"пожалуйста, используйте шорткод %s"
+
+#: bws-testimonials.php:201
 msgid "Also, you can paste the following strings into the template source code"
 msgstr "Также, вы можете вставить следующие строки в исходный код шаблона"
 
-#: bws-testimonials.php:181
+#: bws-testimonials.php:211
 msgid "Widget title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:187 bws-testimonials.php:284
+#: bws-testimonials.php:217 bws-testimonials.php:314
 msgid "Number of testimonials to be displayed"
 msgstr "Количество отзывов для отображения"
 
-#: bws-testimonials.php:195
+#: bws-testimonials.php:225
 msgid "Save Changes"
 msgstr "Сохранить настройки"
 
-#: bws-testimonials.php:213
+#: bws-testimonials.php:243
 msgid "Author"
 msgstr "Автор"
 
-#: bws-testimonials.php:217
+#: bws-testimonials.php:247
 msgid "Company Name"
 msgstr "Название компании"
 
-#: bws-testimonials.php:255
+#: bws-testimonials.php:285
 msgid "Widget for displaying Testimonials."
 msgstr "Виджет для отображения отзывов."
 
-#: bws-testimonials.php:280
+#: bws-testimonials.php:310
 msgid "Widget Title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:384
+#: bws-testimonials.php:405
+msgid "FAQ"
+msgstr "FAQ"
+
+#: bws-testimonials.php:406
 msgid "Support"
 msgstr "Тех.поддержка"
+
+#: bws-testimonials.php:448
+msgid "Add testimonials to your page or post"
+msgstr "Добавить отзывы на вашу страницу или пост"
+
+#~ msgid "Notice:"
+#~ msgstr "Обратите внимание:"
+
+#~ msgid ""
+#~ "The plugin's settings have been changed. In order to save them please "
+#~ "don't forget to click the 'Save Changes' button."
+#~ msgstr ""
+#~ "Настройки плагина были изменены. Чтобы сохранить их, пожалуйста, не "
+#~ "забудьте нажать кнопку 'Сохранить изменения'."
 
 #~ msgid "Changes saved"
 #~ msgstr "Изменения сохранены"
