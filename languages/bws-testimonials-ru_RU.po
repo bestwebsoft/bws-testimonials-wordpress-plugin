@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-30 13:07+0200\n"
-"PO-Revision-Date: 2015-10-30 13:08+0200\n"
+"POT-Creation-Date: 2015-12-08 17:07+0300\n"
+"PO-Revision-Date: 2015-12-08 17:07+0300\n"
 "Last-Translator: plugin@bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -13,14 +13,14 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bws-testimonials.php:35
 msgid "Testimonials Settings"
 msgstr "Настройки Testimonials"
 
-#: bws-testimonials.php:38 bws-testimonials.php:391 bws-testimonials.php:404
+#: bws-testimonials.php:38 bws-testimonials.php:444 bws-testimonials.php:457
 msgid "Settings"
 msgstr "Настройки"
 
@@ -28,11 +28,11 @@ msgstr "Настройки"
 msgid "Testimonials Info"
 msgstr "Информация об отзывах"
 
-#: bws-testimonials.php:97 bws-testimonials.php:128
+#: bws-testimonials.php:97 bws-testimonials.php:131
 msgid "Testimonials"
 msgstr "Отзывы "
 
-#: bws-testimonials.php:98
+#: bws-testimonials.php:98 bws-testimonials.php:470
 msgid "Testimonial"
 msgstr "Отзыв"
 
@@ -64,15 +64,27 @@ msgstr "Ни одного отзыва не найдено"
 msgid "No testimonials found in Trash"
 msgstr "Ни одного отзыва в Корзине не найдено"
 
-#: bws-testimonials.php:162
+#: bws-testimonials.php:113
+msgid "Filter testimonials list"
+msgstr "Фильтр списка отзывов"
+
+#: bws-testimonials.php:114
+msgid "Testimonials list navigation"
+msgstr "Навигация списка отзывов"
+
+#: bws-testimonials.php:115
+msgid "Testimonials list"
+msgstr "Список отзывов"
+
+#: bws-testimonials.php:169
 msgid "Settings saved"
 msgstr "Настройки сохранены."
 
-#: bws-testimonials.php:168
+#: bws-testimonials.php:175
 msgid "All plugin settings were restored."
 msgstr "Все настройки плагина восстановлены."
 
-#: bws-testimonials.php:182
+#: bws-testimonials.php:189
 msgid ""
 "If you would like to display testimonials with a widget, you need to add the "
 "widget"
@@ -80,15 +92,15 @@ msgstr ""
 "Если вы хотите, чтобы отзывы отображались при помощи виджета, вам нужно "
 "добавить этот виджет"
 
-#: bws-testimonials.php:183 bws-testimonials.php:284
+#: bws-testimonials.php:190 bws-testimonials.php:321
 msgid "Testimonials Widget"
 msgstr "Виджет \"Отзывы\""
 
-#: bws-testimonials.php:184
+#: bws-testimonials.php:191
 msgid "on the Widgets tab"
 msgstr "на вкладке виджетов"
 
-#: bws-testimonials.php:188
+#: bws-testimonials.php:195
 #, php-format
 msgid ""
 "If you would like to add testimonials to your page or post, please use %s "
@@ -97,7 +109,7 @@ msgstr ""
 "Если вы хотите добавить отзывы на вашу страницу или пост, то используйте "
 "кнопку %s"
 
-#: bws-testimonials.php:193
+#: bws-testimonials.php:200
 #, php-format
 msgid ""
 "You can add testimonials to your page or post by clicking on %s button in "
@@ -108,49 +120,89 @@ msgstr ""
 "блоке редактирования контента в режиме Visual. Если кнопка не отображается, "
 "пожалуйста, используйте шорткод %s"
 
-#: bws-testimonials.php:201
+#: bws-testimonials.php:208
 msgid "Also, you can paste the following strings into the template source code"
 msgstr "Также, вы можете вставить следующие строки в исходный код шаблона"
 
-#: bws-testimonials.php:211
+#: bws-testimonials.php:218
 msgid "Widget title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:217 bws-testimonials.php:314
+#: bws-testimonials.php:224 bws-testimonials.php:351
 msgid "Number of testimonials to be displayed"
 msgstr "Количество отзывов для отображения"
 
-#: bws-testimonials.php:225
+#: bws-testimonials.php:230
+msgid "Sort testimonials by"
+msgstr "Сортировка отзывов по"
+
+#: bws-testimonials.php:232
+msgid "testimonial id"
+msgstr "id отзыва"
+
+#: bws-testimonials.php:233
+msgid "testimonial title"
+msgstr "название отзыва"
+
+#: bws-testimonials.php:234
+msgid "date"
+msgstr "дата"
+
+#: bws-testimonials.php:235
+msgid "random"
+msgstr "в любом порядке"
+
+#: bws-testimonials.php:239
+msgid "Testimonials sorting"
+msgstr "Сортировка отзывов"
+
+#: bws-testimonials.php:241
+msgid "ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)"
+msgstr ""
+"ASC (в порядке возрастания от наименьшего до наибольшего значения - 1, 2, 3, "
+"а, б, в)"
+
+#: bws-testimonials.php:242
+msgid ""
+"DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)"
+msgstr ""
+"DESC (в порядке убывания от наибольшего до наименьшего значения - 3, 2, 1; "
+"c, b, a)"
+
+#: bws-testimonials.php:248
 msgid "Save Changes"
 msgstr "Сохранить настройки"
 
-#: bws-testimonials.php:243
+#: bws-testimonials.php:266
 msgid "Author"
 msgstr "Автор"
 
-#: bws-testimonials.php:247
+#: bws-testimonials.php:270
 msgid "Company Name"
 msgstr "Название компании"
 
-#: bws-testimonials.php:285
+#: bws-testimonials.php:322
 msgid "Widget for displaying Testimonials."
 msgstr "Виджет для отображения отзывов."
 
-#: bws-testimonials.php:310
+#: bws-testimonials.php:347
 msgid "Widget Title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:405
+#: bws-testimonials.php:458
 msgid "FAQ"
 msgstr "FAQ"
 
-#: bws-testimonials.php:406
+#: bws-testimonials.php:459
 msgid "Support"
 msgstr "Тех.поддержка"
 
-#: bws-testimonials.php:448
+#: bws-testimonials.php:501
 msgid "Add testimonials to your page or post"
 msgstr "Добавить отзывы на вашу страницу или пост"
+
+#~ msgid "menu order"
+#~ msgstr "порядок "
 
 #~ msgid "Notice:"
 #~ msgstr "Обратите внимание:"

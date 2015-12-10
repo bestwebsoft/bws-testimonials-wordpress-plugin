@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add testimonial, add testimonials plugin, add testimonials free plugin, add testimonials, author data, company data, create testimonials, custom post type, display testimonials, free, free plugin, free testimonials plugin, multiple testimonials, plugin, testimonial, testimonial shortcode, Testimonials plugin, testimonials widget, widget, wordpress, wp, wp plugin, wp free plugin, wp testimonials, wp testimonials plugin, wp simple testimonials plugin, wp free testimonials, wp free testimonials plugin, wordpress plugin, wordpress free plugin, wordpress testimonials, wordpress testimonials plugin, wordpress simple testimonials plugin, wordpress free testimonials, wordpress free testimonials plugin
 Requires at least: 3.8
-Tested up to: 4.3.1
-Stable tag: 0.1.4
+Tested up to: 4.4
+Stable tag: 0.1.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -103,6 +103,11 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog ==
 
+= V0.1.5 - 10.12.2015 =
+* NEW : Testimonials sorting order was added.
+* Bugfix : Shortcode displaying was fixed.
+* Bugfix : The bug with plugin menu duplicating was fixed.
+
 = V0.1.4 - 03.11.2015 =
 * NEW : A button for Testimonials shortcode inserting to the content was added.
 * NEW : Hungarian language file is added to the plugin.
@@ -127,6 +132,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.1.5 =
+Testimonials sorting order was added. Shortcode displaying was fixed. The bug with plugin menu duplicating was fixed.
 
 = V0.1.4 =
 A button for Testimonials shortcode inserting to the content was added. Hungarian language file is added to the plugin. Textdomain was changed. We updated all functionality for wordpress 4.3.1.
