@@ -7,6 +7,20 @@
 #adminmenu #menu-posts-bws-testimonial.wp-not-current-submenu div.wp-menu-image {
     opacity: 0.7;
 }
+.tstmnls-thumbnail > img {
+	float: left;
+	margin-top: 1%;
+	margin-right: 10px;
+	max-width: 50% !important;
+}
+.tstmnls-thumbnail + p {
+	margin: 0;
+}
+.testimonials_quote blockquote:after {
+	content: "";
+	clear: both;
+	display: table;
+}
 /*
 * styles for widget
 */

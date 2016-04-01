@@ -3,17 +3,14 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add testimonial, add testimonials plugin, add testimonials free plugin, add testimonials, author data, company data, create testimonials, custom post type, display testimonials, free, free plugin, free testimonials plugin, multiple testimonials, plugin, testimonial, testimonial shortcode, Testimonials plugin, testimonials widget, widget, wordpress, wp, wp plugin, wp free plugin, wp testimonials, wp testimonials plugin, wp simple testimonials plugin, wp free testimonials, wp free testimonials plugin, wordpress plugin, wordpress free plugin, wordpress testimonials, wordpress testimonials plugin, wordpress simple testimonials plugin, wordpress free testimonials, wordpress free testimonials plugin
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 0.1.5
+Tested up to: 4.4.2
+Stable tag: 0.1.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Plugin for displaying Testimonials.
 
 == Description ==
-
-Note: This is a public beta version, which contains basic product options. You are welcome to suggest new features and usability improvements.
-<a href="http://support.bestwebsoft.com/hc/en-us/requests/new">I would like to submit a new feature.</a>
 
 This plugin allows creating and displaying a Testimonial on your website. This testimonial can be displayed using the shortcode, a widget or by adding a code to your theme's template. 
 
@@ -31,6 +28,8 @@ http://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add author and company data to each testimonial.
 * Display testimonials through the widget or using the shortcode. 
 * Choose a number of testimonials to be displayed.
+
+If you have a feature, suggestion or idea you'd like to see in the plugin, we'd love to hear about it! <a href="http://support.bestwebsoft.com/hc/en-us/requests/new" target="_blank">Suggest a Feature</a>
 
 = Recommended Plugins =
 
@@ -103,6 +102,10 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog ==
 
+= V0.1.6 - 01.04.2016 =
+* NEW : Testimonials featured image was added.
+* Bugfix : Conflict with BuddyPress was fixed.
+
 = V0.1.5 - 10.12.2015 =
 * NEW : Testimonials sorting order was added.
 * Bugfix : Shortcode displaying was fixed.
@@ -132,6 +135,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.1.6 =
+Testimonials feautured image was added. Conflict with BuddyPress was fixed.
 
 = V0.1.5 =
 Testimonials sorting order was added. Shortcode displaying was fixed. The bug with plugin menu duplicating was fixed.
