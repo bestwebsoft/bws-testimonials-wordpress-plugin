@@ -3,7 +3,7 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add testimonial, add testimonials plugin, add testimonials free plugin, add testimonials, author data, company data, create testimonials, custom post type, display testimonials, free, free plugin, free testimonials plugin, multiple testimonials, plugin, testimonial, testimonial shortcode, Testimonials plugin, testimonials widget, widget, wordpress, wp, wp plugin, wp free plugin, wp testimonials, wp testimonials plugin, wp simple testimonials plugin, wp free testimonials, wp free testimonials plugin, wordpress plugin, wordpress free plugin, wordpress testimonials, wordpress testimonials plugin, wordpress simple testimonials plugin, wordpress free testimonials, wordpress free testimonials plugin
 Requires at least: 3.8
-Tested up to: 4.4.2
+Tested up to: 4.5
 Stable tag: 0.1.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -48,7 +48,7 @@ If you would like to create your own language pack or update the existing one, y
 
 = Technical support =
 
-Dear users, our plugins are available for free download. If you have any questions or recommendations regarding the functionality of our plugins (existing options, new options, current issues), please feel free to contact us. Please note that we accept requests in English only. All messages in another languages won't be accepted.
+Dear users, our plugins are available for free download. If you have any questions or recommendations regarding the functionality of our plugins (existing options, new options, current issues), please feel free to contact us. Please note that we accept requests in English only. All messages in other languages won't be accepted.
 
 If you notice any bugs in the plugin's work, you can notify us about them and we'll investigate and fix the issue then. Your request should contain website URL, issues description and WordPress admin panel credentials.
 Moreover, we can customize the plugin to match your requirements. It's a paid service (as a rule it costs $40, but the price can vary depending on the amount of the necessary changes and their complexity). Please note that we could also include this or that feature (developed for you) in the next release and share it with the other users then.
