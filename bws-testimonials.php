@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Testimonials by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/
-Description: Plugin for displaying Testimonials.
+Plugin URI: http://bestwebsoft.com/products/testimonials/
+Description: Add testimonials and feedbacks from your customers to WordPress posts, pages and widgets.
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.1.6
+Version: 0.1.7
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -32,7 +32,7 @@ if ( ! function_exists( 'tstmnls_admin_menu' ) ) {
 	function tstmnls_admin_menu() {
 		global $submenu;
 		bws_general_menu();
-		$settings = add_submenu_page( 'bws_plugins', __( 'Testimonials Settings', 'bws-testimonials' ), 'Testimonials', 'manage_options', "testimonials.php", 'tstmnls_settings_page' );
+		$settings = add_submenu_page( 'bws_panel', __( 'Testimonials Settings', 'bws-testimonials' ), 'Testimonials', 'manage_options', "testimonials.php", 'tstmnls_settings_page' );
 		
 		if ( isset( $submenu['edit.php?post_type=bws-testimonial'] ) )
 			$submenu['edit.php?post_type=bws-testimonial'][] = array( __( 'Settings', 'bws-testimonials' ), 'manage_options', admin_url( 'admin.php?page=testimonials.php' ) );
@@ -332,7 +332,7 @@ if ( ! class_exists( 'Testimonials' ) ) {
 			global $tstmnls_options;
 			if ( empty( $tstmnls_options ) )
 				$tstmnls_options = get_option( 'tstmnls_options' );
-			$widget_title   = isset( $instance['widget_title'] ) ? stripslashes( esc_html( $instance['widget_title'] ) ) : $tstmnls_options['widget_title'];
+			$widget_title   = isset( $instance['widget_title'] ) ? apply_filters( 'widget_title', $instance['widget_title'], $instance, $this->id_base ) : $tstmnls_options['widget_title'];
 			$count  		= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count'];
 			echo $args['before_widget'];
 			if ( ! empty( $widget_title ) ) { 
@@ -411,9 +411,26 @@ if ( ! function_exists( 'tstmnls_show_testimonials_shortcode' ) ) {
 			$testimonial_thumbnail = has_post_thumbnail() ? '<div class="tstmnls-thumbnail">' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</div>' : '';
 			$content .= '<div class="testimonials_quote">
 							<blockquote>' .
-								$testimonial_thumbnail .
-								str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', get_the_content() ) ) .
-							'</blockquote>
+								$testimonial_thumbnail;
+
+			$testimonial_content = get_the_content();
+			/* insteed 'the_content' filter we use its functions to compability with social buttons */
+			/* Hack to get the [embed] shortcode to run before wpautop() */
+			require_once( ABSPATH . WPINC . '/class-wp-embed.php' );
+			$wp_embed = new WP_Embed();		
+			$testimonial_content = $wp_embed->run_shortcode( $testimonial_content );
+			$testimonial_content = $wp_embed->autoembed( $testimonial_content );
+			$testimonial_content = wptexturize( $testimonial_content );
+			$testimonial_content = convert_smilies( $testimonial_content );	
+			$testimonial_content = wpautop( $testimonial_content );
+			$testimonial_content = shortcode_unautop( $testimonial_content );
+			if ( function_exists( 'wp_make_content_images_responsive' ) )
+				$testimonial_content = wp_make_content_images_responsive( $testimonial_content );
+			$testimonial_content = do_shortcode( $testimonial_content ); /* AFTER wpautop() */
+			$testimonial_content = str_replace( ']]>', ']]&gt;', $testimonial_content );
+			
+			$content .= $testimonial_content;
+			$content .= '</blockquote>
 							<div class="testimonial_quote_footer">
 								<div class="testimonial_quote_author">' . $testimonials_info['author'] . '</div>
 								<span>' . $testimonials_info['company_name'] . '</span>
@@ -482,7 +499,7 @@ if ( ! function_exists ( 'tstmnls_admin_notices' ) ) {
 	function tstmnls_admin_notices() {
 		global $hook_suffix, $tstmnls_plugin_info;
 		if ( 'plugins.php' == $hook_suffix && ! is_network_admin() ) {
-			bws_plugin_banner_to_settings( $tstmnls_plugin_info, 'tstmnls_options', 'bws-testimonials', 'admin.php?page=testimonials.php', 'post-new.php?post_type=bws-testimonial', __( 'Testimonial', 'bws-testimonials' ) );
+			bws_plugin_banner_to_settings( $tstmnls_plugin_info, 'tstmnls_options', 'bws-testimonials', 'admin.php?page=testimonials.php', 'post-new.php?post_type=bws-testimonial' );
 		}
 
 		if ( isset( $_REQUEST['page'] ) && 'testimonials.php' == $_REQUEST['page'] ) {

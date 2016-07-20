@@ -1,14 +1,14 @@
 === Testimonials by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
-Tags: add testimonial, add testimonials plugin, add testimonials free plugin, add testimonials, author data, company data, create testimonials, custom post type, display testimonials, free, free plugin, free testimonials plugin, multiple testimonials, plugin, testimonial, testimonial shortcode, Testimonials plugin, testimonials widget, widget, wordpress, wp, wp plugin, wp free plugin, wp testimonials, wp testimonials plugin, wp simple testimonials plugin, wp free testimonials, wp free testimonials plugin, wordpress plugin, wordpress free plugin, wordpress testimonials, wordpress testimonials plugin, wordpress simple testimonials plugin, wordpress free testimonials, wordpress free testimonials plugin
+Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.8
-Tested up to: 4.5
-Stable tag: 0.1.6
+Tested up to: 4.5.3
+Stable tag: 0.1.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Plugin for displaying Testimonials.
+Add testimonials and feedbacks from your customers to WordPress posts, pages and widgets.
 
 == Description ==
 
@@ -44,7 +44,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Russian (ru_RU)
 * Ukrainian (uk)
 
-If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> to <a href="http://support.bestwebsoft.com" target="_blank">BestWebSoft</a>, and we'll add it to the plugin. You can download the latest version of the program for working with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
+Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> to <a href="http://support.bestwebsoft.com/hc/en-us/requests/new" target="_blank">BestWebSoft</a>, and we'll add it to the plugin. You can download the latest version of the program for working with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
 
 = Technical support =
 
@@ -95,12 +95,17 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Screenshots ==
 
-1. Testimonials Settings page.
-2. Testimonials Widget in WordPress admin panel.
-3. 'Add New Testimonial' page in WordPress admin panel.
-4. Testimonials Widget display.
+1. Testimonials Widget display.
+2. Testimonials Settings page.
+3. Testimonials Widget in WordPress admin panel.
+4. 'Add New Testimonial' page in WordPress admin panel.
 
 == Changelog ==
+
+= V0.1.7 - 20.07.2016 =
+* Update : 'widget_title' filter was added.
+* Bugfix : The display of unnecessary elements in Testimonials has been removed.
+* Update : BWS panel section was updated.
 
 = V0.1.6 - 01.04.2016 =
 * NEW : Testimonials featured image was added.
@@ -135,6 +140,10 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.1.7 =
+* Usability improved.
+* Bugs fixed.
 
 = V0.1.6 =
 Testimonials feautured image was added. Conflict with BuddyPress was fixed.
