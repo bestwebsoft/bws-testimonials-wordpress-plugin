@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Testimonials by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/testimonials/
+Plugin URI: http://bestwebsoft.com/products/wordpress/plugins/testimonials/
 Description: Add testimonials and feedbacks from your customers to WordPress posts, pages and widgets.
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.1.7
+Version: 0.1.8
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */

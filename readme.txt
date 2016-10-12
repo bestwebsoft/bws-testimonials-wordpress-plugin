@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.8
-Tested up to: 4.5.3
-Stable tag: 0.1.7
+Tested up to: 4.6.1
+Stable tag: 0.1.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -36,7 +36,7 @@ If you have a feature, suggestion or idea you'd like to see in the plugin, we'd 
 The author of the Testimonials also recommends the following plugins:
 
 * <a href="http://wordpress.org/plugins/updater/">Updater</a> - This plugin updates WordPress core and the plugins to the recent versions. You can also use the auto mode or manual mode for updating and set email notifications.
-There is also a premium version of the plugin <a href="http://bestwebsoft.com/products/updater/">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
+There is also a premium version of the plugin <a href="http://bestwebsoft.com/products/wordpress/plugins/updater/">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
 
 = Translation =
 
@@ -102,10 +102,12 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 
 == Changelog ==
 
+= V0.1.8 - 12.10.2016 =
+* Update : BWS plugins section is updated
+
 = V0.1.7 - 20.07.2016 =
 * Update : 'widget_title' filter was added.
 * Bugfix : The display of unnecessary elements in Testimonials has been removed.
-* Update : BWS panel section was updated.
 
 = V0.1.6 - 01.04.2016 =
 * NEW : Testimonials featured image was added.
@@ -140,6 +142,9 @@ Please make sure that the problem hasn't been discussed on our forum yet (<a hre
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.1.8 =
+* Plugin optimization completed.
 
 = V0.1.7 =
 * Usability improved.
