@@ -1,9 +1,7 @@
-<a href="http://bestwebsoft.com/products/testimonials/" target=_blank>Testimonials WordPress Plugin</a>
+<a href="http://bestwebsoft.com/products/wordpress/plugins/testimonials/" target=_blank>Testimonials WordPress Plugin</a>
 ========================
 
 Add testimonials and feedbacks from your customers to WordPress posts, pages and widgets.
-
-<img src="http://bestwebsoft.com/wp-content/uploads/2015/02/testimonials-banner-website.jpg" />
 
 <p>This plugin allows creating and displaying a Testimonial on your website. This testimonial can be displayed using the shortcode, a widget or by adding a code to your theme's template.</p>
 
