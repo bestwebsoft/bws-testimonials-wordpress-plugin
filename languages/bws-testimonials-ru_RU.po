@@ -384,7 +384,7 @@ msgstr "Добавить отзывы на вашу страницу или по
 
 #~ msgid ""
 #~ "Something went wrong. Try again later. If the error will appear again, "
-#~ "please, contact us <a href=http://support.bestwebsoft.com>BestWebSoft</"
+#~ "please, contact us <a href=https://support.bestwebsoft.com>BestWebSoft</"
 #~ "a>. We are sorry for inconvenience."
 #~ msgstr ""
 #~ "Что-то пошло не так. Повторите попытку позже. Если ошибка появится снова, "
@@ -668,9 +668,9 @@ msgstr "Добавить отзывы на вашу страницу или по
 #~ msgstr "Пришло из (реферер)"
 
 #~ msgid ""
-#~ "Example: Sent from (referer):\thttp://bestwebsoft.com/contacts/contact-us/"
+#~ "Example: Sent from (referer):\thttps://bestwebsoft.com/contacts/contact-us/"
 #~ msgstr ""
-#~ "Пример: Sent from (referer):\thttp://bestwebsoft.com/contacts/contact-us/"
+#~ "Пример: Sent from (referer):\thttps://bestwebsoft.com/contacts/contact-us/"
 
 #~ msgid "Using (user agent)"
 #~ msgstr "Используя (user agent)"

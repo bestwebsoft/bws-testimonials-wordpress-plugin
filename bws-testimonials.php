@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Testimonials by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/wordpress/plugins/testimonials/
+Plugin URI: https://bestwebsoft.com/products/wordpress/plugins/testimonials/
 Description: Add testimonials and feedbacks from your customers to WordPress posts, pages and widgets.
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.1.8
-Author URI: http://bestwebsoft.com/
+Version: 0.1.9
+Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
 
-/*  @ Copyright 2016  BestWebSoft  ( http://support.bestwebsoft.com )
+/*  @ Copyright 2017  BestWebSoft  ( https://support.bestwebsoft.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -81,7 +81,7 @@ if ( ! function_exists ( 'tstmnls_admin_init' ) ) {
 	function tstmnls_admin_init() {
 		global $bws_plugin_info, $tstmnls_plugin_info, $bws_shortcode_list;
 
-		if ( ! isset( $bws_plugin_info ) || empty( $bws_plugin_info ) )
+		if ( empty( $bws_plugin_info ) )
 			$bws_plugin_info = array( 'id' => '180', 'version' => $tstmnls_plugin_info["Version"] );
 
 		add_meta_box( 'custom-metabox', __( 'Testimonials Info', 'bws-testimonials' ), 'tstmnls_custom_metabox', 'bws-testimonial', 'normal', 'high' );
@@ -198,12 +198,12 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 						</p>
 						<div><?php printf( 
 							__( "If you would like to add testimonials to your page or post, please use %s button", 'bws-testimonials' ), 
-							'<span class="bws_code"><img style="vertical-align: sub;" src="' . plugins_url( 'bws_menu/images/shortcode-icon.png', __FILE__ ) . '" alt=""/></span>' ); ?> 
+							'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>' ); ?> 
 							<div class="bws_help_box bws_help_box_right dashicons dashicons-editor-help">
 								<div class="bws_hidden_help_text" style="min-width: 180px;">
 									<?php printf( 
 										__( "You can add testimonials to your page or post by clicking on %s button in the content edit block using the Visual mode. If the button isn't displayed, please use the shortcode %s", 'bws-testimonials' ), 
-										'<code><img style="vertical-align: sub;" src="' . plugins_url( 'bws_menu/images/shortcode-icon.png', __FILE__ ) . '" alt="" /></code>',
+										'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>',
 										'<code>[bws_testimonials]</code>'
 									); ?>
 								</div>
@@ -487,8 +487,8 @@ if ( ! function_exists ( 'tstmnls_register_plugin_links' ) ) {
 		if ( $file == $base ) {
 			if ( ! is_network_admin() )
 				$links[] = '<a href="admin.php?page=testimonials.php">' . __( 'Settings', 'bws-testimonials' ) . '</a>';
-			$links[] = '<a href="http://wordpress.org/plugins/bws-testimonials/faq/" target="_blank">' . __( 'FAQ', 'bws-testimonials' ) . '</a>';
-			$links[] = '<a href="http://support.bestwebsoft.com">' . __( 'Support', 'bws-testimonials' ) . '</a>';
+			$links[] = '<a href="https://support.bestwebsoft.com/hc/en-us/sections/200897195" target="_blank">' . __( 'FAQ', 'bws-testimonials' ) . '</a>';
+			$links[] = '<a href="https://support.bestwebsoft.com">' . __( 'Support', 'bws-testimonials' ) . '</a>';
 		}
 		return $links;
 	}
