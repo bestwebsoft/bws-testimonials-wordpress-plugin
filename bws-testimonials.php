@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.1.9
+Version: 0.2.0
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -71,7 +71,7 @@ if ( ! function_exists ( 'tstmnls_init' ) ) {
 			tstmnls_register_settings();
 
 		/* Function check if plugin is compatible with current WP version  */
-		bws_wp_min_version_check( plugin_basename( __FILE__ ), $tstmnls_plugin_info, '3.8', '3.5' );
+		bws_wp_min_version_check( plugin_basename( __FILE__ ), $tstmnls_plugin_info, '3.9' );
 
 		tstmnls_register_testimonial_post_type();
 	}
@@ -198,16 +198,12 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 						</p>
 						<div><?php printf( 
 							__( "If you would like to add testimonials to your page or post, please use %s button", 'bws-testimonials' ), 
-							'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>' ); ?> 
-							<div class="bws_help_box bws_help_box_right dashicons dashicons-editor-help">
-								<div class="bws_hidden_help_text" style="min-width: 180px;">
-									<?php printf( 
-										__( "You can add testimonials to your page or post by clicking on %s button in the content edit block using the Visual mode. If the button isn't displayed, please use the shortcode %s", 'bws-testimonials' ), 
-										'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>',
-										'<code>[bws_testimonials]</code>'
-									); ?>
-								</div>
-							</div>
+							'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>' );
+							echo bws_add_help_box( sprintf( 
+								__( "You can add testimonials to your page or post by clicking on %s button in the content edit block using the Visual mode. If the button isn't displayed, please use the shortcode %s", 'bws-testimonials' ), 
+								'<code><span class="bwsicons bwsicons-shortcode"></span></code>',
+								'<code>[bws_testimonials]</code>'
+							) ); ?>
 						</div>
 						<p>
 							<?php _e( "Also, you can paste the following strings into the template source code", 'bws-testimonials' ); ?> 
@@ -450,8 +446,10 @@ if ( ! function_exists ( 'tstmnls_admin_head' ) ) {
 	function tstmnls_admin_head() {
 		wp_enqueue_style( 'tstmnls_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
 
-		if( isset( $_GET['page'] ) && $_GET['page'] == "testimonials.php" && isset( $_GET['action'] ) && 'custom_code' == $_GET['action'] )
+		if ( isset( $_GET['page'] ) && $_GET['page'] == "testimonials.php" ) {
+			bws_enqueue_settings_scripts();
 			bws_plugins_include_codemirror();
+		}
 	}
 }
 

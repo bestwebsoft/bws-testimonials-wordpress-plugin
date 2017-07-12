@@ -2,9 +2,9 @@
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
-Requires at least: 3.8
-Tested up to: 4.7.3
-Stable tag: 0.1.9
+Requires at least: 3.9
+Tested up to: 4.8
+Stable tag: 0.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,7 +60,7 @@ Some of these translations are not complete. We are constantly adding new featur
 
 = Recommended Plugins =
 
-* [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress core with all installed plugins to the latest versions. Manual mode, email notifications and backups of all your files and database before updating.
+* [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
 
 == Installation == 
 
@@ -99,7 +99,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 1. the link to the page where the problem occurs
 2. the name of the plugin and its version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit)
+4. copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/)
 
 == Screenshots ==
 
@@ -109,6 +109,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 4. 'Add New Testimonial' page in WordPress admin panel.
 
 == Changelog ==
+
+= V0.2.0 - 12.07.2017 =
+* Update : We updated all functionality for wordpress 4.8.
 
 = V0.1.9 - 17.04.2017 =
 * Bugfix : Multiple Cross-Site Scripting (XSS) vulnerability was fixed.
@@ -153,6 +156,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.2.0 =
+* The compatibility with new WordPress version updated.
 
 = V0.1.9 =
 * Bugs fixed.
