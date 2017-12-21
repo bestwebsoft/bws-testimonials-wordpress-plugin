@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 4.8
-Stable tag: 0.2.0
+Tested up to: 4.9.1
+Stable tag: 0.2.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -48,7 +48,7 @@ If you have a feature suggestion or idea you'd like to see in the plugin, we'd l
 
 = Help & Support =
 
-Visit our Help Center if you have any questions, our friendly Support Team is happy to help — <https://support.bestwebsoft.com/>
+Visit our Help Center if you have any questions, our friendly Support Team is happy to help - <https://support.bestwebsoft.com/>
 
 = Translation =
 
@@ -62,16 +62,14 @@ Some of these translations are not complete. We are constantly adding new featur
 
 * [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
 
-== Installation == 
+== Installation ==
 
 1. Upload the `bws-testimonials` folder to `/wp-content/plugins/` directory.
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
 3. You can add the testimonial using your WordPress admin panel in "Testimonials" > "Add New".
 4. You can add "Testimonials Widget" to the necessary sidebar on "Appearance" > "Widgets" page, or copy and paste this shortcode into your post or page: [bws_testimonials].
 
-[View a Step-by-step Instruction on Testimonials Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
-
-https://www.youtube.com/watch?v=YMPuEmLELfk
+[View a Step-by-step Instruction on Testimonials Installation](https://www.youtube.com/watch?v=YMPuEmLELfk/)
 
 == Frequently Asked Questions ==
 
@@ -88,7 +86,7 @@ https://www.youtube.com/watch?v=YMPuEmLELfk
 
 Please create the testimonial using your WordPress admin panel in "Testimonials" > "Add New".
 
-= I set 5 in 'Number of testimonials to be displayed,' but only three testimonials are currently displayed. Why so? =
+= I set 5 in 'Number of testimonials to be displayed', but only three testimonials are currently displayed. Why so? =
 
 To have more testimonials displayed on your website, you need to add them using your WordPress admin panel in "Testimonials" > "Add New".
 
@@ -109,6 +107,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 4. 'Add New Testimonial' page in WordPress admin panel.
 
 == Changelog ==
+
+= V0.2.1 - 21.12.2017 =
+* Bugfix : Number of testimonials to be displayed has been fixed.
+* Bugfix : Options removal from the database when working on a multisite network has been fixed.
 
 = V0.2.0 - 12.07.2017 =
 * Update : We updated all functionality for wordpress 4.8.
@@ -139,23 +141,26 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * Update : We updated all functionality for wordpress 4.3.1.
 
 = V0.1.3 - 31.07.2015 =
-* New : Ability to restore settings to defaults. 
+* New : Ability to restore settings to defaults.
 * Bugfix : We fixed the bug with widgets translation in the Admin Panel.
 * Update : Input maxlength is added.
 * Update : We updated all functionality for wordpress 4.2.3.
 
-= V0.1.2 - 26.05.2015 = 
+= V0.1.2 - 26.05.2015 =
 * Update : We updated all functionality for wordpress 4.2.2
 
-= V0.1.1 - 07.04.2015 = 
+= V0.1.1 - 07.04.2015 =
 * Update : We updated all functionality for wordpress 4.2-beta4
 * Update : BWS plugins section is updated.
 
-= V0.1 - 27.01.2015 = 
+= V0.1 - 27.01.2015 =
 * Bugfix : The code refactoring was performed.
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.2.1 =
+* Bugs fixed.
 
 = V0.2.0 =
 * The compatibility with new WordPress version updated.
@@ -179,13 +184,13 @@ Testimonials sorting order was added. Shortcode displaying was fixed. The bug wi
 = V0.1.4 =
 A button for Testimonials shortcode inserting to the content was added. Hungarian language file is added to the plugin. Textdomain was changed. We updated all functionality for wordpress 4.3.1.
 
-= V0.1.3 = 
+= V0.1.3 =
 Ability to restore settings to defaults. We fixed the bug with widgets translation in the Admin Panel. Input maxlength is added. We updated all functionality for wordpress 4.2.3
 
-= V0.1.2 = 
+= V0.1.2 =
 We updated all functionality for wordpress 4.2.2
 
-= V0.1.1 = 
+= V0.1.1 =
 We updated all functionality for wordpress 4.2-beta4. BWS plugins section is updated.
 
 = V0.1 =

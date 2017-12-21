@@ -38,7 +38,7 @@
 <li><a href="https://www.youtube.com/watch?v=YMPuEmLELfk" rel="nofollow">[Video] Installation Instruction</a></li>
 </ul>
 <h4>Help &amp; Support</h4>
-<p>Visit our Help Center if you have any questions, our friendly Support Team is happy to help — <a href="https://support.bestwebsoft.com/" rel="nofollow">https://support.bestwebsoft.com/</a></p>
+<p>Visit our Help Center if you have any questions, our friendly Support Team is happy to help &#8211; <a href="https://support.bestwebsoft.com/" rel="nofollow">https://support.bestwebsoft.com/</a></p>
 <h4>Translation</h4>
 <ul>
 <li>Hungarian (hu_HU) (thanks to <a href="mailto:&#x73;&#x6f;&#x6c;&#x61;&#x72;s&#105;&#100;&#101;&#048;&#057;&#064;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;c&#111;&#109;" rel="nofollow">Peter Aprily</a> www.aprily.com)</li>
