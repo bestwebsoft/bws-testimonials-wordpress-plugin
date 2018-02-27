@@ -6,9 +6,17 @@
 <p><span class="embed-youtube" style="text-align:center; display: block;"></span></p>
 <h4>Features</h4>
 <ul>
+<li>Add testimonials form via shortcode [NEW]</li>
 <li>Add unlimited number of testimonials</li>
 <li>Add testimonials block via shortcode</li>
 <li>Add testimonials widget</li>
+<li>Compatible with Google Captcha (reCAPTCHA)  [NEW]</li>
+<li>Select the one who can submit new testimonials:  [NEW]
+<ul>
+<li>All users</li>
+<li>Logged in users</li>
+</ul>
+</li>
 <li>Customize testimonials additional info:
 <ul>
 <li>Author</li>
@@ -49,4 +57,5 @@
 <h4>Recommended Plugins</h4>
 <ul>
 <li><a href="https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24" rel="nofollow">Updater</a> &#8211; Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.</li>
+<li>[Google Captcha (reCAPTCHA)] (https://bestwebsoft.com/products/wordpress/plugins/google-captcha/) – Protect WordPress website forms from spam entries with Google reCAPTCHA.</li>
 </ul>

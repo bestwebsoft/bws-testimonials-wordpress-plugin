@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.2.1
+Version: 0.2.2
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -68,7 +68,7 @@ if ( ! function_exists ( 'tstmnls_init' ) ) {
 		if ( ! is_admin() || 'widgets.php' == $pagenow || 'plugins.php' == $pagenow || ( isset( $_REQUEST['page'] ) && 'testimonials.php' == $_REQUEST['page'] ) )
 			tstmnls_register_settings();
 
-		/* Function check if plugin is compatible with current WP version  */
+		/* Function check if plugin is compatible with current WP version */
 		bws_wp_min_version_check( plugin_basename( __FILE__ ), $tstmnls_plugin_info, '3.9' );
 
 		tstmnls_register_testimonial_post_type();
@@ -84,8 +84,8 @@ if ( ! function_exists ( 'tstmnls_admin_init' ) ) {
 
 		add_meta_box( 'custom-metabox', __( 'Testimonials Info', 'bws-testimonials' ), 'tstmnls_custom_metabox', 'bws-testimonial', 'normal', 'high' );
 
-		/* add Testimonials to global $bws_shortcode_list  */
-		$bws_shortcode_list['tstmnls'] = array( 'name' => 'Testimonials' );
+		/* add Testimonials to global $bws_shortcode_list */
+		$bws_shortcode_list['tstmnls'] = array( 'name' => 'Testimonials', 'js_function' => 'tstmnls_shortcode_init' );
 	}
 }
 
@@ -96,12 +96,12 @@ if ( ! function_exists ( 'tstmnls_register_testimonial_post_type' ) ) {
 			'singular_label'	=> __( 'Testimonial', 'bws-testimonials' ),
 			'public'			=> true,
 			'show_ui'			=> true,
-			'capability_type' 	=> 'post',
+			'capability_type'	=> 'post',
 			'hierarchical'		=> false,
 			'rewrite'			=> true,
 			'supports'			=> array( 'title', 'editor', 'thumbnail' ),
 			'labels'			=> array(
-				'add_new'               => __( 'Add New', 'bws-testimonials' ),
+				'add_new'				=> __( 'Add New', 'bws-testimonials' ),
 				'add_new_item'			=> __( 'Add a new testimonial', 'bws-testimonials' ),
 				'edit_item'				=> __( 'Edit testimonials', 'bws-testimonials' ),
 				'new_item'				=> __( 'New testimonial', 'bws-testimonials' ),
@@ -109,9 +109,9 @@ if ( ! function_exists ( 'tstmnls_register_testimonial_post_type' ) ) {
 				'search_items'			=> __( 'Search testimonials', 'bws-testimonials' ),
 				'not_found'				=> __( 'No testimonials found', 'bws-testimonials' ),
 				'not_found_in_trash'	=> __( 'No testimonials found in Trash', 'bws-testimonials' ),
-				'filter_items_list'     => __( 'Testimonials list filter', 'bws-testimonials' ),
+				'filter_items_list'		=> __( 'Testimonials list filter', 'bws-testimonials' ),
 				'items_list_navigation' => __( 'Testimonials list navigation', 'bws-testimonials' ),
-				'items_list'            => __( 'Testimonials list', 'bws-testimonials' )
+				'items_list'			=> __( 'Testimonials list', 'bws-testimonials' )
 			)
 		);
 		register_post_type( 'bws-testimonial' , $args );
@@ -126,13 +126,15 @@ if ( ! function_exists( 'tstmnls_register_settings' ) ) {
 		global $tstmnls_options, $tstmnls_plugin_info, $tstmnls_option_defaults;
 
 		$tstmnls_option_defaults = array(
-			'plugin_option_version' 	=> $tstmnls_plugin_info["Version"],
+			'plugin_option_version'		=> $tstmnls_plugin_info["Version"],
 			'widget_title'				=> __( 'Testimonials', 'bws-testimonials' ),
 			'count'						=> '5',
 			'display_settings_notice'	=> 1,
 			'order_by'					=> 'date',
 			'order'						=> 'DESC',
-			'suggest_feature_banner'	=> 1
+			'suggest_feature_banner'	=> 1,
+			'permissions'				=> 'all',
+			'auto_publication'			=> 0
 		);
 
 		/* Install the option defaults */
@@ -183,12 +185,20 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 			$tstmnls_options['count'] = intval( $_POST['tstmnls_count'] );
 			$tstmnls_options['order_by'] = $_POST['tstmnls_order_by'];
 			$tstmnls_options['order'] = $_POST['tstmnls_order'];
+			$tstmnls_options['permissions'] = $_POST['tstmnls_permission'];
+			$tstmnls_options['auto_publication'] = isset( $_POST['tstmnls_auto_publication'] ) ? 1 : 0;
+
+			$tstmnls_options['widget_title']		= isset( $_POST['tstmnls_widget_title'] ) ? stripslashes( esc_html( $_POST['tstmnls_widget_title'] ) ) : __( 'Testimonials', 'bws-testimonials' );
+			$tstmnls_options['count']				= isset( $_POST['tstmnls_count'] ) ? intval( $_POST['tstmnls_count'] ) : '5';
+			$tstmnls_options['order_by']			= isset( $_POST['tstmnls_order_by'] ) ? $_POST['tstmnls_order_by'] : 'date';
+			$tstmnls_options['order']				= isset( $_POST['tstmnls_order'] ) ? $_POST['tstmnls_order'] : 'DESC';
+			$tstmnls_options['permissions']			= isset( $_POST['tstmnls_permission'] ) ? $_POST['tstmnls_permission'] : 'all';
 
 			update_option( 'tstmnls_options', $tstmnls_options );
-			$message = __( 'Settings saved', 'bws-testimonials' );
+			$message = __( 'Settings saved.', 'bws-testimonials' );
 		}
 		/* Add restore function */
-		if ( isset( $_REQUEST['bws_restore_confirm'] ) && check_admin_referer( plugin_basename(__FILE__), 'bws_settings_nonce_name' ) ) {
+		if ( isset( $_REQUEST['bws_restore_confirm'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'bws_settings_nonce_name' ) ) {
 			$tstmnls_options = $tstmnls_option_defaults;
 			update_option( 'tstmnls_options', $tstmnls_options );
 			$message = __( 'All plugin settings were restored.', 'bws-testimonials' );
@@ -200,11 +210,11 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 				<a class="nav-tab <?php if ( isset( $_GET['action'] ) && 'custom_code' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="edit.php?post_type=bws-testimonial&page=testimonials.php&amp;action=custom_code"><?php _e( 'Custom code', 'bws-testimonials' ); ?></a>
 			</h2>
 			<?php bws_show_settings_notice(); ?>
-			<div class="updated fade below-h2" <?php if ( $message == "" || "" != $error ) echo "style=\"display:none\""; ?>><p><strong><?php echo $message; ?></strong></p></div>
+			<div class="updated fade below-h2" <?php if ( "" == $message || "" != $error ) echo "style=\"display:none\""; ?>><p><strong><?php echo $message; ?></strong></p></div>
 			<div class="error below-h2" <?php if ( "" == $error ) echo "style=\"display:none\""; ?>><p><?php echo $error; ?></p></div>
 			<?php if ( ! isset( $_GET['action'] ) || ( isset( $_GET['action'] ) && 'custom_code' != $_GET['action'] ) ) {
-				if ( isset( $_REQUEST['bws_restore_default'] ) && check_admin_referer( plugin_basename(__FILE__), 'bws_settings_nonce_name' ) ) {
-					bws_form_restore_default_confirm( plugin_basename(__file__) );
+				if ( isset( $_REQUEST['bws_restore_default'] ) && check_admin_referer( plugin_basename( __FILE__ ), 'bws_settings_nonce_name' ) ) {
+					bws_form_restore_default_confirm( plugin_basename( __FILE__ ) );
 				} else { ?>
 					<form id="tstmnls_settings_form" class="bws_form" method='post' action=''>
 						<p><?php printf(
@@ -234,32 +244,66 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 						<table class="form-table">
 							<tbody>
 								<tr>
-									<th scope="row"><?php _e( 'Widget title', 'bws-testimonials' ); ?></th>
+									<th scope="row"><?php _e( 'Widget Title', 'bws-testimonials' ); ?></th>
 									<td>
 										<input type="text" class="text" maxlength="250" value="<?php echo $tstmnls_options['widget_title']; ?>" name="tstmnls_widget_title"/>
 									</td>
 								</tr>
 								<tr>
-									<th scope="row"><?php _e( 'Number of testimonials to be displayed', 'bws-testimonials' ); ?></th>
+									<th scope="row"><?php _e( 'Number of Testimonials to be Displayed', 'bws-testimonials' ); ?></th>
 									<td>
 										<input type="number" class="text" min="1" max="10000" value="<?php echo $tstmnls_options['count']; ?>" name="tstmnls_count" />
 									</td>
 								</tr>
 								<tr>
-									<th scope="row"><?php _e( 'Sort testimonials by', 'bws-testimonials' ); ?></th>
-									<td><fieldset>
-										<label><input type="radio" name="tstmnls_order_by" value="ID" <?php if ( 'ID' == $tstmnls_options["order_by"] ) echo 'checked="checked"'; ?> /> <?php _e( 'Testimonial ID', 'bws-testimonials' ); ?></label><br />
-										<label><input type="radio" name="tstmnls_order_by" value="title" <?php if ( 'title' == $tstmnls_options["order_by"] ) echo 'checked="checked"'; ?> /> <?php _e( 'Testimonial title', 'bws-testimonials' ); ?></label><br />
-										<label><input type="radio" name="tstmnls_order_by" value="date" <?php if ( 'date' == $tstmnls_options["order_by"] ) echo 'checked="checked"'; ?> /> <?php _e( 'Date', 'bws-testimonials' ); ?></label><br />
-										<label><input type="radio" name="tstmnls_order_by" value="rand" <?php if ( 'rand' == $tstmnls_options["order_by"] ) echo 'checked="checked"'; ?> /> <?php _e( 'Random', 'bws-testimonials' ); ?></label>
-									</fieldset></td>
+									<th scope="row"><?php _e( 'Sort Testimonials by', 'bws-testimonials' ); ?></th>
+									<td>
+										<fieldset>
+											<label>
+												<input type="radio" name="tstmnls_order_by" value="ID" <?php checked( 'ID', $tstmnls_options["order_by"] ); ?> /> <?php _e( 'Testimonial ID', 'bws-testimonials' ); ?>
+											</label>
+											<br />
+											<label>
+												<input type="radio" name="tstmnls_order_by" value="title" <?php checked( 'title', $tstmnls_options["order_by"] ); ?> /> <?php _e( 'Testimonial title', 'bws-testimonials' ); ?>
+											</label>
+											<br />
+											<label>
+												<input type="radio" name="tstmnls_order_by" value="date" <?php checked( 'date', $tstmnls_options["order_by"] ); ?> /> <?php _e( 'Date', 'bws-testimonials' ); ?>
+											</label>
+											<br />
+											<label>
+												<input type="radio" name="tstmnls_order_by" value="rand" <?php checked( 'rand', $tstmnls_options["order_by"] ); ?> /> <?php _e( 'Random', 'bws-testimonials' ); ?>
+											</label>
+										</fieldset>
+									</td>
 								</tr>
 								<tr valign="top">
-									<th scope="row"><?php _e( 'Testimonials sorting', 'bws-testimonials' ); ?> </th>
+									<th scope="row"><?php _e( 'Testimonials Sorting', 'bws-testimonials' ); ?> </th>
 									<td><fieldset>
-										<label><input type="radio" name="tstmnls_order" value="ASC" <?php if ( 'ASC' == $tstmnls_options["order"] ) echo 'checked="checked"'; ?> /> <?php _e( 'ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)', 'bws-testimonials' ); ?></label><br />
-										<label><input type="radio" name="tstmnls_order" value="DESC" <?php if ( 'DESC' == $tstmnls_options["order"] ) echo 'checked="checked"'; ?> /> <?php _e( 'DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)', 'bws-testimonials' ); ?></label>
+										<label><input type="radio" name="tstmnls_order" value="ASC" <?php checked( 'ASC', $tstmnls_options["order"] ); ?> /> <?php _e( 'ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)', 'bws-testimonials' ); ?></label><br />
+										<label><input type="radio" name="tstmnls_order" value="DESC" <?php checked( 'DESC', $tstmnls_options["order"] ); ?> /> <?php _e( 'DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)', 'bws-testimonials' ); ?></label>
 									</fieldset></td>
+								</tr>
+								<tr>
+									<th scope="row"><?php _e( 'Publication Permissions', 'bws-testimonials' ); ?></th>
+									<td>
+										<fieldset>
+											<label>
+												<input type="radio" name="tstmnls_permission" value="logged" <?php checked( 'logged', $tstmnls_options["permissions"] ); ?> /> <?php _e( 'Logged', 'bws-testimonials' ); ?>
+											</label>
+											<br />
+											<label>
+												<input type="radio" name="tstmnls_permission" value="all" <?php checked( 'all', $tstmnls_options["permissions"] ); ?> /> <?php _e( 'All', 'bws-testimonials' ); ?>
+											</label>
+										</fieldset>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><?php _e( 'Publish Automatically', 'bws-testimonials' ); ?></th>
+									<td>
+										<input type="checkbox" name="tstmnls_auto_publication" id="tstmnls_auto_publication" <?php checked( 1, $tstmnls_options['auto_publication'] ); ?> >
+										<label><?php _e( 'Enable to publish new testimonials automatically. Otherwise, new testimonials will be saved as drafts.', 'bws-testimonials' ); ?></label>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -269,7 +313,7 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 							<?php wp_nonce_field( plugin_basename( __FILE__ ), 'tstmnls_check_field' ) ?>
 						</p>
 					</form>
-					<?php bws_form_restore_default_settings( plugin_basename(__file__) );
+					<?php bws_form_restore_default_settings( plugin_basename( __FILE__ ) );
 				}
 			} elseif ( 'custom_code' == $_GET['action'] ) {
 				bws_custom_code_tab();
@@ -297,9 +341,9 @@ if ( ! function_exists( 'tstmnls_custom_metabox' ) ) {
 if ( ! function_exists( 'tstmnls_save_postdata' ) ) {
 	function tstmnls_save_postdata( $post_id ) {
 		/*
-		 * We need to verify this came from the our screen and with proper authorization,
-		 * because save_post can be triggered at other times.
-		 */
+		* We need to verify this came from the our screen and with proper authorization,
+		* because save_post can be triggered at other times.
+		*/
 		/* If this is an autosave, our form has not been submitted, so we don't want to do anything. */
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return $post_id;
@@ -346,8 +390,8 @@ if ( ! class_exists( 'Testimonials' ) ) {
 			global $tstmnls_options;
 			if ( empty( $tstmnls_options ) )
 				$tstmnls_options = get_option( 'tstmnls_options' );
-			$widget_title   = isset( $instance['widget_title'] ) ? apply_filters( 'widget_title', $instance['widget_title'], $instance, $this->id_base ) : $tstmnls_options['widget_title'];
-			$count  		= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count'];
+			$widget_title	= isset( $instance['widget_title'] ) ? apply_filters( 'widget_title', $instance['widget_title'], $instance, $this->id_base ) : $tstmnls_options['widget_title'];
+			$count		= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count'];
 			echo $args['before_widget'];
 			if ( ! empty( $widget_title ) ) {
 				echo $args['before_title'] . $widget_title . $args['after_title'];
@@ -359,9 +403,9 @@ if ( ! class_exists( 'Testimonials' ) ) {
 		function form( $instance ) {
 			global $tstmnls_options;
 			if ( empty( $tstmnls_options ) )
-				$tstmnls_options = get_option( 'tstmnls_options' );
-			$widget_title  	= isset( $instance['widget_title'] ) ? stripslashes( esc_html( $instance['widget_title'] ) ) : $tstmnls_options['widget_title'];
-			$count  		= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count']; ?>
+				$tstmnls_options	= get_option( 'tstmnls_options' );
+				$widget_title		= isset( $instance['widget_title'] ) ? stripslashes( esc_html( $instance['widget_title'] ) ) : $tstmnls_options['widget_title'];
+				$count			= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count']; ?>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php _e( 'Widget Title', 'bws-testimonials' ); ?>: </label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" maxlength="250" value="<?php echo esc_attr( $widget_title ); ?>"/>
@@ -375,10 +419,10 @@ if ( ! class_exists( 'Testimonials' ) ) {
 		function update( $new_instance, $old_instance ) {
 			global $tstmnls_options;
 			if ( empty( $tstmnls_options ) )
-				$tstmnls_options = get_option( 'tstmnls_options' );
-			$instance = array();
-			$instance['widget_title']	= ( isset( $new_instance['widget_title'] ) ) ? stripslashes( esc_html( $new_instance['widget_title'] ) ) : $tstmnls_options['widget_title'];
-			$instance['count']			= ( ! empty( $new_instance['count'] ) ) ? intval( $new_instance['count'] ) : $tstmnls_options['count'];
+				$tstmnls_options		= get_option( 'tstmnls_options' );
+				$instance			= array();
+				$instance['widget_title']	= ( isset( $new_instance['widget_title'] ) ) ? stripslashes( esc_html( $new_instance['widget_title'] ) ) : $tstmnls_options['widget_title'];
+				$instance['count']		= ( ! empty( $new_instance['count'] ) ) ? intval( $new_instance['count'] ) : $tstmnls_options['count'];
 			return $instance;
 		}
 	}
@@ -458,6 +502,165 @@ if ( ! function_exists( 'tstmnls_show_testimonials_shortcode' ) ) {
 		return $content;
 	}
 }
+/**
+ * Add captcha and recaptcha support
+ */
+if ( ! function_exists( 'tstmnls_add_captcha_forms' ) ) {
+	function tstmnls_add_captcha_forms( $forms ) {
+		$forms['testimonials'] = __( 'Testimonials Form', 'bws-testimonials' );
+		return $forms;
+	}
+}
+
+if ( ! function_exists( 'tstmnls_add_recaptcha_forms' ) ) {
+	function tstmnls_add_recaptcha_forms( $forms ) {
+		$forms['testimonials'] = array( "form_name" => __( 'Testimonials Form', 'bws-testimonials' ) );
+		return $forms;
+	}
+}
+
+/**
+ * Display captcha form
+ */
+if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
+	function tstmnls_show_testimonials_form () {
+		global $wp;
+		$content = $form_name_error = $form_company_error = $form_title_error = $form_content_error = $subm_result = $form_error = '';
+		$form_author = $form_company = $form_title = $form_content = '';
+		$tstmnls_options = get_option( 'tstmnls_options' );
+		if (
+			isset( $_POST['tstmnls_submit_testimonial'] ) &&
+			isset( $_POST['tstmnls_field'] ) &&
+			wp_verify_nonce( $_POST['tstmnls_field'], 'tstmnls_action' )
+		) {
+			$check = apply_filters( 'gglcptch_verify_recaptcha', true, 'string', 'testimonials' );
+			/**
+			* @todo: uncomment after captcha is fixed
+			* $check = apply_filters( 'cptch_verify', $check, 'string', 'testimonials' );
+			*/
+			$form_author = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_author'] ) ) );
+			$form_company = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_company_name'] ) ) );
+			$form_title = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_title'] ) ) );
+			$form_content = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_comment'] ) ) );
+
+			if ( true === $check &&
+				! empty( $form_author ) &&
+				! empty( $form_company ) &&
+				! empty( $form_title ) &&
+				! empty( $form_content ) ) {
+				if ( ( 'all' == $tstmnls_options['permissions'] ) ){
+					$admin_email = get_option( 'admin_email' );
+					$admin_user = get_user_by( 'email', $admin_email );
+					$post_author=$admin_user->ID;
+				} elseif ( 'logged' == $tstmnls_options['permissions'] ) {
+					$post_author = get_current_user_id();
+				}
+
+				$post = array(
+					'post_type'	=> 'bws-testimonial',
+					'post_title'	=> $form_title,
+					'post_content'	=> $form_content,
+					'post_author'	=> $post_author,
+					'meta_input'	=> array(
+											'_testimonials_info'	=> array(
+											'author'				=> $form_author,
+											'company_name'			=> $form_company
+										)
+					),
+				);
+				if ( isset( $tstmnls_options['auto_publication'] ) ){
+					if ( !empty( $tstmnls_options['auto_publication'] ) ){
+						$post['post_status'] = 'publish';
+					} else {
+						$post['post_status'] = 'draft';
+					}
+					// if ( empty( $tstmnls_options['auto_publication'] ) ){
+					// 	$post['post_status'] = 'draft';
+					// }
+				}
+				wp_insert_post( $post );
+				unset( $_POST );
+				$form_author = '';
+				$form_company = '';
+				$form_title = '';
+				$form_content = '';
+				$url = add_query_arg( 'message', 'true', home_url( $wp->request ) );
+				echo '<script type="text/javascript">window.location.href="'. $url .'";</script>';
+
+			} else {
+				$captcha_error_messages = $check;
+				if ( empty( $form_author ) ) {
+					$form_name_error = '<p class="tstmnls_error">' . __( 'Your name is required.', 'bws-testimonials' ) . '</p>';
+					$form_error = '<p class="_form">' . __( 'Please make corrections below and try again.', 'bws-testimonials' ) . '</p>';
+				} if ( empty( $form_title ) ) {
+					$form_title_error = '<p class="tstmnls_error">' . __( 'Testimonial title is required.', 'bws-testimonials' ) . '</p>';
+					$form_error = '<p class="tstmnls_error_form">' . __( 'Please make corrections below and try again.', 'bws-testimonials' ) . '</p>';
+				} if ( empty( $form_content ) ) {
+					$form_content_error = '<p class="tstmnls_error">' . __( 'Testimonials is required.', 'bws-testimonials' ) . '</p>';
+					$form_error = '<p class="tstmnls_error_form">' . __( 'Please make corrections below and try again.', 'bws-testimonials' ) . '</p>';
+				}
+			}
+		}
+		if ( ! is_user_logged_in() && 'logged' == $tstmnls_options["permissions"] ) {
+			$content =
+			'<div class = "tstmnls_form_div">
+				<p>' . __( 'This form is available only for logged in users. Please', 'bws-testimonials' ) . '<a href="' . wp_login_url() . '"> ' .
+				__( 'log in', 'bws-testimonials' ) . '</a> ' . __( 'or', 'bws-testimonials' ) .
+				'<a href="' . wp_registration_url() . '"> ' . __( 'register', 'bws-testimonials' ) . '</a> ' . __( 'on our site', 'bws-testimonials' ) . '</p>
+			</div>';
+		} else {
+			if ( isset( $_GET['message'] ) ) {
+				if ( !empty( $tstmnls_options['auto_publication'] ) ) {
+					$subm_result = '<p class="tstmnls_result">' . __( 'Your testimonial has been published!', 'bws-testimonials' ) . '</p>';
+				} else {
+					$subm_result = '<p class="tstmnls_result">' . __( 'Your testimonial has been sent to administration!', 'bws-testimonials' ) . '</p>';
+				}
+			}
+			$content =
+			'<div class = "tstmnls_form_div">' . $subm_result . '
+				<form method="post" name="tstmnls_form_name" id="tstmnls_form_name" action="">
+					<h2>' . __( 'Leave your testimonial', 'bws-testimonials' ) . '</h2>
+					' . $form_error . '
+					<div class="tstmnls_field_form">
+						<label for="tstmnls_testimonial_author">' . __( 'Your name:', 'bws-testimonials' ) . '
+							<span class="tstmnls_required_symbol"> * </span>
+						</label>
+						' . $form_name_error . '
+						<input type="text" name="tstmnls_testimonial_author" id="tstmnls_testimonial_author" value="'. $form_author . '" >
+					</div>
+					<div class="tstmnls_field_form">
+						<label for="tstmnls_testimonial_company_name">'. __( 'Your company:', 'bws-testimonials' ) .'</label>
+						<input type="text" name="tstmnls_testimonial_company_name" id="tstmnls_testimonial_company_name" value="'. $form_company .'" >
+					</div>
+					<div class="tstmnls_field_form">
+						<label for="tstmnls_testimonial_title">' . __( 'Testimonial title:', 'bws-testimonials' ) . '
+							<span class="tstmnls_required_symbol"> * </span>
+						</label>
+					' . $form_title_error . '
+						<input type="text" name="tstmnls_testimonial_title" id="tstmnls_testimonial_title" value="' . $form_title . '" >
+					</div>
+					<div class="tstmnls_field_form">
+						<label for="tstmnls_testimonial_title">' . __( 'Testimonial:', 'bws-testimonials' ) . '
+							<span class="tstmnls_required_symbol"> * </span>
+						</label>
+						' . $form_content_error . '
+						<textarea name="tstmnls_testimonial_comment" class="tstmnls_testimonial_comment" rows="8" cols="80">' . $form_content . '</textarea>
+						<input type="hidden" name="tstmnls_submit_testimonial" id="tstmnls_submit_testimonial" value="1">
+					</div>' .
+					/**
+					* @todo: uncomment after captcha is fixed
+					* apply_filters( 'cptch_display', '', 'testimonials' ) .
+					*/
+					apply_filters( 'gglcptch_display_recaptcha', '', 'testimonials' ) .
+					( isset( $captcha_error_messages ) && ( 1 != $captcha_error_messages ) ? '<p class="tstmnls_captcha_error" >' . $captcha_error_messages . '</p>' : '' ) .
+					wp_nonce_field( 'tstmnls_action', 'tstmnls_field', true, false ) . '
+					<input type="submit" value="' . __( 'Publish', 'bws-testimonials' ) . '">
+				</form>
+			</div>';
+		}
+		return $content;
+	}
+}
 
 /**
  * Add styles for admin page and widget
@@ -466,7 +669,7 @@ if ( ! function_exists ( 'tstmnls_admin_head' ) ) {
 	function tstmnls_admin_head() {
 		wp_enqueue_style( 'tstmnls_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
 
-		if ( isset( $_GET['page'] ) && $_GET['page'] == "testimonials.php" ) {
+		if ( isset( $_GET['page'] ) && "testimonials.php" == $_GET['page'] ) {
 			bws_enqueue_settings_scripts();
 			bws_plugins_include_codemirror();
 		}
@@ -488,7 +691,7 @@ if ( ! function_exists( 'tstmnls_plugin_action_links' ) ) {
 			/* Static so we don't call plugin_basename on every plugin row. */
 			static $this_plugin;
 			if ( ! $this_plugin )
-				$this_plugin = plugin_basename(__FILE__);
+				$this_plugin = plugin_basename( __FILE__ );
 
 			if ( $file == $this_plugin ) {
 				$settings_link = '<a href="admin.php?page=testimonials.php">' . __( 'Settings', 'bws-testimonials' ) . '</a>';
@@ -501,12 +704,12 @@ if ( ! function_exists( 'tstmnls_plugin_action_links' ) ) {
 
 if ( ! function_exists ( 'tstmnls_register_plugin_links' ) ) {
 	function tstmnls_register_plugin_links( $links, $file ) {
-		$base = plugin_basename(__FILE__);
+		$base = plugin_basename( __FILE__ );
 		if ( $file == $base ) {
 			if ( ! is_network_admin() )
 				$links[] = '<a href="admin.php?page=testimonials.php">' . __( 'Settings', 'bws-testimonials' ) . '</a>';
-			$links[] = '<a href="https://support.bestwebsoft.com/hc/en-us/sections/200897195" target="_blank">' . __( 'FAQ', 'bws-testimonials' ) . '</a>';
-			$links[] = '<a href="https://support.bestwebsoft.com">' . __( 'Support', 'bws-testimonials' ) . '</a>';
+				$links[] = '<a href="https://support.bestwebsoft.com/hc/en-us/sections/200897195" target="_blank">' . __( 'FAQ', 'bws-testimonials' ) . '</a>';
+				$links[] = '<a href="https://support.bestwebsoft.com">' . __( 'Support', 'bws-testimonials' ) . '</a>';
 		}
 		return $links;
 	}
@@ -532,29 +735,46 @@ if ( ! function_exists ( 'tstmnls_register_widgets' ) ) {
 	}
 }
 
-/* add help tab  */
+/* add help tab */
 if ( ! function_exists( 'tstmnls_add_tabs' ) ) {
 	function tstmnls_add_tabs() {
 		$screen = get_current_screen();
 		if ( ( ! empty( $screen->post_type ) && 'bws-testimonial' == $screen->post_type ) ||
-			( isset( $_GET['page'] ) && $_GET['page'] == 'testimonials.php' ) ) {
+			( isset( $_GET['page'] ) && 'testimonials.php' == $_GET['page'] ) ) {
 			$args = array(
-				'id' 			=> 'tstmnls',
-				'section' 		=> '200897195'
+				'id'			=> 'tstmnls',
+				'section'		=> '200897195'
 			);
 			bws_help_tab( $screen, $args );
 		}
 	}
 }
 
-/* add shortcode content  */
+/* add shortcode content */
 if ( ! function_exists( 'tstmnls_shortcode_button_content' ) ) {
 	function tstmnls_shortcode_button_content( $content ) { ?>
 		<div id="tstmnls" style="display:none;">
 			<fieldset>
-				<?php _e( 'Add testimonials to your page or post', 'bws-testimonials' ); ?>
+				<label>
+					<input type="radio" name="tstmnls_select" value="bws_testimonials" checked="checked">
+					<span><?php _e( 'Add testimonials to your page or post', 'bws-testimonials' ); ?></span>
+				</label>
+				<label>
+					<input type="radio" name="tstmnls_select" value="bws_testimonials_form">
+					<span><?php _e( 'Leave testimonials', 'bws-testimonials' ); ?></span>
+				</label>
 			</fieldset>
 			<input class="bws_default_shortcode" type="hidden" name="default" value="[bws_testimonials]" />
+			<script type="text/javascript">
+				function tstmnls_shortcode_init() {
+					( function( $ ) {
+						$( '.mce-reset input[name="tstmnls_select"]' ).on( 'change', function() {
+							var shortcode = $( '.mce-reset input[name="tstmnls_select"]:checked' ).val();
+							$( '.mce-reset #bws_shortcode_display' ).text( '[' + shortcode + ']' );
+						} );
+					} )( jQuery );
+				}
+			</script>
 			<div class="clear"></div>
 		</div>
 	<?php }
@@ -604,6 +824,7 @@ add_action( 'tstmnls_show_testimonials', 'tstmnls_show_testimonials' );
 /* custom filter for bws button in tinyMCE */
 add_filter( 'bws_shortcode_button_content', 'tstmnls_shortcode_button_content' );
 add_shortcode( 'bws_testimonials', 'tstmnls_show_testimonials_shortcode' );
+add_shortcode( 'bws_testimonials_form', 'tstmnls_show_testimonials_form' );
 /* Add style for admin page */
 add_action( 'admin_enqueue_scripts', 'tstmnls_admin_head' );
 /* Add style for widget */
@@ -613,3 +834,8 @@ add_action( 'admin_notices', 'tstmnls_admin_notices' );
 /* Additional links on the plugin page */
 add_filter( 'plugin_action_links', 'tstmnls_plugin_action_links', 10, 2 );
 add_filter( 'plugin_row_meta', 'tstmnls_register_plugin_links', 10, 2 );
+/**
+ * @todo: uncomment after captcha is fixed
+ * add_filter( 'cptch_add_form', 'tstmnls_add_captcha_forms' );
+ */
+add_filter( 'gglcptch_add_custom_form', 'tstmnls_add_recaptcha_forms' );
