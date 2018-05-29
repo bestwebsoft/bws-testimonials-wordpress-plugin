@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 4.9.4
-Stable tag: 0.2.2
+Tested up to: 4.9.6
+Stable tag: 0.2.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,12 +20,12 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 
 = Features =
 
-* Add testimonials form via shortcode [NEW]
+* GDPR Compliant [NEW]
+* Add testimonials form via shortcode
 * Add unlimited number of testimonials
 * Add testimonials block via shortcode
 * Add testimonials widget
-* Compatible with Google Captcha (reCAPTCHA)  [NEW]
-* Select the one who can submit new testimonials:  [NEW]
+* Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
 * Customize testimonials additional info:
@@ -66,7 +66,6 @@ Some of these translations are not complete. We are constantly adding new featur
 = Recommended Plugins =
 
 * [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
-* [Google Captcha (reCAPTCHA)] (https://bestwebsoft.com/products/wordpress/plugins/google-captcha/) – Protect WordPress website forms from spam entries with Google reCAPTCHA.
 
 == Installation ==
 
@@ -115,9 +114,11 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V0.2.3 - 29.05.2018 =
+* NEW : Ability to add GDPR Compliance checkbox has been added.
+
 = V0.2.2 - 27.02.2018 =
 * NEW : Ability to add testimonials form via shortcode has been added.
-* NEW : The compatibility with Google Captcha (reCAPTCHA) plugin has been added.
 * NEW : Ability to select the one who can submit new testimonials has been added.
 
 = V0.2.1 - 21.12.2017 =
@@ -170,6 +171,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.2.3 =
+* Functionality improved.
 
 = V0.2.2 =
 * Functionality expanded.

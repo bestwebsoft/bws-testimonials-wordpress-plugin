@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-01 11:13+0300\n"
-"PO-Revision-Date: 2016-04-01 13:07+0300\n"
+"POT-Creation-Date: 2018-05-28 16:04+0300\n"
+"PO-Revision-Date: 2018-05-28 16:05+0300\n"
 "Last-Translator: Áprily Péter <info@aprily.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -13,198 +13,353 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bws-testimonials.php:35
 msgid "Testimonials Settings"
 msgstr "Méltatás Beállítások"
 
-#: bws-testimonials.php:38 bws-testimonials.php:181 bws-testimonials.php:459
-#: bws-testimonials.php:472
+#: bws-testimonials.php:35 bws-testimonials.php:351 bws-testimonials.php:941
+#: bws-testimonials.php:954
 msgid "Settings"
 msgstr "Beállítások"
 
-#: bws-testimonials.php:87
+#: bws-testimonials.php:85
 msgid "Testimonials Info"
 msgstr "Méltatások Infó"
 
-#: bws-testimonials.php:97 bws-testimonials.php:131
+#: bws-testimonials.php:95 bws-testimonials.php:130 bws-testimonials.php:303
 msgid "Testimonials"
 msgstr "Méltatások"
 
-#: bws-testimonials.php:98 bws-testimonials.php:485
+#: bws-testimonials.php:96
 msgid "Testimonial"
 msgstr "Méltatás"
 
-#: bws-testimonials.php:106
+#: bws-testimonials.php:104
+msgid "Add New"
+msgstr ""
+
+#: bws-testimonials.php:105
 msgid "Add a new testimonial"
 msgstr "Új méltatás hozzáadása"
 
-#: bws-testimonials.php:107
+#: bws-testimonials.php:106
 msgid "Edit testimonials"
 msgstr "Méltatások szerkesztése"
 
-#: bws-testimonials.php:108
+#: bws-testimonials.php:107
 msgid "New testimonial"
 msgstr "Új méltatás"
 
-#: bws-testimonials.php:109
+#: bws-testimonials.php:108
 msgid "View testimonials"
 msgstr "Méltatások átnézése"
 
-#: bws-testimonials.php:110
+#: bws-testimonials.php:109
 msgid "Search testimonials"
 msgstr "Méltatások keresése"
 
-#: bws-testimonials.php:111
+#: bws-testimonials.php:110
 msgid "No testimonials found"
 msgstr "Nem találtunk méltatást"
 
-#: bws-testimonials.php:112
+#: bws-testimonials.php:111
 msgid "No testimonials found in Trash"
 msgstr "A Lomtárban nem található méltatás"
 
-#: bws-testimonials.php:113
-#, fuzzy
-msgid "Filter testimonials list"
-msgstr "Méltatások szerkesztése"
+#: bws-testimonials.php:112
+msgid "Testimonials list filter"
+msgstr ""
 
-#: bws-testimonials.php:114
+#: bws-testimonials.php:113
 #, fuzzy
 msgid "Testimonials list navigation"
 msgstr "Méltatás Beállítások"
 
-#: bws-testimonials.php:115
+#: bws-testimonials.php:114
 #, fuzzy
 msgid "Testimonials list"
 msgstr "Méltatások Widget"
 
-#: bws-testimonials.php:170
-msgid "Settings saved"
-msgstr "Beállítások mentve"
+#: bws-testimonials.php:141
+msgid "I consent to having this site collect my personal data."
+msgstr ""
 
-#: bws-testimonials.php:176
+#: bws-testimonials.php:316
+msgid "Settings saved."
+msgstr ""
+
+#: bws-testimonials.php:346
 msgid "All plugin settings were restored."
 msgstr "Minden plugin beállítás visszaállítva."
 
-#: bws-testimonials.php:182
+#: bws-testimonials.php:352
 msgid "Custom code"
 msgstr ""
 
-#: bws-testimonials.php:194
-msgid ""
-"If you would like to display testimonials with a widget, you need to add the "
-"widget"
+#: bws-testimonials.php:364
+msgid "If you would like to display testimonials in widget, you need to add "
 msgstr ""
-"Ha widgeten szeretné megjeleníteni a méltatásokat, hozzá kell adnia a "
-"widgetet"
 
-#: bws-testimonials.php:195 bws-testimonials.php:326
+#: bws-testimonials.php:365 bws-testimonials.php:609
 msgid "Testimonials Widget"
 msgstr "Méltatások Widget"
 
-#: bws-testimonials.php:196
-msgid "on the Widgets tab"
-msgstr "a Widget lapon"
-
-#: bws-testimonials.php:200
-#, fuzzy, php-format
-msgid ""
-"If you would like to add testimonials to your page or post, please use %s "
-"button"
+#: bws-testimonials.php:366
+msgid "on the Widgets page"
 msgstr ""
-"Ha a weboldalához méltatásokat szeretne adni, másolja be ezt a shortcode-ot "
-"a bejegyzésbe vagy az oldalába:"
 
-#: bws-testimonials.php:205
+#: bws-testimonials.php:370
+#, php-format
+msgid ""
+"If you would like to add testimonials or testimonials form to your page or "
+"post, please use %s button"
+msgstr ""
+
+#: bws-testimonials.php:373
 #, php-format
 msgid ""
 "You can add testimonials to your page or post by clicking on %s button in "
 "the content edit block using the Visual mode. If the button isn't displayed, "
-"please use the shortcode %s"
+"please use the shortcode %s or use %s shortcode to add testimonials form."
 msgstr ""
 
-#: bws-testimonials.php:213
+#: bws-testimonials.php:380
 msgid "Also, you can paste the following strings into the template source code"
 msgstr "Valamint beillesztheti a következő sorokat a sablon forráskódjába"
 
-#: bws-testimonials.php:223
-msgid "Widget title"
-msgstr "Widget cím"
+#: bws-testimonials.php:390 bws-testimonials.php:636
+msgid "Widget Title"
+msgstr "Widget Cím"
 
-#: bws-testimonials.php:229 bws-testimonials.php:356
-msgid "Number of testimonials to be displayed"
-msgstr "Megjelenítendő méltatások száma"
-
-#: bws-testimonials.php:235
-#, fuzzy
-msgid "Sort testimonials by"
-msgstr "Méltatások keresése"
-
-#: bws-testimonials.php:237
-#, fuzzy
-msgid "testimonial id"
-msgstr "Méltatás"
-
-#: bws-testimonials.php:238
-#, fuzzy
-msgid "testimonial title"
-msgstr "Méltatások Widget"
-
-#: bws-testimonials.php:239
-msgid "date"
+#: bws-testimonials.php:396
+msgid "Number of Testimonials to be Displayed"
 msgstr ""
 
-#: bws-testimonials.php:240
-msgid "random"
+#: bws-testimonials.php:402
+msgid "Sort Testimonials by"
 msgstr ""
 
-#: bws-testimonials.php:244
-#, fuzzy
-msgid "Testimonials sorting"
-msgstr "Méltatás Beállítások"
+#: bws-testimonials.php:406
+msgid "Testimonial ID"
+msgstr ""
 
-#: bws-testimonials.php:246
+#: bws-testimonials.php:410
+msgid "Testimonial title"
+msgstr ""
+
+#: bws-testimonials.php:414
+msgid "Date"
+msgstr ""
+
+#: bws-testimonials.php:418
+msgid "Random"
+msgstr ""
+
+#: bws-testimonials.php:424
+msgid "Testimonials Sorting"
+msgstr ""
+
+#: bws-testimonials.php:426
 msgid "ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)"
 msgstr ""
 
-#: bws-testimonials.php:247
+#: bws-testimonials.php:427
 msgid ""
 "DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)"
 msgstr ""
 
-#: bws-testimonials.php:253
+#: bws-testimonials.php:431
+msgid "Publication Permissions"
+msgstr ""
+
+#: bws-testimonials.php:435
+msgid "Logged"
+msgstr ""
+
+#: bws-testimonials.php:439
+msgid "All"
+msgstr ""
+
+#: bws-testimonials.php:445
+msgid "Publish Automatically"
+msgstr ""
+
+#: bws-testimonials.php:448
+msgid ""
+"Enable to publish new testimonials automatically. Otherwise, new "
+"testimonials will be saved as drafts."
+msgstr ""
+
+#: bws-testimonials.php:511
+msgid "GDPR Compliance"
+msgstr ""
+
+#: bws-testimonials.php:518
+msgid "Checkbox label"
+msgstr ""
+
+#: bws-testimonials.php:522
+msgid "Link to Privacy Policy Page"
+msgstr ""
+
+#: bws-testimonials.php:526
+msgid "Text for Privacy Policy Link"
+msgstr ""
+
+#: bws-testimonials.php:536
 msgid "Save Changes"
 msgstr "Változások mentése"
 
-#: bws-testimonials.php:273
+#: bws-testimonials.php:556
 msgid "Author"
 msgstr "Szerző"
 
-#: bws-testimonials.php:277
+#: bws-testimonials.php:560
 msgid "Company Name"
 msgstr "Cégnév"
 
-#: bws-testimonials.php:327
+#: bws-testimonials.php:610
 msgid "Widget for displaying Testimonials."
 msgstr "Widget a Méltatások megjelenítésére."
 
-#: bws-testimonials.php:352
-msgid "Widget Title"
-msgstr "Widget Cím"
+#: bws-testimonials.php:640
+msgid "Number of testimonials to be displayed"
+msgstr "Megjelenítendő méltatások száma"
 
-#: bws-testimonials.php:473
+#: bws-testimonials.php:738
+msgid "Testimonials Form"
+msgstr ""
+
+#: bws-testimonials.php:822
+msgid "Your name is required."
+msgstr ""
+
+#: bws-testimonials.php:823 bws-testimonials.php:826 bws-testimonials.php:829
+msgid "Please make corrections below and try again."
+msgstr ""
+
+#: bws-testimonials.php:825
+msgid "Testimonial title is required."
+msgstr ""
+
+#: bws-testimonials.php:828
+msgid "Testimonials is required."
+msgstr ""
+
+#: bws-testimonials.php:836
+msgid "This form is available only for logged in users. Please"
+msgstr ""
+
+#: bws-testimonials.php:837
+msgid "log in"
+msgstr ""
+
+#: bws-testimonials.php:837
+msgid "or"
+msgstr ""
+
+#: bws-testimonials.php:838
+msgid "register"
+msgstr ""
+
+#: bws-testimonials.php:838
+msgid "on our site"
+msgstr ""
+
+#: bws-testimonials.php:843
+msgid "Your testimonial has been published!"
+msgstr ""
+
+#: bws-testimonials.php:845
+msgid "Your testimonial has been sent to administration!"
+msgstr ""
+
+#: bws-testimonials.php:851
+msgid "Leave your testimonial"
+msgstr ""
+
+#: bws-testimonials.php:854
+msgid "Your name:"
+msgstr ""
+
+#: bws-testimonials.php:861
+msgid "Your company:"
+msgstr ""
+
+#: bws-testimonials.php:865
+msgid "Testimonial title:"
+msgstr ""
+
+#: bws-testimonials.php:872
+msgid "Testimonial:"
+msgstr ""
+
+#: bws-testimonials.php:901
+msgid "Publish"
+msgstr ""
+
+#: bws-testimonials.php:955
 msgid "FAQ"
 msgstr "Gy.I.K."
 
-#: bws-testimonials.php:474
+#: bws-testimonials.php:956
 msgid "Support"
 msgstr "Támogatás"
 
-#: bws-testimonials.php:520
+#: bws-testimonials.php:1004
 msgid "Add testimonials to your page or post"
 msgstr ""
+
+#: bws-testimonials.php:1008
+msgid "Leave testimonials"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Filter testimonials list"
+#~ msgstr "Méltatások szerkesztése"
+
+#~ msgid "Settings saved"
+#~ msgstr "Beállítások mentve"
+
+#~ msgid ""
+#~ "If you would like to display testimonials with a widget, you need to add "
+#~ "the widget"
+#~ msgstr ""
+#~ "Ha widgeten szeretné megjeleníteni a méltatásokat, hozzá kell adnia a "
+#~ "widgetet"
+
+#~ msgid "on the Widgets tab"
+#~ msgstr "a Widget lapon"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you would like to add testimonials to your page or post, please use %s "
+#~ "button"
+#~ msgstr ""
+#~ "Ha a weboldalához méltatásokat szeretne adni, másolja be ezt a shortcode-"
+#~ "ot a bejegyzésbe vagy az oldalába:"
+
+#~ msgid "Widget title"
+#~ msgstr "Widget cím"
+
+#, fuzzy
+#~ msgid "Sort testimonials by"
+#~ msgstr "Méltatások keresése"
+
+#, fuzzy
+#~ msgid "testimonial id"
+#~ msgstr "Méltatás"
+
+#, fuzzy
+#~ msgid "testimonial title"
+#~ msgstr "Méltatások Widget"
+
+#, fuzzy
+#~ msgid "Testimonials sorting"
+#~ msgstr "Méltatás Beállítások"
 
 #~ msgid "Notice:"
 #~ msgstr "Megjegyzés:"

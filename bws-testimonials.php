@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.2.2
+Version: 0.2.3
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -134,7 +134,11 @@ if ( ! function_exists( 'tstmnls_register_settings' ) ) {
 			'order'						=> 'DESC',
 			'suggest_feature_banner'	=> 1,
 			'permissions'				=> 'all',
-			'auto_publication'			=> 0
+			'auto_publication'			=> 0,
+			'gdpr'						=> 0,
+			'gdpr_text'					=> '',
+			'gdpr_link'					=> '',
+			'gdpr_tm_name'				=> __( 'I consent to having this site collect my personal data.', 'bws-testimonials' ),
 		);
 
 		/* Install the option defaults */
@@ -194,6 +198,11 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 			$tstmnls_options['order']				= isset( $_POST['tstmnls_order'] ) ? $_POST['tstmnls_order'] : 'DESC';
 			$tstmnls_options['permissions']			= isset( $_POST['tstmnls_permission'] ) ? $_POST['tstmnls_permission'] : 'all';
 
+			$tstmnls_options['gdpr_tm_name']		= isset( $_POST['tstmnls_gdpr_tm_name'] ) ? esc_html( $_POST['tstmnls_gdpr_tm_name'] ) : $tstmnls_options['gdpr_tm_name'];
+			$tstmnls_options['gdpr_text']			= isset( $_POST['tstmnls_gdpr_text'] ) ? esc_html( $_POST['tstmnls_gdpr_text'] ) : $tstmnls_options['gdpr_text'];
+			$tstmnls_options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? esc_html( $_POST['tstmnls_gdpr_link'] ) : $tstmnls_options['gdpr_link'];
+			$tstmnls_options['gdpr']				= isset( $_POST['tstmnls_gdpr'] ) ? 1 : 0;
+
 			update_option( 'tstmnls_options', $tstmnls_options );
 			$message = __( 'Settings saved.', 'bws-testimonials' );
 		}
@@ -225,12 +234,13 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 							); ?>
 						</p>
 						<div><?php printf(
-							__( "If you would like to add testimonials to your page or post, please use %s button", 'bws-testimonials' ),
+							__( "If you would like to add testimonials or testimonials form to your page or post, please use %s button", 'bws-testimonials' ),
 							'<span class="bws_code"><span class="bwsicons bwsicons-shortcode"></span></span>' );
 							echo bws_add_help_box( sprintf(
-								__( "You can add testimonials to your page or post by clicking on %s button in the content edit block using the Visual mode. If the button isn't displayed, please use the shortcode %s", 'bws-testimonials' ),
+								__( "You can add testimonials to your page or post by clicking on %s button in the content edit block using the Visual mode. If the button isn't displayed, please use the shortcode %s or use %s shortcode to add testimonials form.", 'bws-testimonials' ),
 								'<code><span class="bwsicons bwsicons-shortcode"></span></code>',
-								'<code>[bws_testimonials]</code>'
+								'<code>[bws_testimonials]</code>',
+								'<code>[bws_testimonials_form]</code>'
 							) ); ?>
 						</div>
 						<p>
@@ -301,8 +311,32 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 								<tr>
 									<th scope="row"><?php _e( 'Publish Automatically', 'bws-testimonials' ); ?></th>
 									<td>
-										<input type="checkbox" name="tstmnls_auto_publication" id="tstmnls_auto_publication" <?php checked( 1, $tstmnls_options['auto_publication'] ); ?> >
+										<input type="checkbox" name="tstmnls_auto_publication" id="tstmnls_auto_publication" <?php checked( 1, $tstmnls_options['auto_publication'] ); ?> />
 										<label><?php _e( 'Enable to publish new testimonials automatically. Otherwise, new testimonials will be saved as drafts.', 'bws-testimonials' ); ?></label>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="tstmnls-gdpr"><?php _e( 'GDPR Compliance', 'bws-testimonials' ); ?></label>
+									</th>
+									<td class="tstmnls_gdpr_td">
+										<fieldset>
+											<input type="checkbox" id="tstmnls_gdpr" name="tstmnls_gdpr" value="1" <?php checked( '1', $tstmnls_options['gdpr'] ); ?> />
+											<div id="tstmnls_gdpr_link_options" >
+												<label class="tstmnls_privacy_policy_text" >
+													<?php _e( 'Checkbox label', 'bws-testimonials' ); ?>
+													<input type="text" id="tstmnls_gdpr_tm_name" size="29" name="tstmnls_gdpr_tm_name" value="<?php echo $tstmnls_options['gdpr_tm_name']; ?>" />
+												</label>
+												<label class="tstmnls_privacy_policy_text" >
+													<?php _e( "Link to Privacy Policy Page", 'bws-testimonials' ); ?>
+													<input type="url" id="tstmnls_gdpr_link"  placeholder="http://" name="tstmnls_gdpr_link" value="<?php echo $tstmnls_options['gdpr_link']; ?>" />
+												</label>
+												<label class="tstmnls_privacy_policy_text" >
+													<?php _e( "Text for Privacy Policy Link", 'bws-testimonials' ); ?>
+													<input type="text" id="tstmnls_gdpr_text" name="tstmnls_gdpr_text" value="<?php echo $tstmnls_options['gdpr_text']; ?>" />
+												</label>
+											</div>
+										</fieldset>
 									</td>
 								</tr>
 							</tbody>
@@ -388,10 +422,11 @@ if ( ! class_exists( 'Testimonials' ) ) {
 
 		function widget( $args, $instance ) {
 			global $tstmnls_options;
-			if ( empty( $tstmnls_options ) )
+			if ( empty( $tstmnls_options ) ) {
 				$tstmnls_options = get_option( 'tstmnls_options' );
+			}
 			$widget_title	= isset( $instance['widget_title'] ) ? apply_filters( 'widget_title', $instance['widget_title'], $instance, $this->id_base ) : $tstmnls_options['widget_title'];
-			$count		= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count'];
+			$count			= isset( $instance['count'] ) ? intval( $instance['count'] ) : $tstmnls_options['count'];
 			echo $args['before_widget'];
 			if ( ! empty( $widget_title ) ) {
 				echo $args['before_title'] . $widget_title . $args['after_title'];
@@ -512,13 +547,6 @@ if ( ! function_exists( 'tstmnls_add_captcha_forms' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tstmnls_add_recaptcha_forms' ) ) {
-	function tstmnls_add_recaptcha_forms( $forms ) {
-		$forms['testimonials'] = array( "form_name" => __( 'Testimonials Form', 'bws-testimonials' ) );
-		return $forms;
-	}
-}
-
 /**
  * Display captcha form
  */
@@ -533,9 +561,13 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 			isset( $_POST['tstmnls_field'] ) &&
 			wp_verify_nonce( $_POST['tstmnls_field'], 'tstmnls_action' )
 		) {
-			$check = apply_filters( 'gglcptch_verify_recaptcha', true, 'string', 'testimonials' );
+
+
+			$check = apply_filters( 'testimonials', true );
+
 			/**
 			* @todo: uncomment after captcha is fixed
+			* $check = apply_filters( 'gglcptch_verify_recaptcha', true, 'string', 'testimonials' );
 			* $check = apply_filters( 'cptch_verify', $check, 'string', 'testimonials' );
 			*/
 			$form_author = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_author'] ) ) );
@@ -569,14 +601,11 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 					),
 				);
 				if ( isset( $tstmnls_options['auto_publication'] ) ){
-					if ( !empty( $tstmnls_options['auto_publication'] ) ){
+					if ( ! empty( $tstmnls_options['auto_publication'] ) ){
 						$post['post_status'] = 'publish';
 					} else {
 						$post['post_status'] = 'draft';
 					}
-					// if ( empty( $tstmnls_options['auto_publication'] ) ){
-					// 	$post['post_status'] = 'draft';
-					// }
 				}
 				wp_insert_post( $post );
 				unset( $_POST );
@@ -646,12 +675,27 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 						' . $form_content_error . '
 						<textarea name="tstmnls_testimonial_comment" class="tstmnls_testimonial_comment" rows="8" cols="80">' . $form_content . '</textarea>
 						<input type="hidden" name="tstmnls_submit_testimonial" id="tstmnls_submit_testimonial" value="1">
-					</div>' .
+					</div>';
+					if( ! empty( $tstmnls_options['gdpr'] ) ) {
+						$content .= '<div class="tstmnls_field_form">
+							<p class="tstmnls-GDPR-wrap">
+								<label>
+									<input id="tstmnls-GDPR-checkbox" required type="checkbox" name="tstmnls_GDPR" style="vertical-align: middle;"/>'
+									. $tstmnls_options['gdpr_tm_name'];
+									if( ! empty( $tstmnls_options['gdpr_link'] ) ) {
+										$content .= ' ' . '<a href="' . $tstmnls_options['gdpr_link'] . '" target="_blank">' . $tstmnls_options['gdpr_text'] . '</a>';
+									} else {
+										$content .= '<span>' . ' ' . $tstmnls_options['gdpr_text'] . '</span>';
+									}
+								$content .= '</label>
+							</p>
+						</div>';
+					}
 					/**
 					* @todo: uncomment after captcha is fixed
 					* apply_filters( 'cptch_display', '', 'testimonials' ) .
 					*/
-					apply_filters( 'gglcptch_display_recaptcha', '', 'testimonials' ) .
+					$content .= /*apply_filters( 'gglcptch_display_recaptcha', '', 'testimonials' ) .*/
 					( isset( $captcha_error_messages ) && ( 1 != $captcha_error_messages ) ? '<p class="tstmnls_captcha_error" >' . $captcha_error_messages . '</p>' : '' ) .
 					wp_nonce_field( 'tstmnls_action', 'tstmnls_field', true, false ) . '
 					<input type="submit" value="' . __( 'Publish', 'bws-testimonials' ) . '">
@@ -667,7 +711,9 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
  */
 if ( ! function_exists ( 'tstmnls_admin_head' ) ) {
 	function tstmnls_admin_head() {
+		global $tstmnls_plugin_info;
 		wp_enqueue_style( 'tstmnls_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
+		wp_enqueue_script( 'tstmnls_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery' ), $tstmnls_plugin_info['Version'] );
 
 		if ( isset( $_GET['page'] ) && "testimonials.php" == $_GET['page'] ) {
 			bws_enqueue_settings_scripts();
@@ -838,4 +884,3 @@ add_filter( 'plugin_row_meta', 'tstmnls_register_plugin_links', 10, 2 );
  * @todo: uncomment after captcha is fixed
  * add_filter( 'cptch_add_form', 'tstmnls_add_captcha_forms' );
  */
-add_filter( 'gglcptch_add_custom_form', 'tstmnls_add_recaptcha_forms' );

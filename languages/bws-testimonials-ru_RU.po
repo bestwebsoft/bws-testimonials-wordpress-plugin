@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-26 17:08+0200\n"
-"PO-Revision-Date: 2018-02-26 17:08+0200\n"
+"POT-Creation-Date: 2018-05-28 15:12+0300\n"
+"PO-Revision-Date: 2018-05-28 15:51+0300\n"
 "Last-Translator: plugin@bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -20,8 +20,8 @@ msgstr ""
 msgid "Testimonials Settings"
 msgstr "Настройки Testimonials"
 
-#: bws-testimonials.php:35 bws-testimonials.php:209 bws-testimonials.php:697
-#: bws-testimonials.php:710
+#: bws-testimonials.php:35 bws-testimonials.php:351 bws-testimonials.php:941
+#: bws-testimonials.php:954
 msgid "Settings"
 msgstr "Настройки"
 
@@ -29,7 +29,7 @@ msgstr "Настройки"
 msgid "Testimonials Info"
 msgstr "Информация об отзывах"
 
-#: bws-testimonials.php:95 bws-testimonials.php:130 bws-testimonials.php:191
+#: bws-testimonials.php:95 bws-testimonials.php:130 bws-testimonials.php:303
 msgid "Testimonials"
 msgstr "Отзывы"
 
@@ -81,118 +81,123 @@ msgstr "Навигация списка отзывов"
 msgid "Testimonials list"
 msgstr "Список отзывов"
 
-#: bws-testimonials.php:198
+#: bws-testimonials.php:141
+msgid "I consent to having this site collect my personal data."
+msgstr "Я согласен, чтоб этот сайт собирал мои личные данные."
+
+#: bws-testimonials.php:316
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: bws-testimonials.php:204
+#: bws-testimonials.php:346
 msgid "All plugin settings were restored."
 msgstr "Все настройки плагина восстановлены."
 
-#: bws-testimonials.php:210
+#: bws-testimonials.php:352
 msgid "Custom code"
 msgstr "Пользовательский код"
 
-#: bws-testimonials.php:222
+#: bws-testimonials.php:364
 msgid "If you would like to display testimonials in widget, you need to add "
 msgstr ""
 "Если вы хотите, чтобы отзывы отображались при помощи виджета, вам нужно "
 "добавить этот виджет"
 
-#: bws-testimonials.php:223 bws-testimonials.php:384
+#: bws-testimonials.php:365 bws-testimonials.php:609
 msgid "Testimonials Widget"
 msgstr "Виджет \"Отзывы\""
 
-#: bws-testimonials.php:224
+#: bws-testimonials.php:366
 msgid "on the Widgets page"
 msgstr "на вкладке виджетов"
 
-#: bws-testimonials.php:228
+#: bws-testimonials.php:370
 #, php-format
 msgid ""
-"If you would like to add testimonials to your page or post, please use %s "
-"button"
+"If you would like to add testimonials or testimonials form to your page or "
+"post, please use %s button"
 msgstr ""
-"Если вы хотите добавить отзывы на вашу страницу или пост, то используйте "
-"кнопку %s"
+"Если вы хотите добавить отзыв или форму отзывов на свою страницу или пост, "
+"используйте кнопку %s"
 
-#: bws-testimonials.php:231
+#: bws-testimonials.php:373
 #, php-format
 msgid ""
 "You can add testimonials to your page or post by clicking on %s button in "
 "the content edit block using the Visual mode. If the button isn't displayed, "
-"please use the shortcode %s"
+"please use the shortcode %s or use %s shortcode to add testimonials form."
 msgstr ""
-"Вы можете добавить отзывы на вашу страницу или пост, нажав на кнопку %s в "
-"блоке редактирования контента в режиме Visual. Если кнопка не отображается, "
-"пожалуйста, используйте шорткод %s"
+"Вы можете добавить отзыв на свою страницу или пост, нажав кнопку %s в блоке "
+"редактирования контента, используя визуальный режим. Если кнопка не "
+"отображается, используйте короткий код %s или используйте короткий код %s, "
+"чтобы добавить форму отзывов."
 
-#: bws-testimonials.php:237
+#: bws-testimonials.php:380
 msgid "Also, you can paste the following strings into the template source code"
 msgstr "Также, вы можете вставить следующие строки в исходный код шаблона"
 
-#: bws-testimonials.php:247 bws-testimonials.php:410
+#: bws-testimonials.php:390 bws-testimonials.php:636
 msgid "Widget Title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:253
+#: bws-testimonials.php:396
 msgid "Number of Testimonials to be Displayed"
 msgstr "Количество отзывов для отображения"
 
-#: bws-testimonials.php:259
+#: bws-testimonials.php:402
 msgid "Sort Testimonials by"
 msgstr "Сортировка отзывов по"
 
-#: bws-testimonials.php:263
+#: bws-testimonials.php:406
 msgid "Testimonial ID"
 msgstr "ID отзыва"
 
-#: bws-testimonials.php:267
+#: bws-testimonials.php:410
 msgid "Testimonial title"
 msgstr "Название отзыва"
 
-#: bws-testimonials.php:271
+#: bws-testimonials.php:414
 msgid "Date"
 msgstr "Дата"
 
-#: bws-testimonials.php:275
+#: bws-testimonials.php:418
 msgid "Random"
 msgstr "В любом порядке"
 
-#: bws-testimonials.php:281
+#: bws-testimonials.php:424
 msgid "Testimonials Sorting"
 msgstr "Сортировка отзывов"
 
-#: bws-testimonials.php:283
+#: bws-testimonials.php:426
 msgid "ASC (ascending order from lowest to highest values - 1, 2, 3; a, b, c)"
 msgstr ""
 "ASC (в порядке возрастания от наименьшего до наибольшего значения - 1, 2, 3, "
 "а, б, в)"
 
-#: bws-testimonials.php:284
+#: bws-testimonials.php:427
 msgid ""
 "DESC (descending order from highest to lowest values - 3, 2, 1; c, b, a)"
 msgstr ""
 "DESC (в порядке убывания от наибольшего до наименьшего значения - 3, 2, 1; "
 "c, b, a)"
 
-#: bws-testimonials.php:288
+#: bws-testimonials.php:431
 msgid "Publication Permissions"
 msgstr "Разрешение на публикацию"
 
-#: bws-testimonials.php:292
+#: bws-testimonials.php:435
 msgid "Logged"
 msgstr "Отображать данные авторизированного пользователя"
 
-#: bws-testimonials.php:296
+#: bws-testimonials.php:439
 msgid "All"
 msgstr "Всех"
 
-#: bws-testimonials.php:302
+#: bws-testimonials.php:445
 msgid "Publish Automatically"
 msgstr "Публиковать автоматически"
 
-#: bws-testimonials.php:305
+#: bws-testimonials.php:448
 msgid ""
 "Enable to publish new testimonials automatically. Otherwise, new "
 "testimonials will be saved as drafts."
@@ -200,114 +205,146 @@ msgstr ""
 "Включите, чтобы публиковать новые отзывы автоматически. Если эта опция не "
 "включена, новые отзывы буду сохранены в виде черновика."
 
-#: bws-testimonials.php:311
+#: bws-testimonials.php:511
+msgid "GDPR Compliance"
+msgstr "Согласие с GDPR"
+
+#: bws-testimonials.php:518
+msgid "Checkbox label"
+msgstr "Метка чекбокса"
+
+#: bws-testimonials.php:522
+msgid "Link to Privacy Policy Page"
+msgstr "Ссылка на страницу политики конфиденциальности"
+
+#: bws-testimonials.php:526
+msgid "Text for Privacy Policy Link"
+msgstr "Текст ссылки для политики конфиденциальности"
+
+#: bws-testimonials.php:536
 msgid "Save Changes"
 msgstr "Сохранить настройки"
 
-#: bws-testimonials.php:331
+#: bws-testimonials.php:556
 msgid "Author"
 msgstr "Автор"
 
-#: bws-testimonials.php:335
+#: bws-testimonials.php:560
 msgid "Company Name"
 msgstr "Название компании"
 
-#: bws-testimonials.php:385
+#: bws-testimonials.php:610
 msgid "Widget for displaying Testimonials."
 msgstr "Виджет для отображения отзывов."
 
-#: bws-testimonials.php:414
+#: bws-testimonials.php:640
 msgid "Number of testimonials to be displayed"
 msgstr "Количество отзывов для отображения"
 
-#: bws-testimonials.php:510 bws-testimonials.php:517
+#: bws-testimonials.php:738
 msgid "Testimonials Form"
 msgstr "Форма"
 
-#: bws-testimonials.php:593
+#: bws-testimonials.php:822
 msgid "Your name is required."
 msgstr "Поле \"Ваше имя\" является обязательным для заполнения."
 
-#: bws-testimonials.php:594 bws-testimonials.php:597 bws-testimonials.php:600
+#: bws-testimonials.php:823 bws-testimonials.php:826 bws-testimonials.php:829
 msgid "Please make corrections below and try again."
 msgstr ""
 "Пожалуйста, сделайте исправления в отмеченных полях ниже и повторите попытку."
 
-#: bws-testimonials.php:596
+#: bws-testimonials.php:825
 msgid "Testimonial title is required."
 msgstr "Поле \"Заголовок\" является обязательным для заполнения."
 
-#: bws-testimonials.php:599
+#: bws-testimonials.php:828
 msgid "Testimonials is required."
 msgstr "Поле \"Отзыв\" является обязательным для заполнения."
 
-#: bws-testimonials.php:607
+#: bws-testimonials.php:836
 msgid "This form is available only for logged in users. Please"
 msgstr "Эта форма доступна для зарегистрированных пользователей. Пожалуйста"
 
-#: bws-testimonials.php:608
+#: bws-testimonials.php:837
 msgid "log in"
 msgstr "авторизуйтесь"
 
-#: bws-testimonials.php:608
+#: bws-testimonials.php:837
 msgid "or"
 msgstr "или"
 
-#: bws-testimonials.php:609
+#: bws-testimonials.php:838
 msgid "register"
 msgstr "зарегистрируйтесь"
 
-#: bws-testimonials.php:609
+#: bws-testimonials.php:838
 msgid "on our site"
 msgstr "на нашем сайте"
 
-#: bws-testimonials.php:614
+#: bws-testimonials.php:843
 msgid "Your testimonial has been published!"
 msgstr "Ваш отзыв был опубликован!"
 
-#: bws-testimonials.php:616
+#: bws-testimonials.php:845
 msgid "Your testimonial has been sent to administration!"
 msgstr "Ваш отзыв был отправлен администрации!"
 
-#: bws-testimonials.php:622
+#: bws-testimonials.php:851
 msgid "Leave your testimonial"
 msgstr "Оставьте свой отзыв"
 
-#: bws-testimonials.php:625
+#: bws-testimonials.php:854
 msgid "Your name:"
 msgstr "Ваше имя:"
 
-#: bws-testimonials.php:632
+#: bws-testimonials.php:861
 msgid "Your company:"
 msgstr "Название вашей компании:"
 
-#: bws-testimonials.php:636
+#: bws-testimonials.php:865
 msgid "Testimonial title:"
 msgstr "Заголовок поля:"
 
-#: bws-testimonials.php:643
+#: bws-testimonials.php:872
 msgid "Testimonial:"
 msgstr "Отзыв:"
 
-#: bws-testimonials.php:657
+#: bws-testimonials.php:901
 msgid "Publish"
 msgstr "Опубликовать"
 
-#: bws-testimonials.php:711
+#: bws-testimonials.php:955
 msgid "FAQ"
 msgstr "FAQ"
 
-#: bws-testimonials.php:712
+#: bws-testimonials.php:956
 msgid "Support"
 msgstr "Тех.поддержка"
 
-#: bws-testimonials.php:760
+#: bws-testimonials.php:1004
 msgid "Add testimonials to your page or post"
 msgstr "Добавить отзывы на вашу страницу или пост"
 
-#: bws-testimonials.php:764
+#: bws-testimonials.php:1008
 msgid "Leave testimonials"
 msgstr "Оставьте свой отзыв"
+
+#~ msgid ""
+#~ "If you would like to add testimonials to your page or post, please use %s "
+#~ "button"
+#~ msgstr ""
+#~ "Если вы хотите добавить отзывы на вашу страницу или пост, то используйте "
+#~ "кнопку %s"
+
+#~ msgid ""
+#~ "You can add testimonials to your page or post by clicking on %s button in "
+#~ "the content edit block using the Visual mode. If the button isn't "
+#~ "displayed, please use the shortcode %s"
+#~ msgstr ""
+#~ "Вы можете добавить отзывы на вашу страницу или пост, нажав на кнопку %s в "
+#~ "блоке редактирования контента в режиме Visual. Если кнопка не "
+#~ "отображается, пожалуйста, используйте шорткод %s"
 
 #~ msgid "Your company: "
 #~ msgstr "Название вашей компании:"
