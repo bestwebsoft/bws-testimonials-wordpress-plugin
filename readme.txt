@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 4.9.6
-Stable tag: 0.2.3
+Tested up to: 4.9.8
+Stable tag: 0.2.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,12 +19,12 @@ Show what other people are saying about your business to generate more sales!
 https://www.youtube.com/watch?v=y-9_ThXTUS8
 
 = Features =
-
-* GDPR Compliant [NEW]
+* GDPR Compliant
 * Add testimonials form via shortcode
 * Add unlimited number of testimonials
 * Add testimonials block via shortcode
 * Add testimonials widget
+* Compatible with Google Captcha (reCAPTCHA) [NEW]
 * Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
@@ -66,6 +66,7 @@ Some of these translations are not complete. We are constantly adding new featur
 = Recommended Plugins =
 
 * [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
+* [Google Captcha (reCAPTCHA)](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=50392a4147eefdfb1d4f7a754ece974c) – Protect WordPress website forms from spam entries with Google reCAPTCHA.
 
 == Installation ==
 
@@ -109,12 +110,19 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 1. Testimonials Widget display.
 2. Testimonial form display.
 3. Testimonials Settings page.
-4. Testimonials Widget in WordPress admin panel.
-5. 'Add New Testimonial' page in WordPress admin panel.
+4. GDPR Compliance option.
+5. GDPR Compliance display in Testimonials form.
+6. Add Google Captcha option.
+7. Google Captcha display in Testimonials form.
+8. Testimonials Widget in WordPress admin panel.
+9. 'Add New Testimonial' page in WordPress admin panel.
 
 == Changelog ==
 
-= V0.2.3 - 29.05.2018 =
+= V0.2.4 - 07.08.2018 =
+* NEW : The compatibility with Google Captcha (reCAPTCHA) plugin has been added.
+
+= V0.2.3 - 24.05.2018 =
 * NEW : Ability to add GDPR Compliance checkbox has been added.
 
 = V0.2.2 - 27.02.2018 =
@@ -171,6 +179,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V0.2.4 =
+* Functionality expanded.
 
 = V0.2.3 =
 * Functionality improved.
