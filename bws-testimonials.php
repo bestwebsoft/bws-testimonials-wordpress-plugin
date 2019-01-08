@@ -6,12 +6,12 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 0.2.4
+Version: 1.0.0
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
 
-/*  @ Copyright 2018  BestWebSoft  ( https://support.bestwebsoft.com )
+/*  @ Copyright 2019  BestWebSoft  ( https://support.bestwebsoft.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -352,6 +352,13 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 		} /* end */ ?>
 		<div class="wrap">
 			<h1><?php echo $title; ?></h1>
+			<noscript>
+            	<div class="error below-h2">
+                	<p><strong><?php _e( 'WARNING', 'bws-testimonials' ); ?>
+                    	    :</strong> <?php _e( 'The plugin works correctly only if JavaScript is enabled.', 'bws-testimonials' ); ?>
+                	</p>
+            	</div>
+        	</noscript>
 			<h2 class="nav-tab-wrapper">
 				<a class="nav-tab<?php if ( ! isset( $_GET['action'] ) || ( isset( $_GET['action'] ) && 'custom_code' != $_GET['action'] ) ) echo ' nav-tab-active'; ?>" href="edit.php?post_type=bws-testimonial&page=testimonials.php"><?php _e( 'Settings', 'bws-testimonials' ); ?></a>
 				<a class="nav-tab <?php if ( isset( $_GET['action'] ) && 'custom_code' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="edit.php?post_type=bws-testimonial&page=testimonials.php&amp;action=custom_code"><?php _e( 'Custom code', 'bws-testimonials' ); ?></a>
@@ -400,7 +407,7 @@ if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 								<tr>
 									<th scope="row"><?php _e( 'Number of Testimonials to be Displayed', 'bws-testimonials' ); ?></th>
 									<td>
-										<input type="number" class="text" min="1" max="10000" value="<?php echo $tstmnls_options['count']; ?>" name="tstmnls_count" />
+										<input type="number" required class="text" min="1" max="10000" value="<?php echo $tstmnls_options['count']; ?>" name="tstmnls_count" />
 									</td>
 								</tr>
 								<tr>

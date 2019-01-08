@@ -11,7 +11,7 @@
 <li>Add unlimited number of testimonials</li>
 <li>Add testimonials block via shortcode</li>
 <li>Add testimonials widget</li>
-<li>Compatible with Google Captcha (reCAPTCHA) [NEW]</li>
+<li>Compatible with Google Captcha (reCAPTCHA)</li>
 <li>Select the one who can submit new testimonials:
 <ul>
 <li>All users</li>

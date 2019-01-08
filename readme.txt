@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 4.9.8
-Stable tag: 0.2.4
+Tested up to: 5.0.2
+Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add unlimited number of testimonials
 * Add testimonials block via shortcode
 * Add testimonials widget
-* Compatible with Google Captcha (reCAPTCHA) [NEW]
+* Compatible with Google Captcha (reCAPTCHA)
 * Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
@@ -119,6 +119,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.0.0 - 08.01.2019 =
+* Update : All functionality was updated for WordPress 5.0.2.
+* Bugfix : Fixed small bugs.
+
 = V0.2.4 - 07.08.2018 =
 * NEW : The compatibility with Google Captcha (reCAPTCHA) plugin has been added.
 
@@ -179,6 +183,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.0 =
+* The compatibility with new WordPress version updated.
 
 = V0.2.4 =
 * Functionality expanded.
