@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 5.0.2
-Stable tag: 1.0.0
+Tested up to: 5.1
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add testimonials form via shortcode
 * Add unlimited number of testimonials
 * Add testimonials block via shortcode
-* Add testimonials widget
+* Add testimonials widget [NEW]
 * Compatible with Google Captcha (reCAPTCHA)
 * Select the one who can submit new testimonials:
 	* All users
@@ -43,7 +43,6 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Incredibly simple settings for fast setup without modifying code
 * Detailed step-by-step documentation and videos
 * Multilingual and RTL ready
-
 If you have a feature suggestion or idea you'd like to see in the plugin, we'd love to hear about it! [Suggest a Feature](https://support.bestwebsoft.com/hc/en-us/requests/new)
 
 = Documentation & Videos =
@@ -116,8 +115,15 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 7. Google Captcha display in Testimonials form.
 8. Testimonials Widget in WordPress admin panel.
 9. 'Add New Testimonial' page in WordPress admin panel.
+10. Setting page Testimonials Slider.
+11. Testimonials Slider display.
+12. Testimonials Slider Widget in WordPress admin panel.
+13. Testimonials Slider Widget display.
 
 == Changelog ==
+
+= V1.0.1 - 14.03.2019 =
+* NEW : The slider option for testimonials has been added.
 
 = V1.0.0 - 08.01.2019 =
 * Update : All functionality was updated for WordPress 5.0.2.
@@ -183,6 +189,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.1 = 
+* Functionality expanded.
 
 = V1.0.0 =
 * The compatibility with new WordPress version updated.

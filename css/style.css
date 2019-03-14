@@ -67,7 +67,22 @@ max-width: 390px;
 margin: 5px 0;
 padding: 3px;
 }
-
+.bws-testimonials .owl-prev {
+    position: absolute;
+    bottom: 50%;
+    left: -10%;
+}
+.bws-testimonials .dashicons-arrow-left-alt2{
+    font-size:25px;
+}
+.bws-testimonials .dashicons-arrow-right-alt2{
+    font-size:25px;
+}
+.bws-testimonials .owl-next {
+    position: absolute;
+    bottom: 50%;
+    right: -5%;
+}
 #tstmnls_gdpr_link::placeholder {
    color: #cdcdcd;
 }
@@ -75,7 +90,6 @@ padding: 3px;
 #tstmnls_gdpr_link_options label {
 	display: block;
 }
-
 @media screen and ( min-width: 1100px ) {
 	.tstmnls_gdpr_td {
 		padding-top: 23px !important; 
@@ -100,4 +114,8 @@ padding: 3px;
 
 .form-table th label {
 	cursor: auto;
+}
+
+.tstmlnls_display_none {
+    display: none !important;
 }
