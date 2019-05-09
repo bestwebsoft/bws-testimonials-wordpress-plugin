@@ -10,7 +10,8 @@
 <li>Add testimonials form via shortcode</li>
 <li>Add unlimited number of testimonials</li>
 <li>Add testimonials block via shortcode</li>
-<li>Add testimonials widget [NEW]</li>
+<li>Add testimonials widget</li>
+<li>Add slider with testimonials</li>
 <li>Compatible with Google Captcha (reCAPTCHA)</li>
 <li>Select the one who can submit new testimonials:
 <ul>

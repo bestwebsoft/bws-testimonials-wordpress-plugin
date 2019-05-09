@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 5.1
-Stable tag: 1.0.1
+Tested up to: 5.1.1
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -23,7 +23,8 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add testimonials form via shortcode
 * Add unlimited number of testimonials
 * Add testimonials block via shortcode
-* Add testimonials widget [NEW]
+* Add testimonials widget
+* Add slider with testimonials
 * Compatible with Google Captcha (reCAPTCHA)
 * Select the one who can submit new testimonials:
 	* All users
@@ -122,6 +123,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.0.2 - 03.05.2019 =
+* Update : The function for returning an array of objects has been added.
+
 = V1.0.1 - 14.03.2019 =
 * NEW : The slider option for testimonials has been added.
 
@@ -189,6 +193,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.2 =
+* Functionality improved.
 
 = V1.0.1 = 
 * Functionality expanded.

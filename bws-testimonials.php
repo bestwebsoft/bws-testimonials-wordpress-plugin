@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 1.0.1
+Version: 1.0.2
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -1033,6 +1033,59 @@ if ( ! function_exists( 'tstmnls_shortcode_button_content' ) ) {
 	<?php }
 }
 
+/* Testimonials data objects. Takes array of id, single id or 'all' */
+if ( ! function_exists( 'tstmnls_get_testimonials_data' ) ) {
+	function tstmnls_get_testimonials_data( $testimonial_id ) {
+		global $tstmnls_options;
+
+		if ( empty( $tstmnls_options ) )
+			$tstmnls_options = get_option( 'tstmnls_options' );
+
+		$testimonials_posts = $testimonials_objects = $testimonial_post_meta_key = array();
+		$tstmnls_post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : 'bws-testimonial';
+
+		if ( 'all' == $testimonial_id || is_array( $testimonial_id ) ) {
+
+			/* prepare args for get_posts */
+			if ( is_array( $testimonial_id ) && ! empty( $testimonial_id ) ) {
+				$testimonial_id_list = $testimonial_id;
+				$args = array( 'post_type' => $tstmnls_post_type, 'include' => $testimonial_id_list );
+			} else {
+				$args = array( 'post_type' => $tstmnls_post_type );
+			}
+
+			$testimonials_posts = get_posts( $args );
+
+		} else if ( is_int( $testimonial_id ) ) {
+
+			$testimonial_int_id = intval( $testimonial_id );
+			$testimonials_posts[] = get_post( $testimonial_int_id );
+
+		}
+
+		/* return false if there are no records */
+		if ( ! $testimonials_posts ) {
+			return false;
+		}
+
+		foreach ( (array)$testimonials_posts as $testimonials_post ) {
+
+			/* add gallery data to resulting array from wp_posts */
+			$testimonials_objects[ $testimonials_post->ID ]['testimonial_wp_post'] = $testimonials_post;
+
+            $testimonial_post_meta = get_post_meta( $testimonials_post->ID, '', true );
+            foreach ( $testimonial_post_meta as $key => $value ) {
+                $testimonial_post_meta_item = get_post_meta( $testimonials_post->ID, $key, true );
+                $testimonial_post_meta_key[$key] = $testimonial_post_meta_item;
+            }
+			$testimonials_objects[ $testimonials_post->ID ]['testimonial_post_meta'] = $testimonial_post_meta_key;
+
+		}
+
+		return $testimonials_objects;
+	}
+}
+
 /**
  * Delete plugin options
  */
@@ -1076,6 +1129,7 @@ if ( ! function_exists( 'tstmnls_register_scripts' ) ) {
         wp_enqueue_script( 'tstmnls_front_script', plugins_url( 'js/script.js', __FILE__ ) );
     }
 }
+
 /* Plugin uninstall function */
 register_activation_hook( __FILE__, 'tstmnls_plugin_activate' );
 
