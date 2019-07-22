@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 1.0.2
+Version: 1.0.3
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -147,6 +147,8 @@ if ( ! function_exists( 'tstmnls_get_option_defaults' ) ) {
 			'widget_title'				        => __( 'Testimonials', 'bws-testimonials' ),
 			'count'						        => '5',
 			'display_settings_notice'	        => 1,
+            'custom_size_px'					=> array( 'tstmnls_custom_size' => array( 160, 120 ) ),
+            'image_size_photo'					=> 'thumbnail',
 			'order_by'					        => 'date',
 			'order'						        => 'DESC',
 			'suggest_feature_banner'	        => 1,
@@ -160,6 +162,7 @@ if ( ! function_exists( 'tstmnls_get_option_defaults' ) ) {
 			'gdpr'						        => 0,
 			'recaptcha_cb'				        => 0,
             /*carousel options*/
+            'items_in_slide'					=> 1,
             'loop'						        => 0,
             'nav'						        => 0,
             'dots'						        => 0,
@@ -536,8 +539,6 @@ if ( ! function_exists( 'tstmnls_show_testimonials' ) ) {
 	}
 }
 
-
-
 if ( ! function_exists('tstmnls_show_testimonials_shortcode_slider' ) ){
    function tstmnls_show_testimonials_shortcode_slider( $attr ){
        global $tstmnls_options, $wp_query, $post;
@@ -567,7 +568,24 @@ if ( ! function_exists('tstmnls_show_testimonials_shortcode_slider' ) ){
        while ( $tstmnl_query->have_posts() ) {
            $tstmnl_query->the_post();
            $testimonials_info = get_post_meta( $post->ID, '_testimonials_info', true );
-           $testimonial_thumbnail = has_post_thumbnail() ? '<div class="tstmnls-thumbnail">' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</div>' : '';
+           $testimonial_thumbnail = has_post_thumbnail() ? '<div class="tstmnls-thumbnail">' . get_the_post_thumbnail( $post->ID, $tstmnls_options['image_size_photo'] ) . '</div>' : '';
+           if ( 'tstmnls_custom_size' == $tstmnls_options['image_size_photo'] ) {
+               $width = $tstmnls_options['custom_size_px']['tstmnls_custom_size'][0];
+               $height = $tstmnls_options['custom_size_px']['tstmnls_custom_size'][1];
+           } else {
+               $width = get_option( $tstmnls_options['image_size_photo'] . '_size_w' );
+               $height = get_option( $tstmnls_options['image_size_photo'] . '_size_h' );
+           }
+           if ( $width || $height ) {
+               $inline_style = 'style="' . ( $width ? 'width:' . $width . 'px;' : '' ) . ( $height ? 'height:' . $height . 'px;' : '' ) . '"';
+               $testimonial_thumbnail = preg_replace( '/<img /', '<img ' . $inline_style, $testimonial_thumbnail );
+           }
+           if ( $width ) {
+               $testimonial_thumbnail = preg_replace( '/width="[0-9]*"/', 'width="' . $width . '"', $testimonial_thumbnail );
+           }
+           if ( $height ) {
+               $testimonial_thumbnail = preg_replace( '/height="[0-9]*"/', 'height="' . $height . '"', $testimonial_thumbnail );
+           }
            $content .= '<div class="item"><div class="testimonials_quote">
 							<blockquote>' .
                $testimonial_thumbnail;
@@ -623,16 +641,16 @@ if ( ! function_exists('tstmnls_show_testimonials_shortcode_slider' ) ){
                        ],
                        responsive:{
                            0:{
-                               items:1
+                               items: 1
                            },
                            600:{
-                               items:1
+                               items: <?php echo $tstmnls_options['items_in_slide'] > 2 ? 2 : $tstmnls_options['items_in_slide'] ; ?>
                            },
                            960:{
-                               items:1
+                               items: <?php echo $tstmnls_options['items_in_slide'] > 3 ? 3 : $tstmnls_options['items_in_slide'] ; ?>
                            },
                            1200:{
-                               items:1
+                               items: <?php echo $tstmnls_options['items_in_slide']; ?>
                            }
                        }
                    });
@@ -687,8 +705,26 @@ if ( ! function_exists( 'tstmnls_show_testimonials_shortcode' ) ) {
 		while ( $tstmnl_query->have_posts() ) {
 			$tstmnl_query->the_post();
 			$testimonials_info = get_post_meta( $post->ID, '_testimonials_info', true );
-			$testimonial_thumbnail = has_post_thumbnail() ? '<div class="tstmnls-thumbnail">' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</div>' : '';
-			$content .= '<div class="item"><div class="testimonials_quote">
+            $testimonial_thumbnail = has_post_thumbnail() ? '<div class="tstmnls-thumbnail">' . get_the_post_thumbnail( $post->ID, $tstmnls_options['image_size_photo'] ) . '</div>' : '';
+            if ( 'tstmnls_custom_size' == $tstmnls_options['image_size_photo'] ) {
+                $width = $tstmnls_options['custom_size_px']['tstmnls_custom_size'][0];
+                $height = $tstmnls_options['custom_size_px']['tstmnls_custom_size'][1];
+            } else {
+                $width = get_option( $tstmnls_options['image_size_photo'] . '_size_w' );
+                $height = get_option( $tstmnls_options['image_size_photo'] . '_size_h' );
+            }
+            if ( $width || $height ) {
+                $inline_style = 'style="' . ( $width ? 'width:' . $width . 'px;' : '' ) . ( $height ? 'height:' . $height . 'px;' : '' ) . '"';
+                $testimonial_thumbnail = preg_replace( '/<img /', '<img ' . $inline_style, $testimonial_thumbnail );
+            }
+            if ( $width ) {
+                $testimonial_thumbnail = preg_replace( '/width="[0-9]*"/', 'width="' . $width . '"', $testimonial_thumbnail );
+            }
+            if ( $height ) {
+                $testimonial_thumbnail = preg_replace( '/height="[0-9]*"/', 'height="' . $height . '"', $testimonial_thumbnail );
+            }
+
+            $content .= '<div class="item"><div class="testimonials_quote">
 							<blockquote>' .
 								$testimonial_thumbnail;
 

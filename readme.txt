@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 5.1.1
-Stable tag: 1.0.2
+Tested up to: 5.2.2
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,6 +19,7 @@ Show what other people are saying about your business to generate more sales!
 https://www.youtube.com/watch?v=y-9_ThXTUS8
 
 = Features =
+
 * GDPR Compliant
 * Add testimonials form via shortcode
 * Add unlimited number of testimonials
@@ -33,6 +34,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 	* Author
 	* Company name
 * Set the number of testimonials to display
+* Change featured image size and its dimensions [NEW]
 * Set the default testimonials sorting order by:
 	* ID
 	* Title
@@ -123,7 +125,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
-= V1.0.2 - 03.05.2019 =
+= V1.0.3 - 22.07.2019 =
+* NEW : Ability to select image size has been added.
+
+= V1.0.2 - 09.05.2019 =
 * Update : The function for returning an array of objects has been added.
 
 = V1.0.1 - 14.03.2019 =
@@ -194,10 +199,13 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Upgrade Notice ==
 
+= V1.0.3 =
+* Functionality expanded.
+
 = V1.0.2 =
 * Functionality improved.
 
-= V1.0.1 = 
+= V1.0.1 =
 * Functionality expanded.
 
 = V1.0.0 =

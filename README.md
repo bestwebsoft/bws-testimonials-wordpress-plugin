@@ -26,6 +26,7 @@
 </ul>
 </li>
 <li>Set the number of testimonials to display</li>
+<li>Change featured image size and its dimensions [NEW]</li>
 <li>Set the default testimonials sorting order by:
 <ul>
 <li>ID</li>

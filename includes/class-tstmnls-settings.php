@@ -8,6 +8,7 @@ require_once( dirname( dirname( __FILE__ ) ) . '/bws_menu/class-bws-settings.php
 if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
     class Tstmnls_Settings_Tabs extends Bws_Settings_Tabs {
         public $is_general_settings = true;
+        public $wp_image_sizes = array();
 
         /**
          * Constructor.
@@ -19,7 +20,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
          * @param string $plugin_basename
          */
         public function __construct( $plugin_basename ) {
-            global $tstmnls_options, $tstmnls_plugin_info;
+            global $_wp_additional_image_sizes, $tstmnls_options, $tstmnls_plugin_info;
 
             $this->is_general_settings = ( isset( $_GET['page'] ) && 'testimonials.php' == $_GET['page'] );
 
@@ -50,6 +51,34 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                 'tabs' 				 => $tabs,
                 'wp_slug'			 => 'bws-testimonials'
             ) );
+
+            $wp_sizes = get_intermediate_image_sizes();
+
+            foreach ( ( array ) $wp_sizes as $size ) {
+                if ( ! array_key_exists( $size, $tstmnls_options['custom_size_px'] ) ) {
+                    if ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+                        $width  = absint( $_wp_additional_image_sizes[ $size ]['width'] );
+                        $height = absint( $_wp_additional_image_sizes[ $size ]['height'] );
+                    } else {
+                        $width  = absint( get_option( $size . '_size_w' ) );
+                        $height = absint( get_option( $size . '_size_h' ) );
+                    }
+
+                    if ( ! $width && ! $height ) {
+                        $this->wp_image_sizes[] = array(
+                            'value'  => $size,
+                            'name'   => ucwords( str_replace( array( '-', '_' ), ' ', $size ) ),
+                        );
+                    } else {
+                        $this->wp_image_sizes[] = array(
+                            'value'  => $size,
+                            'name'   => ucwords( str_replace( array( '-', '_' ), ' ', $size ) ) . ' ( ' . $width . ' &#215; ' . $height . ' ) ',
+                            'width'  => $width,
+                            'height' => $height
+                        );
+                    }
+                }
+            }
         }
 
         /**
@@ -60,34 +89,45 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
          */
         public function save_options() {
 
-                $this->options['widget_title']		= isset( $_POST['tstmnls_widget_title'] ) ? stripslashes( esc_html( $_POST['tstmnls_widget_title'] ) ) : __( 'Testimonials', 'bws-testimonials' );
-                $this->options['count']				= isset( $_POST['tstmnls_count'] ) ? intval( $_POST['tstmnls_count'] ) : '5';
-                $this->options['order_by']			= isset( $_POST['tstmnls_order_by'] ) ? $_POST['tstmnls_order_by'] : 'date';
-                $this->options['order']				= isset( $_POST['tstmnls_order'] ) ? $_POST['tstmnls_order'] : 'DESC';
-                $this->options['permissions']			= isset( $_POST['tstmnls_permission'] ) ? $_POST['tstmnls_permission'] : 'all';
-                $this->options['auto_publication']    = isset( $_POST['tstmnls_auto_publication'] ) ? 1 : 0;
+            $this->options['widget_title']		= isset( $_POST['tstmnls_widget_title'] ) ? stripslashes( esc_html( $_POST['tstmnls_widget_title'] ) ) : __( 'Testimonials', 'bws-testimonials' );
+            $this->options['count']				= isset( $_POST['tstmnls_count'] ) ? intval( $_POST['tstmnls_count'] ) : '5';
 
-                $this->options['gdpr_tm_name']		= isset( $_POST['tstmnls_gdpr_tm_name'] ) ? esc_html( $_POST['tstmnls_gdpr_tm_name'] ) : $this->options['gdpr_tm_name'];
-                $this->options['gdpr_text']			= isset( $_POST['tstmnls_gdpr_text'] ) ? esc_html( $_POST['tstmnls_gdpr_text'] ) : $this->options['gdpr_text'];
-                $this->options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? esc_html( $_POST['tstmnls_gdpr_link'] ) : $this->options['gdpr_link'];
-                $this->options['gdpr']				= isset( $_POST['tstmnls_gdpr'] ) ? 1 : 0;
-                $this->options['recaptcha_cb']		= isset( $_POST['tstmnls_enable_recaptcha'] ) ? 1 : 0;
+            $new_image_size_photo 		= esc_attr( $_POST['tstmnls_image_size_photo'] );
+            $custom_image_size_w_photo 	= intval( $_POST['tstmnls_custom_image_size_w_photo'] );
+            $custom_image_size_h_photo 	= intval( $_POST['tstmnls_custom_image_size_h_photo'] );
+            $custom_size_px_photo 		= array( $custom_image_size_w_photo, $custom_image_size_h_photo );
 
-                $this->options['loop']					=  isset( $_POST['tstmnls_loop'] )  ? 1 : 0;
-                /* Display navigation button */
-                $this->options['nav']					= ( isset( $_POST['tstmnls_nav'] ) ) ? 1 : 0;
-                /* Display navigation Dots */
-                $this->options['dots']					= ( isset( $_POST['tstmnls_dots'] ) ) ? 1 : 0;
-                /* Set autoplay */
-                $this->options['autoplay']				= ( isset( $_POST['tstmnls_autoplay'] ) ) ? 1 : 0;
-                /* Autoplay timeout */
-                $this->options['autoplay_timeout'] 		= ( ! empty( $_POST['tstmnls_autoplay_timeout'] ) ) ? intval( $_POST['tstmnls_autoplay_timeout']  )*1000 : '2000';
-                $this->options['auto_height']				= ( isset( $_POST['tstmnls_auto_height'] ) ) ? 1 : 0;
+            $this->options['custom_size_px']['tstmnls_custom_size'] = $custom_size_px_photo;
+            $this->options['image_size_photo'] 				= $new_image_size_photo;
 
-                $this->options	= array_map( 'stripslashes_deep', $this->options );
+            $this->options['order_by']			= isset( $_POST['tstmnls_order_by'] ) ? $_POST['tstmnls_order_by'] : 'date';
+            $this->options['order']				= isset( $_POST['tstmnls_order'] ) ? $_POST['tstmnls_order'] : 'DESC';
+            $this->options['permissions']			= isset( $_POST['tstmnls_permission'] ) ? $_POST['tstmnls_permission'] : 'all';
+            $this->options['auto_publication']    = isset( $_POST['tstmnls_auto_publication'] ) ? 1 : 0;
 
-                update_option( 'tstmnls_options', $this->options );
-                $message = __( 'Settings saved.', 'bws-testimonials' );
+            $this->options['gdpr_tm_name']		= isset( $_POST['tstmnls_gdpr_tm_name'] ) ? esc_html( $_POST['tstmnls_gdpr_tm_name'] ) : $this->options['gdpr_tm_name'];
+            $this->options['gdpr_text']			= isset( $_POST['tstmnls_gdpr_text'] ) ? esc_html( $_POST['tstmnls_gdpr_text'] ) : $this->options['gdpr_text'];
+            $this->options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? esc_html( $_POST['tstmnls_gdpr_link'] ) : $this->options['gdpr_link'];
+            $this->options['gdpr']				= isset( $_POST['tstmnls_gdpr'] ) ? 1 : 0;
+            $this->options['recaptcha_cb']		= isset( $_POST['tstmnls_enable_recaptcha'] ) ? 1 : 0;
+
+				$this->options['loop']					=  isset( $_POST['tstmnls_loop'] )  ? 1 : 0;
+				/* Display navigation button */
+				$this->options['nav']					= ( isset( $_POST['tstmnls_nav'] ) ) ? 1 : 0;
+				/* Display navigation Dots */
+				$this->options['dots']					= ( isset( $_POST['tstmnls_dots'] ) ) ? 1 : 0;
+				/* Set count items in 1 slide */
+				$this->options['items_in_slide']		= isset( $_POST['tstmnls_items_in_slide'] ) ? intval( $_POST['tstmnls_items_in_slide'] ) : '1';
+				/* Set autoplay */
+				$this->options['autoplay']				= ( isset( $_POST['tstmnls_autoplay'] ) ) ? 1 : 0;
+				/* Autoplay timeout */
+				$this->options['autoplay_timeout'] 		= ( ! empty( $_POST['tstmnls_autoplay_timeout'] ) ) ? intval( $_POST['tstmnls_autoplay_timeout']  )*1000 : '2000';
+				$this->options['auto_height']				= ( isset( $_POST['tstmnls_auto_height'] ) ) ? 1 : 0;
+
+            $this->options	= array_map( 'stripslashes_deep', $this->options );
+
+            update_option( 'tstmnls_options', $this->options );
+            $message = __( 'Settings saved.', 'bws-testimonials' );
 
 
             return compact( 'message', 'notice', 'error' );
@@ -112,6 +152,24 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                     <th scope="row"><?php _e( 'Number of Testimonials to be Displayed', 'bws-testimonials' ); ?></th>
                     <td>
                         <input type="number" required class="text" min="1" max="10000" value="<?php echo $this->options['count']; ?>" name="tstmnls_count" />
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><?php _e( 'Image Size', 'bws-testimonials' ); ?> </th>
+                    <td>
+                        <select name="tstmnls_image_size_photo">
+                            <?php foreach ( $this->wp_image_sizes as $data ) { ?>
+                                <option value="<?php echo $data['value']; ?>" <?php selected( $data['value'], $this->options['image_size_photo'] ); ?>><?php echo $data['name']; ?></option>
+                            <?php } ?>
+                            <option value="tstmnls_custom_size" <?php selected( 'tstmnls_custom_size', $this->options['image_size_photo'] ); ?> class="bws_option_affect" data-affect-show=".tstmnls_for_custom_image_size"><?php _e( 'Custom', 'bws-testimonials' ); ?></option>
+                        </select>
+                        <div class="bws_info"><?php _e( 'Maximum testimonials image size. "Custom" uses the Image Dimensions values.', 'bws-testimonials' ); ?></div>
+                    </td>
+                </tr>
+                <tr valign="top" class="tstmnls_for_custom_image_size">
+                    <th scope="row"><?php _e( 'Custom Image Size', 'bws-testimonials' ); ?> </th>
+                    <td>
+                        <input type="number" name="tstmnls_custom_image_size_w_photo" min="1" max="10000" value="<?php echo $this->options['custom_size_px']['tstmnls_custom_size'][0]; ?>" /> x <input type="number" name="tstmnls_custom_image_size_h_photo" min="1" max="10000" value="<?php echo $this->options['custom_size_px']['tstmnls_custom_size'][1]; ?>" /> <?php _e( 'px', 'bws-testimonials' ); ?>
                     </td>
                 </tr>
                 <tr>
@@ -269,65 +327,73 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
             </table>
         <?php }
 
-       public function  tab_images(){?>
-           <h3 class="bws_tab_label"><?php _e( 'Slider', 'bws-testimonials' ); ?></h3>
-           <?php $this->help_phrase(); ?>
-           <hr>
-           <table class="form-table tstmnls_settings_form">
-               <?php if ( $this->is_general_settings ) { ?>
-                   <tr>
-                       <th><?php _e( 'Autoplay', 'bws-testimonials' ); ?></th>
-                       <td>
-                           <label>
-                               <input type="checkbox" name="tstmnls_autoplay" class="bws_option_affect" data-affect-show=".tstmnls_autoplay" value="1" <?php checked( 1, $this->options['autoplay'] ); ?> /> <span class="bws_info"><?php _e( 'Enable to turn autoplay on for the slideshow.', 'slider-bws' ); ?></span>
-                           </label>
-                       </td>
-                   </tr>
-                   <tr class="tstmnls_autoplay">
-                       <th><?php _e( 'Autoplay Timeout', 'bws-testimonials' ); ?></th>
-                       <td>
-                           <label>
-                               <input type="number" name="tstmnls_autoplay_timeout" min="1" max="1000" value="<?php echo $this->options["autoplay_timeout"]/1000; ?>" /> <?php _e( 'sec', 'slider-bws' ); ?>
-                           </label>
-                       </td>
-                   </tr>
-                   <tr>
-                       <th><?php _e( 'Auto Height', 'bws-testimonials' ); ?></th>
-                       <td>
-                           <label>
-                               <input type="checkbox" name="tstmnls_auto_height" value="1" <?php checked( 1, $this->options['auto_height'] ); ?> />
-                               <span class="bws_info"><?php _e( 'Enable to change slider height automatically (according to the hight of the slide).', 'slider-bws' ); ?></span>
-                           </label>
-                       </td>
-                   </tr>
-                   <tr>
-                       <th><?php _e( 'Loop', 'bws-testimonials' ); ?></th>
-                       <td>
-                           <label>
-                               <input type="checkbox" name="tstmnls_loop" value="1" <?php checked( 1, $this->options['loop'] ); ?> />
-                               <span class="bws_info"><?php _e( 'Enable to loop the slideshow.', 'slider-bws' ); ?></span>
-                           </label>
-                       </td>
-                   </tr>
-                   <tr>
-                       <th><?php _e( 'Navigation', 'bws-testimonials' ); ?></th>
-                       <td>
-                           <fieldset>
-                               <label>
-                                   <input type="checkbox" name="tstmnls_nav" value="1" <?php checked( 1, $this->options['nav'] ); ?> />
-                                   <?php _e( 'Arrows', 'bws-testimonials' ); ?>
-                               </label>
-                               <br/>
-                               <label>
-                                   <input type="checkbox" name="tstmnls_dots" value="1" <?php checked( 1, $this->options['dots'] ); ?> />
-                                   <?php _e( 'Dots', 'bws-testimonials' ); ?>
-                               </label>
-                           </fieldset>
-                       </td>
-                   </tr>
-               <?php } ?>
-           </table>
-       <?php }
+		public function  tab_images(){?>
+			<h3 class="bws_tab_label"><?php _e( 'Slider', 'bws-testimonials' ); ?></h3>
+			<?php $this->help_phrase(); ?>
+			<hr>
+			<table class="form-table tstmnls_settings_form">
+				<?php if ( $this->is_general_settings ) { ?>
+					<tr>
+						<th><?php _e( 'Items in Slide', 'bws-testimonials' ); ?></th>
+						<td>
+							<label>
+								<input type="number" name="tstmnls_items_in_slide" min="1" max="4" value="<?php echo $this->options['items_in_slide']; ?>" />
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Autoplay', 'bws-testimonials' ); ?></th>
+						<td>
+							<label>
+								<input type="checkbox" name="tstmnls_autoplay" class="bws_option_affect" data-affect-show=".tstmnls_autoplay" value="1" <?php checked( 1, $this->options['autoplay'] ); ?> /> <span class="bws_info"><?php _e( 'Enable to turn autoplay on for the slideshow.', 'slider-bws' ); ?></span>
+							</label>
+						</td>
+					</tr>
+					<tr class="tstmnls_autoplay">
+						<th><?php _e( 'Autoplay Timeout', 'bws-testimonials' ); ?></th>
+						<td>
+							<label>
+								<input type="number" name="tstmnls_autoplay_timeout" min="1" max="1000" value="<?php echo $this->options['autoplay_timeout']/1000; ?>" /> <?php _e( 'sec', 'slider-bws' ); ?>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Auto Height', 'bws-testimonials' ); ?></th>
+						<td>
+							<label>
+								<input type="checkbox" name="tstmnls_auto_height" value="1" <?php checked( 1, $this->options['auto_height'] ); ?> />
+								<span class="bws_info"><?php _e( 'Enable to change slider height automatically (according to the hight of the slide).', 'slider-bws' ); ?></span>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Loop', 'bws-testimonials' ); ?></th>
+						<td>
+							<label>
+								<input type="checkbox" name="tstmnls_loop" value="1" <?php checked( 1, $this->options['loop'] ); ?> />
+								<span class="bws_info"><?php _e( 'Enable to loop the slideshow.', 'slider-bws' ); ?></span>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Navigation', 'bws-testimonials' ); ?></th>
+						<td>
+							<fieldset>
+								<label>
+									<input type="checkbox" name="tstmnls_nav" value="1" <?php checked( 1, $this->options['nav'] ); ?> />
+									<?php _e( 'Arrows', 'bws-testimonials' ); ?>
+								</label>
+								<br/>
+								<label>
+									<input type="checkbox" name="tstmnls_dots" value="1" <?php checked( 1, $this->options['dots'] ); ?> />
+									<?php _e( 'Dots', 'bws-testimonials' ); ?>
+								</label>
+							</fieldset>
+						</td>
+					</tr>
+				<?php } ?>
+			</table>
+		<?php }
 
         public function display_metabox() { ?>
             <div class="postbox">
