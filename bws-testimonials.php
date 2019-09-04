@@ -6,7 +6,7 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 1.0.3
+Version: 1.0.4
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
