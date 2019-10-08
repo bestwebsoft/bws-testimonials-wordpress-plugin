@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: testimonials\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 17:41+0300\n"
-"PO-Revision-Date: 2019-05-27 17:50+0300\n"
+"POT-Creation-Date: 2019-09-30 17:13+0300\n"
+"PO-Revision-Date: 2019-09-30 17:14+0300\n"
 "Last-Translator: plugin@bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft.com <plugin@bestwebsoft.com>\n"
 "Language: ru_RU\n"
@@ -13,233 +13,269 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bws-testimonials.php:34 includes/class-tstmnls-settings.php:138
+#: bws-testimonials.php:34 includes/class-tstmnls-settings.php:142
 msgid "Testimonials Settings"
 msgstr "Настройки Testimonials"
 
-#: bws-testimonials.php:34 bws-testimonials.php:980 bws-testimonials.php:993
+#: bws-testimonials.php:34 bws-testimonials.php:1453 bws-testimonials.php:1466
 #: includes/class-tstmnls-settings.php:29
 msgid "Settings"
 msgstr "Настройки"
 
-#: bws-testimonials.php:97
+#: bws-testimonials.php:117
 msgid "Testimonials Info"
 msgstr "Информация об отзывах"
 
-#: bws-testimonials.php:107 bws-testimonials.php:147
+#: bws-testimonials.php:127 bws-testimonials.php:167
 #: includes/class-tstmnls-settings.php:92
-#: includes/class-tstmnls-settings.php:392
+#: includes/class-tstmnls-settings.php:424
 msgid "Testimonials"
 msgstr "Отзывы"
 
-#: bws-testimonials.php:108
+#: bws-testimonials.php:128
 msgid "Testimonial"
 msgstr "Отзыв"
 
-#: bws-testimonials.php:116
+#: bws-testimonials.php:136
 msgid "Add New"
 msgstr "Добавить новые"
 
-#: bws-testimonials.php:117
+#: bws-testimonials.php:137
 msgid "Add a new testimonial"
 msgstr "Добавить новый отзыв"
 
-#: bws-testimonials.php:118
+#: bws-testimonials.php:138
 msgid "Edit testimonials"
 msgstr "Редактировать отзыв"
 
-#: bws-testimonials.php:119
+#: bws-testimonials.php:139
 msgid "New testimonial"
 msgstr "Новый отзыв"
 
-#: bws-testimonials.php:120
+#: bws-testimonials.php:140
 msgid "View testimonials"
 msgstr "Просмотреть отзывы"
 
-#: bws-testimonials.php:121
+#: bws-testimonials.php:141
 msgid "Search testimonials"
 msgstr "Поиск отзывов"
 
-#: bws-testimonials.php:122
+#: bws-testimonials.php:142
 msgid "No testimonials found"
 msgstr "Ни одного отзыва не найдено"
 
-#: bws-testimonials.php:123
+#: bws-testimonials.php:143
 msgid "No testimonials found in Trash"
 msgstr "Ни одного отзыва в Корзине не найдено"
 
-#: bws-testimonials.php:124
+#: bws-testimonials.php:144
 msgid "Testimonials list filter"
 msgstr "Фильтр списка отзывов"
 
-#: bws-testimonials.php:125
+#: bws-testimonials.php:145
 msgid "Testimonials list navigation"
 msgstr "Навигация списка отзывов"
 
-#: bws-testimonials.php:126
+#: bws-testimonials.php:146
 msgid "Testimonials list"
 msgstr "Список отзывов"
 
-#: bws-testimonials.php:160
+#: bws-testimonials.php:180
 msgid "I consent to having this site collect my personal data."
 msgstr "Я согласен, чтоб этот сайт собирал мои личные данные."
 
-#: bws-testimonials.php:319
+#: bws-testimonials.php:351
 msgid "All plugin settings were restored."
 msgstr "Все настройки плагина восстановлены."
 
-#: bws-testimonials.php:325
+#: bws-testimonials.php:357
 msgid "WARNING"
 msgstr "ВНИМАНИЕ"
 
-#: bws-testimonials.php:326
+#: bws-testimonials.php:358
 msgid "The plugin works correctly only if JavaScript is enabled."
 msgstr ""
 "Плагин работает корректно только в том случае, если включен JavaScript."
 
-#: bws-testimonials.php:342
+#: bws-testimonials.php:374
 msgid "Author"
 msgstr "Автор"
 
-#: bws-testimonials.php:346
+#: bws-testimonials.php:391
 msgid "Company Name"
 msgstr "Название компании"
 
-#: bws-testimonials.php:395
+#: bws-testimonials.php:480
 msgid "Testimonials Slider Widget"
 msgstr "Виджет \"Отзывы Слайдер\""
 
-#: bws-testimonials.php:396
+#: bws-testimonials.php:481
 msgid "Widget for displaying Testimonials Slider."
 msgstr "Виджет для отображения Отзывы Слайдер."
 
-#: bws-testimonials.php:430 bws-testimonials.php:501
-#: includes/class-tstmnls-settings.php:144
+#: bws-testimonials.php:515 bws-testimonials.php:586
+#: includes/class-tstmnls-settings.php:148
 msgid "Widget Title"
 msgstr "Название виджета"
 
-#: bws-testimonials.php:434 includes/class-tstmnls-settings.php:361
+#: bws-testimonials.php:519 includes/class-tstmnls-settings.php:393
 msgid "Loop"
 msgstr "Цикл"
 
-#: bws-testimonials.php:436 includes/class-tstmnls-settings.php:352
+#: bws-testimonials.php:521 includes/class-tstmnls-settings.php:384
 msgid "Auto Height"
 msgstr "Автоматическая высота"
 
-#: bws-testimonials.php:438
+#: bws-testimonials.php:523
 msgid "Arrow"
 msgstr "Стрелка"
 
-#: bws-testimonials.php:440 includes/class-tstmnls-settings.php:380
+#: bws-testimonials.php:525 includes/class-tstmnls-settings.php:412
 msgid "Dots"
 msgstr "Точки"
 
-#: bws-testimonials.php:442 includes/class-tstmnls-settings.php:336
+#: bws-testimonials.php:527 includes/class-tstmnls-settings.php:368
 msgid "Autoplay"
 msgstr "Автовоспроизведение"
 
-#: bws-testimonials.php:443 includes/class-tstmnls-settings.php:344
+#: bws-testimonials.php:528 includes/class-tstmnls-settings.php:376
 msgid "Autoplay Timeout"
 msgstr "Задержка автовоспроизведения"
 
-#: bws-testimonials.php:445 includes/class-tstmnls-settings.php:347
+#: bws-testimonials.php:530 includes/class-tstmnls-settings.php:379
 msgid "sec"
 msgstr "сек"
 
-#: bws-testimonials.php:472
+#: bws-testimonials.php:557
 msgid "Testimonials Widget"
 msgstr "Виджет \"Отзывы\""
 
-#: bws-testimonials.php:473
+#: bws-testimonials.php:558
 msgid "Widget for displaying Testimonials."
 msgstr "Виджет для отображения отзывов."
 
-#: bws-testimonials.php:505
+#: bws-testimonials.php:590
 msgid "Number of testimonials to be displayed"
 msgstr "Количество отзывов для отображения"
 
-#: bws-testimonials.php:773 bws-testimonials.php:1048
-msgid "Testimonials Form"
-msgstr "Форма"
+#: bws-testimonials.php:699
+msgid "See all reviews"
+msgstr "Все отзывы"
 
-#: bws-testimonials.php:872
+#: bws-testimonials.php:754
+msgid "out of"
+msgstr "из"
+
+#: bws-testimonials.php:901 bws-testimonials.php:1345
 msgid "Please make corrections below and try again."
 msgstr ""
 "Пожалуйста, сделайте исправления в отмеченных полях ниже и повторите попытку."
 
-#: bws-testimonials.php:878
+#: bws-testimonials.php:909 bws-testimonials.php:1351
 msgid "This form is available only for logged in users. Please"
 msgstr "Эта форма доступна для зарегистрированных пользователей. Пожалуйста"
 
-#: bws-testimonials.php:879
+#: bws-testimonials.php:910 bws-testimonials.php:1352
 msgid "log in"
 msgstr "авторизуйтесь"
 
-#: bws-testimonials.php:879
+#: bws-testimonials.php:911 bws-testimonials.php:1352
 msgid "or"
 msgstr "или"
 
-#: bws-testimonials.php:880
+#: bws-testimonials.php:912 bws-testimonials.php:1353
 msgid "register"
 msgstr "зарегистрируйтесь"
 
-#: bws-testimonials.php:880
+#: bws-testimonials.php:913 bws-testimonials.php:1353
 msgid "on our site"
 msgstr "на нашем сайте"
 
-#: bws-testimonials.php:885
-msgid "Your testimonial has been published!"
+#: bws-testimonials.php:920
+msgid "Your review has been published!"
 msgstr "Ваш отзыв был опубликован!"
 
-#: bws-testimonials.php:887
-msgid "Your testimonial has been sent to administration!"
+#: bws-testimonials.php:922
+msgid "Your review has been sent to administration!"
 msgstr "Ваш отзыв был отправлен администрации!"
 
-#: bws-testimonials.php:893
-msgid "Leave your testimonial"
-msgstr "Оставьте свой отзыв"
+#: bws-testimonials.php:933
+msgid "You have alredy published a review."
+msgstr "Вы уже опубликовали отзыв."
 
-#: bws-testimonials.php:896
-msgid "Your name:"
-msgstr "Ваше имя:"
+#: bws-testimonials.php:942
+msgid "Review title:"
+msgstr "Заголовок отзыва:"
 
-#: bws-testimonials.php:902
-msgid "Your company:"
-msgstr "Название вашей компании:"
+#: bws-testimonials.php:948
+msgid "Review text:"
+msgstr "Текст отзыва:"
 
-#: bws-testimonials.php:906
-msgid "Testimonial title:"
-msgstr "Заголовок поля:"
-
-#: bws-testimonials.php:912
-msgid "Testimonial:"
-msgstr "Отзыв:"
-
-#: bws-testimonials.php:938
+#: bws-testimonials.php:985 bws-testimonials.php:1411
 msgid "Publish"
 msgstr "Опубликовать"
 
-#: bws-testimonials.php:994
+#: bws-testimonials.php:1245 bws-testimonials.php:1521
+msgid "Testimonials Form"
+msgstr "Форма"
+
+#: bws-testimonials.php:1358
+msgid "Your testimonial has been published!"
+msgstr "Ваш отзыв был опубликован!"
+
+#: bws-testimonials.php:1360
+msgid "Your testimonial has been sent to administration!"
+msgstr "Ваш отзыв был отправлен администрации!"
+
+#: bws-testimonials.php:1366
+msgid "Leave your testimonial"
+msgstr "Оставьте свой отзыв"
+
+#: bws-testimonials.php:1369
+msgid "Your name:"
+msgstr "Ваше имя:"
+
+#: bws-testimonials.php:1375
+msgid "Your company:"
+msgstr "Название вашей компании:"
+
+#: bws-testimonials.php:1379
+msgid "Testimonial title:"
+msgstr "Заголовок поля:"
+
+#: bws-testimonials.php:1385
+msgid "Testimonial:"
+msgstr "Отзыв:"
+
+#: bws-testimonials.php:1467
 msgid "FAQ"
 msgstr "FAQ"
 
-#: bws-testimonials.php:995
+#: bws-testimonials.php:1468
 msgid "Support"
 msgstr "Тех.поддержка"
 
-#: bws-testimonials.php:1044
+#: bws-testimonials.php:1517
 msgid "Add testimonials to your page or post"
 msgstr "Добавить отзывы на вашу страницу или пост"
 
-#: bws-testimonials.php:1052
+#: bws-testimonials.php:1525
 msgid "Slider Testimonials"
 msgstr "Слайдер Testimonials"
 
+#: bws-testimonials.php:1529
+msgid "Testimonials Reviews"
+msgstr "Testimonial отзывы"
+
+#: bws-testimonials.php:1533
+msgid "Testimonials Review Form"
+msgstr "Форма отзыва Testimonials"
+
 #: includes/class-tstmnls-settings.php:30
-#: includes/class-tstmnls-settings.php:330
+#: includes/class-tstmnls-settings.php:354
 msgid "Slider"
 msgstr "Слайдер"
 
@@ -251,97 +287,91 @@ msgstr "Разное"
 msgid "Custom Code"
 msgstr "Пользовательский код"
 
-#: includes/class-tstmnls-settings.php:128
+#: includes/class-tstmnls-settings.php:132
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: includes/class-tstmnls-settings.php:150
+#: includes/class-tstmnls-settings.php:154
 msgid "Number of Testimonials to be Displayed"
 msgstr "Количество отзывов для отображения"
 
-#: includes/class-tstmnls-settings.php:156
+#: includes/class-tstmnls-settings.php:160
 msgid "Image Size"
 msgstr "Размер изображения"
 
-#: includes/class-tstmnls-settings.php:162
+#: includes/class-tstmnls-settings.php:166
 msgid "Custom"
 msgstr "Пользовательский"
 
-#: includes/class-tstmnls-settings.php:164
+#: includes/class-tstmnls-settings.php:168
 msgid ""
 "Maximum testimonials image size. \"Custom\" uses the Image Dimensions values."
 msgstr ""
 "Максимальный размер изображения отзыва. \"Пользовательский\" использует "
 "значения, указанные в поле Размеры изображения."
 
-#: includes/class-tstmnls-settings.php:168
+#: includes/class-tstmnls-settings.php:172
 msgid "Custom Image Size"
 msgstr "Пользовательский размер изображения"
 
-#: includes/class-tstmnls-settings.php:170
+#: includes/class-tstmnls-settings.php:174
 msgid "px"
 msgstr "пикс"
 
-#: includes/class-tstmnls-settings.php:171
-msgid ""
-"Adjust these values based on the number of columns in your gallery. This "
-"won't effect the full size of your images in the lightbox."
-msgstr ""
-
-#: includes/class-tstmnls-settings.php:175
+#: includes/class-tstmnls-settings.php:178
 msgid "Sort Testimonials by"
 msgstr "Сортировка отзывов по"
 
-#: includes/class-tstmnls-settings.php:179
+#: includes/class-tstmnls-settings.php:182
 msgid "Testimonial ID"
 msgstr "ID отзыва"
 
-#: includes/class-tstmnls-settings.php:183
+#: includes/class-tstmnls-settings.php:186
 msgid "Testimonial title"
 msgstr "Название отзыва"
 
-#: includes/class-tstmnls-settings.php:187
+#: includes/class-tstmnls-settings.php:190
 msgid "Date"
 msgstr "Дата"
 
-#: includes/class-tstmnls-settings.php:191
+#: includes/class-tstmnls-settings.php:194
 msgid "Random"
 msgstr "В любом порядке"
 
-#: includes/class-tstmnls-settings.php:197
+#: includes/class-tstmnls-settings.php:200
 msgid "Testimonials Sorting"
 msgstr "Сортировка отзывов"
 
-#: includes/class-tstmnls-settings.php:199
+#: includes/class-tstmnls-settings.php:202
 msgid ""
 "ASC ( ascending order from lowest to highest values - 1, 2, 3; a, b, c )"
 msgstr ""
 "ASC ( по возрастанию от наименьших до наибольших значений - 1, 2, 3; a, b, "
 "c )"
 
-#: includes/class-tstmnls-settings.php:200
+#: includes/class-tstmnls-settings.php:203
 msgid ""
 "DESC ( descending order from highest to lowest values - 3, 2, 1; c, b, a )"
 msgstr ""
 "DESC ( по убыванию от наибольших до наименьших значений - 3, 2, 1; c, b, a )"
 
-#: includes/class-tstmnls-settings.php:204
+#: includes/class-tstmnls-settings.php:207
 msgid "Publication Permissions"
 msgstr "Разрешение на публикацию"
 
-#: includes/class-tstmnls-settings.php:208
+#: includes/class-tstmnls-settings.php:211
 msgid "Logged"
 msgstr "Отображать данные авторизированного пользователя"
 
-#: includes/class-tstmnls-settings.php:212
+#: includes/class-tstmnls-settings.php:215
 msgid "All"
 msgstr "Всех"
 
-#: includes/class-tstmnls-settings.php:218
+#: includes/class-tstmnls-settings.php:221
 msgid "Publish Automatically"
 msgstr "Публиковать автоматически"
 
-#: includes/class-tstmnls-settings.php:221
+#: includes/class-tstmnls-settings.php:224
 msgid ""
 "Enable to publish new testimonials automatically. Otherwise, new "
 "testimonials will be saved as drafts."
@@ -349,50 +379,67 @@ msgstr ""
 "Включите, чтобы публиковать новые отзывы автоматически. Если эта опция не "
 "включена, новые отзывы буду сохранены в виде черновика."
 
-#: includes/class-tstmnls-settings.php:251
-#, php-format
-msgid "Add %s"
-msgstr "Добавить %s"
-
-#: includes/class-tstmnls-settings.php:273
+#: includes/class-tstmnls-settings.php:281
 msgid "Download"
 msgstr "Скачать"
 
-#: includes/class-tstmnls-settings.php:280
+#: includes/class-tstmnls-settings.php:288
 msgid "Activate"
 msgstr "Активировать"
 
-#: includes/class-tstmnls-settings.php:286
+#: includes/class-tstmnls-settings.php:295
+#, fuzzy, php-format
+#| msgid "Enable to use %s for Testimonials Review form."
+msgid "Enable to add %s to Testimonials Review form."
+msgstr "Включите, чтобы использовать %s для формы отзывов Testimonials."
+
+#: includes/class-tstmnls-settings.php:300
 #, php-format
 msgid "Enable to use %s for Testimonials form."
 msgstr "Включите, чтобы использовать %s для формы Testimonials."
 
-#: includes/class-tstmnls-settings.php:291
+#: includes/class-tstmnls-settings.php:306
 #, php-format
 msgid "Your %s plugin is outdated. Please update it to the latest version."
 msgstr "Ваш % s плагин устарел. Обновите его до последней версии."
 
-#: includes/class-tstmnls-settings.php:303
+#: includes/class-tstmnls-settings.php:317
+msgid "Reviews per load"
+msgstr "Отзывов за загрузку"
+
+#: includes/class-tstmnls-settings.php:321
+msgid ""
+"The amount of reviews that will be loaded by pressing \"See all reviews\" "
+"button."
+msgstr ""
+"Количество отзывов которые будут загружены при нажатии на кнопку \"Все отзывы"
+"\"."
+
+#: includes/class-tstmnls-settings.php:327
 msgid "GDPR Compliance"
 msgstr "Согласие с GDPR"
 
-#: includes/class-tstmnls-settings.php:310
+#: includes/class-tstmnls-settings.php:334
 msgid "Checkbox label"
 msgstr "Метка чекбокса"
 
-#: includes/class-tstmnls-settings.php:314
+#: includes/class-tstmnls-settings.php:338
 msgid "Link to Privacy Policy Page"
 msgstr "Ссылка на страницу политики конфиденциальности"
 
-#: includes/class-tstmnls-settings.php:318
+#: includes/class-tstmnls-settings.php:342
 msgid "Text for Privacy Policy Link"
 msgstr "Текст ссылки для политики конфиденциальности"
 
-#: includes/class-tstmnls-settings.php:339
+#: includes/class-tstmnls-settings.php:360
+msgid "Items in Slide"
+msgstr "Элементов в слайде"
+
+#: includes/class-tstmnls-settings.php:371
 msgid "Enable to turn autoplay on for the slideshow."
 msgstr "Включить автовоспроизведение для слайд-шоу."
 
-#: includes/class-tstmnls-settings.php:356
+#: includes/class-tstmnls-settings.php:388
 msgid ""
 "Enable to change slider height automatically (according to the hight of the "
 "slide)."
@@ -400,19 +447,19 @@ msgstr ""
 "Включите, чтобы высота слайдера изменялась автоматически (в соответствии с "
 "высотой слайда)."
 
-#: includes/class-tstmnls-settings.php:365
+#: includes/class-tstmnls-settings.php:397
 msgid "Enable to loop the slideshow."
 msgstr "Включить цикличность для слайдера."
 
-#: includes/class-tstmnls-settings.php:370
+#: includes/class-tstmnls-settings.php:402
 msgid "Navigation"
 msgstr "Навигация"
 
-#: includes/class-tstmnls-settings.php:375
+#: includes/class-tstmnls-settings.php:407
 msgid "Arrows"
 msgstr "Стрелки"
 
-#: includes/class-tstmnls-settings.php:395
+#: includes/class-tstmnls-settings.php:427
 msgid ""
 "If you would like to display testimonials in widget, you need to add "
 "\"Testimonials Widget\" on the Widgets page."
@@ -420,23 +467,52 @@ msgstr ""
 "Если вы хотите отображать отзывы в виджете, вам нужно добавить «Testimonials "
 "Widget» на странице виджетов."
 
-#: includes/class-tstmnls-settings.php:398
+#: includes/class-tstmnls-settings.php:430
 msgid "If you would like to add testimonials use next shortcode:"
 msgstr "Если вы хотите добавить отзывы, используйте следующий шорткод:"
 
-#: includes/class-tstmnls-settings.php:402
+#: includes/class-tstmnls-settings.php:434
 msgid "If you would like to add testimonials form use next shortcode:"
 msgstr "Если вы хотите добавить форму отзывов, используйте следующий шорткод:"
 
-#: includes/class-tstmnls-settings.php:406
+#: includes/class-tstmnls-settings.php:438
 msgid "If you would like to add testimonials slider use next shortcode:"
 msgstr ""
 "Если вы хотите добавить слайдер с отзывами, используйте следующий шорткод:"
 
-#: includes/class-tstmnls-settings.php:410
+#: includes/class-tstmnls-settings.php:442
 msgid ""
 "Also, you can paste the following strings into the template source code: "
 msgstr "Также, вы можете вставить следующие строки в исходный код шаблона: "
+
+#: includes/class-tstmnls-settings.php:450
+#, fuzzy
+#| msgid "If you would like to add testimonials use next shortcode:"
+msgid "If you would like to add reviews use next shortcode:"
+msgstr "Если вы хотите добавить отзывы, используйте следующий шорткод:"
+
+#: includes/class-tstmnls-settings.php:454
+#, fuzzy
+#| msgid "If you would like to add testimonials form use next shortcode:"
+msgid "If you would like to add review form use next shortcode:"
+msgstr "Если вы хотите добавить форму отзывов, используйте следующий шорткод:"
+
+#~ msgid "Add %s"
+#~ msgstr "Добавить %s"
+
+#~ msgid ""
+#~ "If you would like to display reviews you can paste the following strings "
+#~ "into the template source code: "
+#~ msgstr ""
+#~ "Если вы хотите отобразить отзывы вы можете вставить следующие строки в "
+#~ "исходный код шаблона: "
+
+#~ msgid ""
+#~ "If you would like to add review form you can paste the following strings "
+#~ "into the template source code: "
+#~ msgstr ""
+#~ "Если вы хотите добавить форму отзывов вы можете вставить следующие строки "
+#~ "в исходный код шаблона: "
 
 #~ msgid "Slider Settings"
 #~ msgstr "Настройки Slider"
@@ -527,9 +603,6 @@ msgstr "Также, вы можете вставить следующие стр
 
 #~ msgid "Your company"
 #~ msgstr "Ваша компания"
-
-#~ msgid "Widget title"
-#~ msgstr "Название виджета"
 
 #~ msgid "Sort testimonials by"
 #~ msgstr "Сортировка отзывов по"

@@ -110,6 +110,8 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
             $this->options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? esc_html( $_POST['tstmnls_gdpr_link'] ) : $this->options['gdpr_link'];
             $this->options['gdpr']				= isset( $_POST['tstmnls_gdpr'] ) ? 1 : 0;
             $this->options['recaptcha_cb']		= isset( $_POST['tstmnls_enable_recaptcha'] ) ? 1 : 0;
+            $this->options['rating_cb']		= isset( $_POST['tstmnls_enable_rating'] ) ? 1 : 0;
+            $this->options['reviews_per_load']	= intval( $_POST['tstmnls_reviews_per_load'] );
 
 				$this->options['loop']					=  isset( $_POST['tstmnls_loop'] )  ? 1 : 0;
 				/* Display navigation button */
@@ -223,82 +225,102 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                     </td>
                 </tr>
                 <tr>
-                    <?php /* Display reCAPTCHA settings */
-                    $related_plugins = array(
-                        'recaptcha' => array(
-                            'name'				=> 'Google Captcha ( reCAPTCHA ) by BestWebSoft',
-                            'short_name'		=> 'Google Captcha',
-                            'download_link'		=> 'https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=8b945710c30a24dd837c9c53c0aed0f8&amp;pn=180&v=' . $tstmnls_plugin_info["Version"] . '&amp;wp_v=' . $wp_version,
-                            'status'			=> tstmnls_get_related_plugin_status( 'recaptcha' )
-                        ),
-
-                    );
-                    foreach ( $related_plugins as $plugin_slug => $plugin_data ) {
-                        if ( ! empty( $plugin_data['status']['active'] ) && 'outdated' != $plugin_data['status']['active'] ) {
-                            $is_enabled = isset( $_POST["tstmnls_enable_{$plugin_slug}"] ) ? true : false;
-                            $related_plugins[ $plugin_slug ]['status']['enabled'] = $is_enabled;
-                            if ( 'recaptcha' == $plugin_slug && get_option( 'gglcptch_options' )  ) {
-                                $gglcptch_options = get_option( 'gglcptch_options' );
-                                $gglcptch_options['testimonials_form'] = $is_enabled ? 1 : 0;
-                                update_option( 'gglcptch_options', $gglcptch_options );
-                            }
+                <?php /* Display reCAPTCHA settings */
+                $related_plugins = array(
+                    'recaptcha' => array(
+                        'name'				=> 'Google Captcha (reCAPTCHA) by BestWebSoft',
+                        'short_name'		=> 'Google Captcha',
+                        'download_link'		=> 'https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=8b945710c30a24dd837c9c53c0aed0f8&amp;pn=180&v=' . $tstmnls_plugin_info["Version"] . '&amp;wp_v=' . $wp_version,
+                        'status'			=> tstmnls_get_related_plugin_status( 'recaptcha' )
+                    ),
+                    'rating' => array(
+                        'name'				=> 'Rating by BestWebSoft',
+                        'short_name'		=> 'Rating',
+                        'download_link'		=> 'https://bestwebsoft.com/products/wordpress/plugins/rating/?k=61d18b51a1d3170ba85a3a5ee07d207c&amp;pn=180&v=' . $tstmnls_plugin_info["Version"] . '&amp;wp_v=' . $wp_version,
+                        'status'			=> tstmnls_get_related_plugin_status( 'rating' )
+                    ),
+                );
+                foreach ( $related_plugins as $plugin_slug => $plugin_data ) {
+                    if ( ! empty( $plugin_data['status']['active'] ) && 'outdated' != $plugin_data['status']['active'] ) {
+                        $is_enabled = isset( $_POST["tstmnls_enable_{$plugin_slug}"] ) ? true : false;
+                        $related_plugins[ $plugin_slug ]['status']['enabled'] = $is_enabled;
+                        if ( 'recaptcha' == $plugin_slug && get_option( 'gglcptch_options' )  ) {
+                            $gglcptch_options = get_option( 'gglcptch_options' );
+                            $gglcptch_options['testimonials_form'] = $is_enabled ? 1 : 0;
+                            update_option( 'gglcptch_options', $gglcptch_options );
                         }
                     }
-                    foreach ( $related_plugins as $plugin_slug => $plugin_data ) { ?>
-                <tr valign="top">
-                    <th scope="row">
-                        <label for="<?php echo "tstmnls-enable-{$plugin_slug}"; ?>">
-                            <?php printf(
-                                __( 'Add %s', 'bws-testimonials' ),
-                                $plugin_data['short_name']
-                            ); ?>
-                        </label>
-                    </th>
-                    <td>
-                        <label for="tstmnls-enable-<?php echo $plugin_slug; ?>">
-                            <input type="checkbox"
-                                   name="tstmnls_enable_<?php echo $plugin_slug; ?>"
-                                   id="<?php echo "tstmnls-enable-{$plugin_slug}"; ?>"
-                                <?php checked( $plugin_data['status']['installed'] && ! empty( $this->options['recaptcha_cb'] ) );
-                                disabled(
-                                    ! $plugin_data['status']['installed'] ||
-                                    ! $plugin_data['status']['active'] ||
-                                    'outdated' == $plugin_data['status']['active']
-                                ); ?>
-                                   value="1" >&nbsp;
-                            <span class="bws_info">
-                                <?php if ( ! $plugin_data['status']['installed'] ) {
-                                    printf(
-                                        '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
-                                        $plugin_data['download_link'],
-                                        __( 'Download', 'bws-testimonials' ),
-                                        $plugin_data['name']
-                                    );
-                                } elseif ( ! $plugin_data['status']['active'] ) {
-                                    printf(
-                                        '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
-                                        network_admin_url( 'plugins.php' ),
-                                        __( 'Activate', 'bws-testimonials' ),
-                                        $plugin_data['name']
-                                    );
-                                } else {
-                                    if ( 'outdated' != $plugin_data['status']['active'] ) {
+                }
+                foreach ( $related_plugins as $plugin_slug => $plugin_data ) { ?>
+                    <tr valign="top">
+                        <th scope="row">
+                            <label for="<?php echo "tstmnls-enable-{$plugin_slug}"; ?>">
+                                <?php echo $plugin_data['short_name']; ?>
+                            </label>
+                        </th>
+                        <td>
+                            <label for="tstmnls-enable-<?php echo $plugin_slug; ?>">
+                                <input type="checkbox"
+                                    name="tstmnls_enable_<?php echo $plugin_slug; ?>"
+                                    id="<?php echo "tstmnls-enable-{$plugin_slug}"; ?>"
+                                    <?php checked( ! empty( $this->options[ $plugin_slug . '_cb' ] ) );
+                                    disabled(
+                                        ! $plugin_data['status']['installed'] ||
+                                        ! $plugin_data['status']['active'] ||
+                                        'outdated' == $plugin_data['status']['active']
+                                    ); ?>
+                                    value="1"
+                                    <?php if ( 'rating' == $plugin_slug ) echo 'class="bws_option_affect" data-affect-show=".tstmnls_reviews_per_load"' ?>
+                                    >&nbsp;
+                                <span class="bws_info">
+                                    <?php if ( ! $plugin_data['status']['installed'] ) {
                                         printf(
-                                            __( 'Enable to use %s for Testimonials form.', 'bws-testimonials' ),
+                                            '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
+                                            $plugin_data['download_link'],
+                                            __( 'Download', 'bws-testimonials' ),
+                                            $plugin_data['name']
+                                        );
+                                    } elseif ( ! $plugin_data['status']['active'] ) {
+                                        printf(
+                                            '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
+                                            network_admin_url( 'plugins.php' ),
+                                            __( 'Activate', 'bws-testimonials' ),
                                             $plugin_data['name']
                                         );
                                     } else {
-                                        printf(
-                                            __( 'Your %s plugin is outdated. Please update it to the latest version.', 'bws-testimonials' ),
-                                            $plugin_data['name']
-                                        );
-                                    }
-                                } ?>
-                            </span>
+                                        if ( 'outdated' != $plugin_data['status']['active'] ) {
+                                            if ( 'rating' == $plugin_slug ) {
+                                                printf(
+                                                    __( 'Enable to add %s to Testimonials Review form.', 'bws-testimonials' ),
+                                                    $plugin_data['name']
+                                                );
+                                            } else {
+                                                printf(
+                                                    __( 'Enable to use %s for Testimonials form.', 'bws-testimonials' ),
+                                                    $plugin_data['name']
+                                                );
+                                            }
+                                        } else {
+                                            printf(
+                                                __( 'Your %s plugin is outdated. Please update it to the latest version.', 'bws-testimonials' ),
+                                                $plugin_data['name']
+                                            );
+                                        }
+                                    } ?>
+                                </span>
+                            </label>
+                        </td>
+                    </tr>
+                <?php } ?>
+                <tr class="tstmnls_reviews_per_load">
+                    <th><?php _e( 'Reviews per load', 'bws-testimonials' ); ?></th>
+                    <td>
+                        <label>
+                            <input type="number" min="3" max="100" name="tstmnls_reviews_per_load" value="<?php echo $this->options['reviews_per_load']; ?>" />
+                            <span class="bws_info"><?php _e( 'The amount of reviews that will be loaded by pressing "See all reviews" button.', 'bws-testimonials' ); ?></span>
                         </label>
                     </td>
                 </tr>
-                <?php } ?>
                 <tr valign="top">
                     <th scope="row">
                         <label for="tstmnls-gdpr"><?php _e( 'GDPR Compliance', 'bws-testimonials' ); ?></label>
@@ -422,6 +444,14 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                         do_action( 'tstmnls_show_testimonials' );
                         } ?&gt;
                     </code>
+                </div>
+                <div class="inside">
+                    <?php _e( "If you would like to add reviews use next shortcode:", 'bws-testimonials' ); ?>
+                    <?php bws_shortcode_output( "[bws_testimonials_reviews]" ) ?>
+                </div>
+                <div class="inside">
+                    <?php _e( "If you would like to add review form use next shortcode:", 'bws-testimonials' ); ?>
+                    <?php bws_shortcode_output( "[bws_testimonials_review_form]" ) ?>
                 </div>
             </div>
         <?php }

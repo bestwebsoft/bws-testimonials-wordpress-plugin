@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 3.9
-Tested up to: 5.2.2
-Stable tag: 1.0.4
+Tested up to: 5.2.3
+Stable tag: 1.0.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,6 +27,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add testimonials widget
 * Add slider with testimonials
 * Compatible with Google Captcha (reCAPTCHA)
+* Compatible with Rating [NEW]
 * Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
@@ -34,7 +35,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 	* Author
 	* Company name
 * Set the number of testimonials to display
-* Change featured image size and its dimensions [NEW]
+* Change featured image size and its dimensions
 * Set the default testimonials sorting order by:
 	* ID
 	* Title
@@ -122,8 +123,13 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 11. Testimonials Slider display.
 12. Testimonials Slider Widget in WordPress admin panel.
 13. Testimonials Slider Widget display.
+14. Testimonials review form display.
+15. Testimonials reviews display.
 
 == Changelog ==
+
+= V1.0.5 - 08.10.2019 =
+* NEW : Compatibility with Rating by BestWebSoft has been added.
 
 = V1.0.4 - 04.09.2019 =
 * Update: The deactivation feedback has been changed. Misleading buttons have been removed.
@@ -201,6 +207,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.5 =
+* Functionality expanded.
 
 = V1.0.4 =
 * Usability improved

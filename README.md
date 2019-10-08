@@ -13,6 +13,7 @@
 <li>Add testimonials widget</li>
 <li>Add slider with testimonials</li>
 <li>Compatible with Google Captcha (reCAPTCHA)</li>
+<li>Compatible with Rating [NEW]</li>
 <li>Select the one who can submit new testimonials:
 <ul>
 <li>All users</li>
@@ -26,7 +27,7 @@
 </ul>
 </li>
 <li>Set the number of testimonials to display</li>
-<li>Change featured image size and its dimensions [NEW]</li>
+<li>Change featured image size and its dimensions</li>
 <li>Set the default testimonials sorting order by:
 <ul>
 <li>ID</li>
