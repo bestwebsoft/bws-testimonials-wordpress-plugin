@@ -13,7 +13,7 @@
 <li>Add testimonials widget</li>
 <li>Add slider with testimonials</li>
 <li>Compatible with Google Captcha (reCAPTCHA)</li>
-<li>Compatible with Rating [NEW]</li>
+<li>Compatible with Rating</li>
 <li>Select the one who can submit new testimonials:
 <ul>
 <li>All users</li>

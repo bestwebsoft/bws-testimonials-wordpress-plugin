@@ -2,9 +2,9 @@
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
-Requires at least: 3.9
-Tested up to: 5.2.3
-Stable tag: 1.0.5
+Requires at least: 4.5
+Tested up to: 5.3.2
+Stable tag: 1.0.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add testimonials widget
 * Add slider with testimonials
 * Compatible with Google Captcha (reCAPTCHA)
-* Compatible with Rating [NEW]
+* Compatible with Rating
 * Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
@@ -128,6 +128,11 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.0.6 - 19.12.2019 =
+* Update : All functionality was updated for WordPress 5.3.1.
+* Bugfix : Bugs with saving data were fixed.
+* Update : BWS plugins section is updated.
+
 = V1.0.5 - 08.10.2019 =
 * NEW : Compatibility with Rating by BestWebSoft has been added.
 
@@ -207,6 +212,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.6 =
+* Bugs fixed.
 
 = V1.0.5 =
 * Functionality expanded.

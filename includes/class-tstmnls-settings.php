@@ -3,8 +3,6 @@
  * Displays the content on the plugin settings page
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . '/bws_menu/class-bws-settings.php' );
-
 if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
     class Tstmnls_Settings_Tabs extends Bws_Settings_Tabs {
         public $is_general_settings = true;
@@ -33,15 +31,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                 );
             }
 
-            if ( $this->is_multisite && ! $this->is_network_options ) {
-                if ( $network_options = get_site_option( 'tstmnls_options' ) ) {
-                    if ( 'all' == $network_options['network_apply'] && 0 == $network_options['network_change'] )
-                        $this->change_permission_attr = ' readonly="readonly" disabled="disabled"';
-                    if ( 'all' == $network_options['network_apply'] && 0 == $network_options['network_view'] )
-                        $this->forbid_view = true;
-                }
-            }
-            add_action( get_parent_class( $this ) . '_display_metabox', array( $this, 'display_metabox' ) );
+            
             parent::__construct( array(
                 'plugin_basename' 	 => $plugin_basename,
                 'plugins_info'		 => $tstmnls_plugin_info,
@@ -79,6 +69,8 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                     }
                 }
             }
+
+            add_action( get_parent_class( $this ) . '_display_metabox', array( $this, 'display_metabox' ) );
         }
 
         /**
@@ -88,6 +80,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
          * @return array    The action results
          */
         public function save_options() {
+            $message = $notice = $error = '';
 
             $this->options['widget_title']		= isset( $_POST['tstmnls_widget_title'] ) ? stripslashes( esc_html( $_POST['tstmnls_widget_title'] ) ) : __( 'Testimonials', 'bws-testimonials' );
             $this->options['count']				= isset( $_POST['tstmnls_count'] ) ? intval( $_POST['tstmnls_count'] ) : '5';
@@ -129,8 +122,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
             $this->options	= array_map( 'stripslashes_deep', $this->options );
 
             update_option( 'tstmnls_options', $this->options );
-            $message = __( 'Settings saved.', 'bws-testimonials' );
-
+            $message .= __( 'Settings saved.', 'bws-testimonials' );
 
             return compact( 'message', 'notice', 'error' );
         }
@@ -367,7 +359,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
 						<th><?php _e( 'Autoplay', 'bws-testimonials' ); ?></th>
 						<td>
 							<label>
-								<input type="checkbox" name="tstmnls_autoplay" class="bws_option_affect" data-affect-show=".tstmnls_autoplay" value="1" <?php checked( 1, $this->options['autoplay'] ); ?> /> <span class="bws_info"><?php _e( 'Enable to turn autoplay on for the slideshow.', 'slider-bws' ); ?></span>
+								<input type="checkbox" name="tstmnls_autoplay" class="bws_option_affect" data-affect-show=".tstmnls_autoplay" value="1" <?php checked( 1, $this->options['autoplay'] ); ?> /> <span class="bws_info"><?php _e( 'Enable to turn autoplay on for the slideshow.', 'bws-testimonials' ); ?></span>
 							</label>
 						</td>
 					</tr>
@@ -375,7 +367,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
 						<th><?php _e( 'Autoplay Timeout', 'bws-testimonials' ); ?></th>
 						<td>
 							<label>
-								<input type="number" name="tstmnls_autoplay_timeout" min="1" max="1000" value="<?php echo $this->options['autoplay_timeout']/1000; ?>" /> <?php _e( 'sec', 'slider-bws' ); ?>
+								<input type="number" name="tstmnls_autoplay_timeout" min="1" max="1000" value="<?php echo $this->options['autoplay_timeout']/1000; ?>" /> <?php _e( 'sec', 'bws-testimonials' ); ?>
 							</label>
 						</td>
 					</tr>
@@ -384,7 +376,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
 						<td>
 							<label>
 								<input type="checkbox" name="tstmnls_auto_height" value="1" <?php checked( 1, $this->options['auto_height'] ); ?> />
-								<span class="bws_info"><?php _e( 'Enable to change slider height automatically (according to the hight of the slide).', 'slider-bws' ); ?></span>
+								<span class="bws_info"><?php _e( 'Enable to change slider height automatically (according to the hight of the slide).', 'bws-testimonials' ); ?></span>
 							</label>
 						</td>
 					</tr>
@@ -393,7 +385,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
 						<td>
 							<label>
 								<input type="checkbox" name="tstmnls_loop" value="1" <?php checked( 1, $this->options['loop'] ); ?> />
-								<span class="bws_info"><?php _e( 'Enable to loop the slideshow.', 'slider-bws' ); ?></span>
+								<span class="bws_info"><?php _e( 'Enable to loop the slideshow.', 'bws-testimonials' ); ?></span>
 							</label>
 						</td>
 					</tr>
