@@ -31,7 +31,7 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                 );
             }
 
-            
+
             parent::__construct( array(
                 'plugin_basename' 	 => $plugin_basename,
                 'plugins_info'		 => $tstmnls_plugin_info,
@@ -82,7 +82,6 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
         public function save_options() {
             $message = $notice = $error = '';
 
-            $this->options['widget_title']		= isset( $_POST['tstmnls_widget_title'] ) ? stripslashes( esc_html( $_POST['tstmnls_widget_title'] ) ) : __( 'Testimonials', 'bws-testimonials' );
             $this->options['count']				= isset( $_POST['tstmnls_count'] ) ? intval( $_POST['tstmnls_count'] ) : '5';
 
             $new_image_size_photo 		= esc_attr( $_POST['tstmnls_image_size_photo'] );
@@ -91,19 +90,19 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
             $custom_size_px_photo 		= array( $custom_image_size_w_photo, $custom_image_size_h_photo );
 
             $this->options['custom_size_px']['tstmnls_custom_size'] = $custom_size_px_photo;
-            $this->options['image_size_photo'] 				= $new_image_size_photo;
+            $this->options['image_size_photo'] 				        = $new_image_size_photo;
 
-            $this->options['order_by']			= isset( $_POST['tstmnls_order_by'] ) ? $_POST['tstmnls_order_by'] : 'date';
-            $this->options['order']				= isset( $_POST['tstmnls_order'] ) ? $_POST['tstmnls_order'] : 'DESC';
-            $this->options['permissions']			= isset( $_POST['tstmnls_permission'] ) ? $_POST['tstmnls_permission'] : 'all';
-            $this->options['auto_publication']    = isset( $_POST['tstmnls_auto_publication'] ) ? 1 : 0;
+            $this->options['order_by']			= isset( $_POST['tstmnls_order_by'] ) && in_array( $_POST['tstmnls_order_by'], array( 'ID', 'title', 'date', 'rand' ) ) ? $_POST['tstmnls_order_by'] : 'date';
+            $this->options['order']				= isset( $_POST['tstmnls_order'] ) && in_array( $_POST['tstmnls_order'], array( 'ASC', 'DESC' ) ) ? $_POST['tstmnls_order'] : 'DESC';
+            $this->options['permissions']		= isset( $_POST['tstmnls_permission'] ) && in_array( $_POST['tstmnls_permission'], array( 'all', 'logged' ) ) ? $_POST['tstmnls_permission'] : 'all';
+            $this->options['auto_publication']  = isset( $_POST['tstmnls_auto_publication'] ) ? 1 : 0;
 
-            $this->options['gdpr_tm_name']		= isset( $_POST['tstmnls_gdpr_tm_name'] ) ? esc_html( $_POST['tstmnls_gdpr_tm_name'] ) : $this->options['gdpr_tm_name'];
-            $this->options['gdpr_text']			= isset( $_POST['tstmnls_gdpr_text'] ) ? esc_html( $_POST['tstmnls_gdpr_text'] ) : $this->options['gdpr_text'];
-            $this->options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? esc_html( $_POST['tstmnls_gdpr_link'] ) : $this->options['gdpr_link'];
+            $this->options['gdpr_tm_name']		= isset( $_POST['tstmnls_gdpr_tm_name'] ) ? sanitize_text_field( htmlspecialchars( $_POST['tstmnls_gdpr_tm_name'] ) ) : $this->options['gdpr_tm_name'];
+            $this->options['gdpr_text']			= isset( $_POST['tstmnls_gdpr_text'] ) ? sanitize_text_field( htmlspecialchars( $_POST['tstmnls_gdpr_text'] ) ) : $this->options['gdpr_text'];
+            $this->options['gdpr_link']			= isset( $_POST['tstmnls_gdpr_link'] ) ? sanitize_text_field( $_POST['tstmnls_gdpr_link'] ) : $this->options['gdpr_link'];
             $this->options['gdpr']				= isset( $_POST['tstmnls_gdpr'] ) ? 1 : 0;
             $this->options['recaptcha_cb']		= isset( $_POST['tstmnls_enable_recaptcha'] ) ? 1 : 0;
-            $this->options['rating_cb']		= isset( $_POST['tstmnls_enable_rating'] ) ? 1 : 0;
+            $this->options['rating_cb']		    = isset( $_POST['tstmnls_enable_rating'] ) ? 1 : 0;
             $this->options['reviews_per_load']	= intval( $_POST['tstmnls_reviews_per_load'] );
 
 				$this->options['loop']					=  isset( $_POST['tstmnls_loop'] )  ? 1 : 0;
@@ -137,15 +136,10 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
             <table class="form-table">
                 <tbody>
                 <tr>
-                    <th scope="row"><?php _e( 'Widget Title', 'bws-testimonials' ); ?></th>
-                    <td>
-                        <input type="text" class="text" maxlength="250" value="<?php echo $this->options['widget_title']; ?>" name="tstmnls_widget_title"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php _e( 'Number of Testimonials to be Displayed', 'bws-testimonials' ); ?></th>
+                    <th scope="row"><?php _e( 'Number of Testimonials', 'bws-testimonials' ); ?></th>
                     <td>
                         <input type="number" required class="text" min="1" max="10000" value="<?php echo $this->options['count']; ?>" name="tstmnls_count" />
+                        <span class="bws_info"><?php _e( 'per page', 'bws-testimonials' ); ?></span>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -175,11 +169,11 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                             </label>
                             <br />
                             <label>
-                                <input type="radio" name="tstmnls_order_by" value="title" <?php checked( 'title', $this->options["order_by"] ); ?> /> <?php _e( 'Testimonial title', 'bws-testimonials' ); ?>
+                                <input type="radio" name="tstmnls_order_by" value="title" <?php checked( 'title', $this->options["order_by"] ); ?> /> <?php _e( 'Title', 'bws-testimonials' ); ?>
                             </label>
                             <br />
                             <label>
-                                <input type="radio" name="tstmnls_order_by" value="date" <?php checked( 'date', $this->options["order_by"] ); ?> /> <?php _e( 'Date', 'bws-testimonials' ); ?>
+                                <input type="radio" name="tstmnls_order_by" value="date" <?php checked( 'date', $this->options["order_by"] ); ?> /> <?php _e( 'Date added', 'bws-testimonials' ); ?>
                             </label>
                             <br />
                             <label>
@@ -189,44 +183,44 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row"><?php _e( 'Testimonials Sorting', 'bws-testimonials' ); ?> </th>
+                    <th scope="row"><?php _e( 'Arrange Testimonials by', 'bws-testimonials' ); ?> </th>
                     <td><fieldset>
-                            <label><input type="radio" name="tstmnls_order" value="ASC" <?php checked( 'ASC', $this->options["order"] ); ?> /> <?php _e( 'ASC ( ascending order from lowest to highest values - 1, 2, 3; a, b, c )', 'bws-testimonials' ); ?></label><br />
-                            <label><input type="radio" name="tstmnls_order" value="DESC" <?php checked( 'DESC', $this->options["order"] ); ?> /> <?php _e( 'DESC ( descending order from highest to lowest values - 3, 2, 1; c, b, a )', 'bws-testimonials' ); ?></label>
+                            <label><input type="radio" name="tstmnls_order" value="ASC" <?php checked( 'ASC', $this->options["order"] ); ?> /> <?php _e( 'Ascending (e.g. 1, 2, 3; a, b, c)', 'bws-testimonials' ); ?></label><br />
+                            <label><input type="radio" name="tstmnls_order" value="DESC" <?php checked( 'DESC', $this->options["order"] ); ?> /> <?php _e( 'Descending (e.g. 3, 2, 1; c, b, a)', 'bws-testimonials' ); ?></label>
                         </fieldset></td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php _e( 'Publication Permissions', 'bws-testimonials' ); ?></th>
+                    <th scope="row"><?php _e( 'Allow Testimonials from', 'bws-testimonials' ); ?></th>
                     <td>
                         <fieldset>
                             <label>
-                                <input type="radio" name="tstmnls_permission" value="logged" <?php checked( 'logged', $this->options["permissions"] ); ?> /> <?php _e( 'Logged', 'bws-testimonials' ); ?>
+                                <input type="radio" name="tstmnls_permission" value="logged" <?php checked( 'logged', $this->options["permissions"] ); ?> /> <?php _e( 'Logged users', 'bws-testimonials' ); ?>
                             </label>
                             <br />
                             <label>
-                                <input type="radio" name="tstmnls_permission" value="all" <?php checked( 'all', $this->options["permissions"] ); ?> /> <?php _e( 'All', 'bws-testimonials' ); ?>
+                                <input type="radio" name="tstmnls_permission" value="all" <?php checked( 'all', $this->options["permissions"] ); ?> /> <?php _e( 'Everyone', 'bws-testimonials' ); ?>
                             </label>
                         </fieldset>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php _e( 'Publish Automatically', 'bws-testimonials' ); ?></th>
+                    <th scope="row"><?php _e( 'Auto Approve Testimonials', 'bws-testimonials' ); ?></th>
                     <td>
                         <input type="checkbox" name="tstmnls_auto_publication" id="tstmnls_auto_publication" <?php checked( 1, $this->options['auto_publication'] ); ?> />
-                        <label><?php _e( 'Enable to publish new testimonials automatically. Otherwise, new testimonials will be saved as drafts.', 'bws-testimonials' ); ?></label>
+                        <label><?php _e( 'Enable to approve new testimonials automatically. Otherwise, new testimonials will be saved as drafts.', 'bws-testimonials' ); ?></label>
                     </td>
                 </tr>
                 <tr>
                 <?php /* Display reCAPTCHA settings */
                 $related_plugins = array(
                     'recaptcha' => array(
-                        'name'				=> 'Google Captcha (reCAPTCHA) by BestWebSoft',
-                        'short_name'		=> 'Google Captcha',
+                        'name'				=> 'reCaptcha plugin',
+                        'short_name'		=> 'reCaptcha',
                         'download_link'		=> 'https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=8b945710c30a24dd837c9c53c0aed0f8&amp;pn=180&v=' . $tstmnls_plugin_info["Version"] . '&amp;wp_v=' . $wp_version,
                         'status'			=> tstmnls_get_related_plugin_status( 'recaptcha' )
                     ),
                     'rating' => array(
-                        'name'				=> 'Rating by BestWebSoft',
+                        'name'				=> 'Rating plugin',
                         'short_name'		=> 'Rating',
                         'download_link'		=> 'https://bestwebsoft.com/products/wordpress/plugins/rating/?k=61d18b51a1d3170ba85a3a5ee07d207c&amp;pn=180&v=' . $tstmnls_plugin_info["Version"] . '&amp;wp_v=' . $wp_version,
                         'status'			=> tstmnls_get_related_plugin_status( 'rating' )
@@ -262,41 +256,28 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                                         'outdated' == $plugin_data['status']['active']
                                     ); ?>
                                     value="1"
-                                    <?php if ( 'rating' == $plugin_slug ) echo 'class="bws_option_affect" data-affect-show=".tstmnls_reviews_per_load"' ?>
-                                    >&nbsp;
+                                    <?php if ( 'rating' == $plugin_slug ) echo 'class="bws_option_affect" data-affect-show=".tstmnls_reviews_per_load"' ?>>
                                 <span class="bws_info">
-                                    <?php if ( ! $plugin_data['status']['installed'] ) {
+                                    <?php if ( 'rating' == $plugin_slug ) {
+                                        printf( __( 'Enable to allow people add rating to the form submission with the %s.', 'bws-testimonials' ), $plugin_data['name'] );
+                                    } else {
+                                        printf( __( 'Enable to protect your testimonials submission form with the %s.', 'bws-testimonials' ), $plugin_data['name'] );
+                                    }
+                                    if ( ! $plugin_data['status']['installed'] ) {
                                         printf(
-                                            '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
+                                            ' <a href="%1$s" target="_blank">%2$s</a>',
                                             $plugin_data['download_link'],
-                                            __( 'Download', 'bws-testimonials' ),
-                                            $plugin_data['name']
+                                            __( 'Install Now', 'bws-testimonials' )
                                         );
                                     } elseif ( ! $plugin_data['status']['active'] ) {
                                         printf(
-                                            '<a href="%1$s" target="_blank">%2$s</a> %3$s.',
+                                            ' <a href="%1$s" target="_blank">%2$s</a>',
                                             network_admin_url( 'plugins.php' ),
-                                            __( 'Activate', 'bws-testimonials' ),
-                                            $plugin_data['name']
+                                            __( 'Activate', 'bws-testimonials' )
                                         );
                                     } else {
-                                        if ( 'outdated' != $plugin_data['status']['active'] ) {
-                                            if ( 'rating' == $plugin_slug ) {
-                                                printf(
-                                                    __( 'Enable to add %s to Testimonials Review form.', 'bws-testimonials' ),
-                                                    $plugin_data['name']
-                                                );
-                                            } else {
-                                                printf(
-                                                    __( 'Enable to use %s for Testimonials form.', 'bws-testimonials' ),
-                                                    $plugin_data['name']
-                                                );
-                                            }
-                                        } else {
-                                            printf(
-                                                __( 'Your %s plugin is outdated. Please update it to the latest version.', 'bws-testimonials' ),
-                                                $plugin_data['name']
-                                            );
+                                        if ( 'outdated' == $plugin_data['status']['active'] ) {
+                                            printf( __( 'Your %s plugin is outdated. Please update it to the latest version.', 'bws-testimonials' ), $plugin_data['name'] );
                                         }
                                     } ?>
                                 </span>
@@ -320,18 +301,28 @@ if ( ! class_exists( 'Tstmnls_Settings_Tabs' ) ) {
                     <td class="tstmnls_gdpr_td">
                         <fieldset>
                             <input type="checkbox" id="tstmnls_gdpr" name="tstmnls_gdpr" value="1" <?php checked( '1', $this->options['gdpr'] ); ?> />
+                            <label><?php _e( 'Enable to display a GDPR Compliance checkbox.', 'bws-testimonials' ); ?></label>
                             <div id="tstmnls_gdpr_link_options" >
                                 <label class="tstmnls_privacy_policy_text" >
                                     <?php _e( 'Checkbox label', 'bws-testimonials' ); ?>
-                                    <input type="text" id="tstmnls_gdpr_tm_name" size="29" name="tstmnls_gdpr_tm_name" value="<?php echo $this->options['gdpr_tm_name']; ?>"/>
+                                    <br />
+                                    <input type="text" id="tstmnls_gdpr_tm_name" size="30" name="tstmnls_gdpr_tm_name" value="<?php echo $this->options['gdpr_tm_name']; ?>"/>
                                 </label>
+                                <span class="bws_info"><strong>{PRIVACYPOLICY}</strong> - <?php _e( 'Link to Privacy Policy page.', 'bws-testimonials' ); ?></span>
                                 <label class="tstmnls_privacy_policy_text" >
                                     <?php _e( "Link to Privacy Policy Page", 'bws-testimonials' ); ?>
-                                    <input type="url" id="tstmnls_gdpr_link"  placeholder="http://" name="tstmnls_gdpr_link" value="<?php echo $this->options['gdpr_link']; ?>" />
+                                    <br />
+                                    <?php wp_dropdown_pages( array(
+                                        'depth'                 => 0,
+                                        'selected'              => isset( $this->options['gdpr_link'] ) ? $this->options['gdpr_link'] : true,
+                                        'name'                  => 'tstmnls_gdpr_link',
+                                        'show_option_none'		=> '...'
+                                    ) ); ?>
                                 </label>
                                 <label class="tstmnls_privacy_policy_text" >
                                     <?php _e( "Text for Privacy Policy Link", 'bws-testimonials' ); ?>
-                                    <input type="text" id="tstmnls_gdpr_text" name="tstmnls_gdpr_text" value="<?php echo $this->options['gdpr_text']; ?>" />
+                                    <br />
+                                    <input type="text" id="tstmnls_gdpr_text" size="30" name="tstmnls_gdpr_text" value="<?php echo $this->options['gdpr_text']; ?>" />
                                 </label>
                             </div>
                         </fieldset>

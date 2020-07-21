@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add testimonials, author data, company data, testimonials, testimonials plugin, display testimonials, multiple testimonials, testimonials shortcode, testimonials widget, add testimonials widget, custom post type
 Requires at least: 4.5
-Tested up to: 5.3.2
-Stable tag: 1.0.6
+Tested up to: 5.4.2
+Stable tag: 1.0.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,8 +26,8 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Add testimonials block via shortcode
 * Add testimonials widget
 * Add slider with testimonials
-* Compatible with Google Captcha (reCAPTCHA)
-* Compatible with Rating
+* Compatible with [reCaptcha](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=50392a4147eefdfb1d4f7a754ece974c)
+* Compatible with [Rating](https://bestwebsoft.com/products/wordpress/plugins/rating/?k=15c9ee1f62b49ee24460cad261e745a8)
 * Select the one who can submit new testimonials:
 	* All users
 	* Logged in users
@@ -39,7 +39,7 @@ https://www.youtube.com/watch?v=y-9_ThXTUS8
 * Set the default testimonials sorting order by:
 	* ID
 	* Title
-	* Date
+	* Date added
 	* Random
 	* ASC (ascending order from lowest to highest values)
 	* DESC (descending order from highest to lowest values)
@@ -69,7 +69,8 @@ Some of these translations are not complete. We are constantly adding new featur
 = Recommended Plugins =
 
 * [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=91123f9d92aeccd5ae253904a08c8c24) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
-* [Google Captcha (reCAPTCHA)](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=50392a4147eefdfb1d4f7a754ece974c) – Protect WordPress website forms from spam entries with Google reCAPTCHA.
+* [reCaptcha](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=50392a4147eefdfb1d4f7a754ece974c) – Protect WordPress website forms from spam entries with reCAPTCHA.
+* [Rating](https://bestwebsoft.com/products/wordpress/plugins/rating/?k=15c9ee1f62b49ee24460cad261e745a8) – Add rating plugin to your WordPress website to receive feedback from your customers.
 
 == Installation ==
 
@@ -113,20 +114,25 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 1. Testimonials Widget display.
 2. Testimonial form display.
 3. Testimonials Settings page.
-4. GDPR Compliance option.
-5. GDPR Compliance display in Testimonials form.
-6. Add Google Captcha option.
-7. Google Captcha display in Testimonials form.
-8. Testimonials Widget in WordPress admin panel.
-9. 'Add New Testimonial' page in WordPress admin panel.
-10. Setting page Testimonials Slider.
-11. Testimonials Slider display.
-12. Testimonials Slider Widget in WordPress admin panel.
-13. Testimonials Slider Widget display.
-14. Testimonials review form display.
-15. Testimonials reviews display.
+4. GDPR Compliance display in Testimonials form.
+5. Testimonials Widget in WordPress admin panel.
+6. 'Add New Testimonial' page in WordPress admin panel.
+7. Setting page Testimonials Slider.
+8. Testimonials Slider display.
+9. Testimonials Slider Widget in WordPress admin panel.
+10. Testimonials Slider Widget display.
+11. Testimonials review form display.
+12. Testimonials reviews display.
 
 == Changelog ==
+
+= V1.0.7 - 21.07.2020 =
+* Update : All functionality was updated for WordPress 5.4.2.
+* Update : BWS plugins section is updated.
+* NEW : Add notification counter to WordPress admin menu.
+* Update : The plugin settings page was changed.
+* Update : Testimonials review form was changed.
+* Bugfix : Bugs with "Illegal string offset" were fixed.
 
 = V1.0.6 - 19.12.2019 =
 * Update : All functionality was updated for WordPress 5.3.1.
@@ -212,6 +218,11 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW : Css-style was added.
 
 == Upgrade Notice ==
+
+= V1.0.7 =
+* The compatibility with new WordPress version updated.
+* Functionality improved.
+* Bugs fixed.
 
 = V1.0.6 =
 * Bugs fixed.

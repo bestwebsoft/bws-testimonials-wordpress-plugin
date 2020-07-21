@@ -6,12 +6,12 @@ Description: Add testimonials and feedbacks from your customers to WordPress pos
 Author: BestWebSoft
 Text Domain: bws-testimonials
 Domain Path: /languages
-Version: 1.0.6
+Version: 1.0.7
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
 
-/*  @ Copyright 2019  BestWebSoft  ( https://support.bestwebsoft.com )
+/*  @ Copyright 2020  BestWebSoft  ( https://support.bestwebsoft.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -30,6 +30,20 @@ License: GPLv3 or later
 /* Add option page in admin menu */
 if ( ! function_exists( 'tstmnls_admin_menu' ) ) {
 	function tstmnls_admin_menu() {
+        global $menu;
+
+        $awaiting_tstmnls = wp_count_posts( 'bws-testimonial' )->draft;
+        $awaiting_tstmnls_i18n = number_format_i18n( $awaiting_tstmnls );
+
+        $menu_item = wp_list_filter(
+            $menu,
+            array( 2 => 'edit.php?post_type=bws-testimonial' )
+        );
+
+        if ( ! empty( $menu_item )  ) {
+            $menu_item_position = key( $menu_item );
+            $menu[$menu_item_position][0] .= ' <span class="awaiting-mod count-' . $awaiting_tstmnls . '"><span class="pending-count" aria-hidden="true">' . $awaiting_tstmnls_i18n . '</span></span>';
+        }
 
 		$settings = add_submenu_page( 'edit.php?post_type=bws-testimonial', __( 'Testimonials Settings', 'bws-testimonials' ), __( 'Settings', 'bws-testimonials' ), 'manage_options', "testimonials.php", 'tstmnls_settings_page' );
 		add_submenu_page( 'edit.php?post_type=bws-testimonial', 'BWS Panel', 'BWS Panel', 'manage_options', 'tstmnls-bws-panel', 'bws_add_menu_render' );
@@ -71,6 +85,9 @@ if ( ! function_exists ( 'tstmnls_init' ) ) {
 		/* Function check if plugin is compatible with current WP version */
 		bws_wp_min_version_check( plugin_basename( __FILE__ ), $tstmnls_plugin_info, '4.5' );
 
+        if ( is_admin() && 'edit.php' == $pagenow && $_GET['post_type'] == 'bws-testimonial' ) {
+		    tstmnls_approve_button();
+        }
 		tstmnls_register_testimonial_post_type();
 
 		tstmnls_show_testimonials_form();
@@ -133,12 +150,13 @@ if ( ! function_exists ( 'tstmnls_register_testimonial_post_type' ) ) {
 			'rewrite'			=> true,
 			'supports'			=> array( 'title', 'editor', 'thumbnail' ),
 			'labels'			=> array(
+                'all_items'				=> __( 'Testimonials', 'bws-testimonials' ),
 				'add_new'				=> __( 'Add New', 'bws-testimonials' ),
 				'add_new_item'			=> __( 'Add a new testimonial', 'bws-testimonials' ),
-				'edit_item'				=> __( 'Edit testimonials', 'bws-testimonials' ),
+				'edit_item'				=> __( 'Edit Testimonials', 'bws-testimonials' ),
 				'new_item'				=> __( 'New testimonial', 'bws-testimonials' ),
 				'view_item'				=> __( 'View testimonials', 'bws-testimonials' ),
-				'search_items'			=> __( 'Search testimonials', 'bws-testimonials' ),
+				'search_items'			=> __( 'Search Testimonials', 'bws-testimonials' ),
 				'not_found'				=> __( 'No testimonials found', 'bws-testimonials' ),
 				'not_found_in_trash'	=> __( 'No testimonials found in Trash', 'bws-testimonials' ),
 				'filter_items_list'		=> __( 'Testimonials list filter', 'bws-testimonials' ),
@@ -148,6 +166,50 @@ if ( ! function_exists ( 'tstmnls_register_testimonial_post_type' ) ) {
 		);
 		register_post_type( 'bws-testimonial' , $args );
 	}
+}
+
+if ( ! function_exists ( 'tstmnls_approve_button' ) ) {
+    function tstmnls_approve_button() {
+        if( isset( $_GET['nonce_approve'], $_GET['post_type'] ) && $_GET['post_type'] == 'bws-testimonial' ) {
+            $post_id = $_GET['testimonial_id'];
+            $post_status = get_post_status( $post_id );
+            if( wp_verify_nonce( $_GET['nonce_approve'], 'publish-post_' . $post_id ) && $post_status == 'draft' ) {
+                wp_publish_post($post_id);
+            }
+        }
+    }
+}
+
+if ( ! function_exists ( 'tstmnls_modify_list_row_actions' ) ) {
+    function tstmnls_modify_list_row_actions( $actions, $post ) {
+
+        if ( $post->post_type == 'bws-testimonial' ) {
+            $post_status = get_post_status( $post->ID );
+            if ( $post_status == 'draft' ) {
+                $actions['approvetestimonial'] = "<span class=\"trash\"><a class='vim-a aria-button-if-js' href='" . wp_nonce_url("edit.php?post_type=bws-testimonial", 'publish-post_' . $post->ID, 'nonce_approve') . "&testimonial_id=" . $post->ID . "'>" . __('Approve', 'bws-testimonials') . "</a></span>";
+            }
+        }
+        return $actions;
+    }
+}
+
+if ( ! function_exists ( 'tstmnls_patterns_testimonials' ) ) {
+    function tstmnls_patterns_testimonials() {
+        global $tstmnls_options;
+
+        if( ! empty( $tstmnls_options['gdpr_link'] ) ) {
+            $content = ' ' . '<a href="' . get_page_uri( $tstmnls_options['gdpr_link'] ) . '" target="_blank">' . $tstmnls_options['gdpr_text'] . '</a>';
+        } else {
+            $content = '<span>' . ' ' . $tstmnls_options['gdpr_text'] . '</span>';
+        }
+        $patterns = array(
+            array( '/{PRIVACYPOLICY}/', $content ),
+        );
+        foreach ( $patterns as $pattern ) {
+            $data = preg_replace( $pattern[0], $pattern[1], $tstmnls_options['gdpr_tm_name'] );
+        }
+        return $data;
+    }
 }
 
 /**
@@ -175,13 +237,13 @@ if ( ! function_exists( 'tstmnls_get_option_defaults' ) ) {
 			'permissions'				        => 'all',
 			'auto_publication'			        => 0,
 			/* form labels */
-			'gdpr_text'					        => '',
+			'gdpr_text'					        => 'Privacy Policy',
 			'gdpr_link'					        => '',
-			'gdpr_tm_name'				        => __( 'I consent to having this site collect my personal data.', 'bws-testimonials' ),
+			'gdpr_tm_name'				        => __( 'I agree to {PRIVACYPOLICY} and having this website store my submitted information so they can respond to my inquiry.', 'bws-testimonials' ),
 			/* To email settings */
 			'gdpr'						        => 0,
 			'recaptcha_cb'				        => 0,
-			'rating_cb'				        => 0,
+			'rating_cb'				            => 0,
 			'reviews_per_load'					=> 5,
             /*carousel options*/
             'items_in_slide'					=> 1,
@@ -341,7 +403,7 @@ if ( ! function_exists( 'tstmnls_get_related_plugin_status' ) ) {
 */
 if ( ! function_exists( 'tstmnls_settings_page' ) ) {
 	function tstmnls_settings_page() {
-		global $title; 
+		global $title;
 		if ( ! class_exists( 'Bws_Settings_Tabs' ) )
 			require_once( dirname( __FILE__ ) . '/bws_menu/class-bws-settings.php' );
         require_once( dirname( __FILE__ ) . '/includes/class-tstmnls-settings.php' );
@@ -371,14 +433,15 @@ if ( ! function_exists( 'tstmnls_custom_metabox' ) ) {
 		<?php
 		if ( isset( $testimonials_info['rating'], $rtng_options ) ) {
 			$rating = maybe_unserialize( $testimonials_info['rating'] );
-			foreach ( $rtng_options['testimonials_titles'] as $key => $value ) {
-				?>
+            if( isset( $rtng_options['testimonials_titles'] ) && is_array( $rtng_options['testimonials_titles'] ) ) {
+                foreach( $rtng_options['testimonials_titles'] as $key => $value ) { ?>
 				<p>
 					<label for="tstmnls_rating_<?php echo $key; ?>"><?php echo $value; ?>:</label>
 					<br />
 					<input type="number" id="tstmnls_rating_<?php echo $key; ?>" name="tstmnls_rating[<?php echo $key; ?>]" value="<?php echo isset( $rating[ $key ] ) ? $rating[ $key ] : ''; ?>"/>
 				</p>
 			<?php }
+            }
 		} else { ?>
 			<p>
 				<label for="tstmnls_company_name"><?php _e( 'Company Name', 'bws-testimonials' ); ?>:</label>
@@ -409,7 +472,7 @@ if ( ! function_exists( 'tstmnls_save_postdata' ) ) {
 		if ( ! is_admin() ) {
 			return $post_id;
 		}
-		$testimonials_info = get_post_meta( $post_id, '_testimonials_info', false );
+        $testimonials_info = get_post_meta( $post_id, '_testimonials_info', true );
 		if ( isset( $_POST[ 'tstmnls_author' ] ) ) {
 			$testimonials_info['author'] = esc_js( $_POST[ 'tstmnls_author' ] );
 		}
@@ -443,10 +506,13 @@ if ( ! function_exists( 'tstmnls_delete_review' ) ) {
 			return;
 		}
 
-		$wpdb->delete(
-			$wpdb->prefix . "bws_rating",
-			array( 'object_id' => $post_id )
-		);
+		$results = $wpdb->get_results( 'SHOW TABLES LIKE "' . $wpdb->prefix . 'bws_rating"' );
+		if ( ! empty( $results ) ) {
+			$wpdb->delete(
+				$wpdb->prefix . "bws_rating",
+				array( 'object_id' => $post_id )
+			);
+		}
 	}
 }
 
@@ -522,7 +588,7 @@ if ( ! class_exists( 'Testimonials_Slider' ) ) {
                 <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'autoplay' ); ?>" name="<?php echo $this->get_field_name( 'autoplay' ); ?>"<?php checked( $autoplay ); ?> />
                 <label for="<?php echo $this->get_field_id( 'autoplay' ); ?>"><?php _e( 'Autoplay', 'bws-testimonials' ); ?></label><br />
                 <label for="<?php echo $this->get_field_id( 'autoplay_timeout' ); ?>"><?php _e( 'Autoplay Timeout', 'bws-testimonials' ); ?>: </label>
-                <input class="widefat" id="<?php echo $this->get_field_id( 'autoplay_timeout' ); ?>" name="<?php echo $this->get_field_name( 'autoplay_timeout' ); ?>" type="number" min="1" max="1000" value="<?php echo esc_attr( $autoplay_timeout ) ; ?>"/>
+                <input class="tiny-text" id="<?php echo $this->get_field_id( 'autoplay_timeout' ); ?>" name="<?php echo $this->get_field_name( 'autoplay_timeout' ); ?>" type="number" min="1" max="1000" value="<?php echo esc_attr( $autoplay_timeout ) ; ?>"/>
                 <label for="<?php echo $this->get_field_id( 'autoplay_timeout' ); ?>"><?php _e( 'sec', 'bws-testimonials' ); ?></label>
             </p>
         <?php }
@@ -585,7 +651,7 @@ if ( ! class_exists( 'Testimonials' ) ) {
 				<input class="widefat" id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" maxlength="250" value="<?php echo esc_attr( $widget_title ); ?>"/>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Number of testimonials to be displayed', 'bws-testimonials' ); ?>: </label>
+				<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Number of Testimonials', 'bws-testimonials' ); ?>: </label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="number" min="1" max="10000" value="<?php echo esc_attr( $count ); ?>"/>
 			</p>
 		<?php }
@@ -626,15 +692,17 @@ if ( ! function_exists( 'tstmnls_reviews' ) ) {
 
 		$amount_of_stars = isset( $rtng_options['quantity_star'] ) ? $rtng_options['quantity_star'] : 5;
 
-		$last_review = $wpdb->get_row(
-			"SELECT `p`.`ID`, `post_title`, `post_content`, `post_author`, `post_date`, `rating`
-			FROM `" . $wpdb->prefix . "posts` AS p
-			INNER JOIN `" . $wpdb->prefix . "bws_rating`
-			ON `p`.`ID` = `object_id`
-			WHERE `post_status` = 'publish' AND `post_id` = '" . $post_id . "'
-			ORDER BY `p`.`ID` DESC",
-			ARRAY_A
-		); ?>
+		if ( 1 == $tstmnls_options['rating_cb'] ) {
+            $last_review = $wpdb->get_row(
+                "SELECT `p`.`ID`, `post_title`, `post_content`, `post_author`, `post_date`, `rating`
+                FROM `" . $wpdb->prefix . "posts` AS p
+                INNER JOIN `" . $wpdb->prefix . "bws_rating`
+                ON `p`.`ID` = `object_id`
+                WHERE `post_status` = 'publish' AND `post_id` = '" . $post_id . "'
+                ORDER BY `p`.`ID` DESC",
+                ARRAY_A
+            );
+        }   ?>
 		<br />
 		<br />
 		<div id="tstmnls-reviews">
@@ -774,7 +842,7 @@ if ( ! function_exists( 'tstmnls_load_reviews' ) ) {
 			LIMIT " . $offset . ", " . $tstmnls_options['reviews_per_load'],
 			ARRAY_A
 		);
-		
+
 		if ( ! empty( $reviews ) ) {
 			foreach ( $reviews as $review ) {
 				tstmnls_display_review( $review );
@@ -820,8 +888,8 @@ if ( ! function_exists( 'tstmnls_review_form' ) ) {
 				$check = true;
 			}
 
-			$form_title = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_title'] ) ) );
-			$form_content = stripslashes( esc_html( trim( $_POST['tstmnls_testimonial_comment'] ) ) );
+			$form_title = stripslashes( sanitize_text_field( trim( $_POST['tstmnls_testimonial_title'] ) ) );
+			$form_content = stripslashes( sanitize_text_field( trim( $_POST['tstmnls_testimonial_comment'] ) ) );
 			$rating = isset( $_POST['rtng_rating'] ) ? $_POST['rtng_rating'] : false;
 
 			if ( true === $check && ! empty( $form_title ) && ! empty( $form_content ) ) {
@@ -942,15 +1010,8 @@ if ( ! function_exists( 'tstmnls_review_form' ) ) {
 								<div class="tstmnls_field_form">
 									<p class="tstmnls-GDPR-wrap">
 										<label>
-											<input id="tstmnls-GDPR-checkbox" required type="checkbox" name="tstmnls_GDPR" style="vertical-align: middle;"/>
-											<?php
-											echo $tstmnls_options['gdpr_tm_name'];
-											if ( ! empty( $tstmnls_options['gdpr_link'] ) ) {
-											?>
-												<a href="<?php echo $tstmnls_options['gdpr_link']; ?>" target="_blank"><?php echo $tstmnls_options['gdpr_text']; ?></a>
-											<?php } else { ?>
-												<span><?php echo $tstmnls_options['gdpr_text']; ?></span>
-											<?php } ?>
+											<input id="tstmnls-GDPR-checkbox" required type="checkbox" name="tstmnls_GDPR"/>
+											<?php echo tstmnls_patterns_testimonials(); ?>
 										</label>
 									</p>
 								</div>
@@ -1062,57 +1123,57 @@ if ( ! function_exists('tstmnls_show_testimonials_shortcode_slider' ) ) {
                $content .= '<div class="testimonial_quote_footer">';
 		   }
 		   $company_name = isset( $testimonials_info['company_name'] ) ? $testimonials_info['company_name'] : '';
-           $content .=			'<div class="testimonial_quote_author">' . $testimonials_info['author'] . '</div>
-									<span>' . $company_name . '</span>
-							</div>
-						</div>
-						</div>';
+           $tstmnls_author_info = isset( $testimonials_info['author'] ) ? $testimonials_info['author'] : '';
+           $content .= '<div class="testimonial_quote_author">' . $tstmnls_author_info . '</div><span>' . $company_name . '</span></div></div></div>';
        }
-       ob_start(); ?>
-       <script type="text/javascript">
-           ( function($) {
-               $(document).ready(function(){
+       ob_start();
 
-                   var owl =  $( '.bws-carousel-<?php echo $id ;?>' );
-                   owl.owlCarousel( {
-                       loop: <?php  echo ! empty ( $attr['instance'] ) ? $attr['instance']['loop'] : $tstmnls_options['loop'] ; ?>,
-                       nav: <?php   echo ! empty ( $attr['instance'] ) ? $attr['instance']['nav'] : $tstmnls_options['nav'] ; ?>,
-                       dots: <?php  echo ! empty ( $attr['instance'] ) ? $attr['instance']['dots'] : $tstmnls_options['dots'] ; ?>,
-                       autoHeight:<?php echo ! empty ( $attr['instance'] ) ? $attr['instance']['auto_height'] : $tstmnls_options['auto_height'] ;?>,
-                       autoplayTimeout: <?php echo ! empty ( $attr['instance'] ) ? $attr['instance']['autoplay_timeout']*1000 : $tstmnls_options['autoplay_timeout'] ;?>,
-                       autoplay: <?php echo ! empty ( $attr['instance'] ) ? $attr['instance']['autoplay'] : $tstmnls_options['autoplay'] ; ?>,
-                       margin:10,
-                       navText:[
-                           "<i class='dashicons dashicons-arrow-left-alt2'></i>",
-                           "<i class='dashicons dashicons-arrow-right-alt2'></i>"
-                       ],
-                       responsive:{
-                           0:{
-                               items: 1
-                           },
-                           600:{
-                               items: <?php echo $tstmnls_options['items_in_slide'] > 2 ? 2 : $tstmnls_options['items_in_slide'] ; ?>
-                           },
-                           960:{
-                               items: <?php echo $tstmnls_options['items_in_slide'] > 3 ? 3 : $tstmnls_options['items_in_slide'] ; ?>
-                           },
-                           1200:{
-                               items: <?php echo $tstmnls_options['items_in_slide']; ?>
+           $script_bws_carousel = "
+               ( function($) {
+                   $(document).ready(function(){
+    
+                       var owl =  $( '.bws-carousel-" . $id . "' );
+                       owl.owlCarousel( {
+                           loop:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['loop'] : $tstmnls_options['loop'] ) . ",
+                           nav:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['nav'] : $tstmnls_options['nav'] ) . ",
+                           dots:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['dots'] : $tstmnls_options['dots'] ) . ",
+                           autoHeight:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['auto_height'] : $tstmnls_options['auto_height'] ) . ",
+                           autoplayTimeout:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['autoplay_timeout']*1000 : $tstmnls_options['autoplay_timeout'] ) . ",
+                           autoplay:" . ( ! empty( $attr['instance'] ) ? $attr['instance']['autoplay'] : $tstmnls_options['autoplay'] ) . ",
+                           margin:10,
+                           navText:[
+                               \"<i class='dashicons dashicons-arrow-left-alt2'></i>\",
+                               \"<i class='dashicons dashicons-arrow-right-alt2'></i>\"
+                           ],
+                           responsive:{
+                               0:{
+                                   items: 1
+                               },
+                               600:{
+                                   items:" . ( $tstmnls_options['items_in_slide'] > 2 ? 2 : $tstmnls_options['items_in_slide'] ) . "
+                               },
+                               960:{
+                                   items:" . ( $tstmnls_options['items_in_slide'] > 3 ? 3 : $tstmnls_options['items_in_slide'] ) . "
+                               },
+                               1200:{
+                                   items:" . ( $tstmnls_options['items_in_slide'] ) . "
+                               }
                            }
-                       }
-                   });
-                   owl.on('mousewheel', '.owl-stage', function (e) {
-                       if (e.deltaY>0) {
-                           owl.trigger('next.owl');
-                       } else {
-                           owl.trigger('prev.owl');
-                       }
-                       e.preventDefault();
-                   });
-               })
-           })  (jQuery);
-       </script>
-       <?php
+                       });
+                       owl.on('mousewheel', '.owl-stage', function (e) {
+                           if (e.deltaY>0) {
+                               owl.trigger('next.owl');
+                           } else {
+                               owl.trigger('prev.owl');
+                           }
+                           e.preventDefault();
+                       });
+                   })
+               })  (jQuery);";
+           wp_register_script( 'tstmnls_bws-carousel', '' );
+           wp_enqueue_script( 'tstmnls_bws-carousel' );
+           wp_add_inline_script( 'tstmnls_bws-carousel', sprintf( $script_bws_carousel ) );
+
        wp_reset_postdata();
        wp_reset_query();
        $wp_query = $old_query;
@@ -1200,11 +1261,9 @@ if ( ! function_exists( 'tstmnls_show_testimonials_shortcode' ) ) {
 			} else {
 				$content .= '<div class="testimonial_quote_footer">';
 			}
-			$content .=			'<div class="testimonial_quote_author">' . $testimonials_info['author'] . '</div>
-									<span>' . $testimonials_info['company_name'] . '</span>
-							</div>
-						</div>
-						</div>';
+            $company_name = isset( $testimonials_info['company_name'] ) ? $testimonials_info['company_name'] : '';
+            $tstmnls_author_info = isset( $testimonials_info['author'] ) ? $testimonials_info['author'] : '';
+			$content .=	'<div class="testimonial_quote_author">' . $tstmnls_author_info . '</div><span>' . $company_name . '</span></div></div></div>';
 		}
 		wp_reset_postdata();
 		wp_reset_query();
@@ -1338,20 +1397,20 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 			$content =
 			'<div class = "tstmnls_form_div">' . $subm_result . '
 				<form method="post" name="tstmnls_form_name" id="tstmnls_form_name" action="">
-					<h2>' . __( 'Leave your testimonial', 'bws-testimonials' ) . '</h2>
+					<h2>' . __( 'Submit Your Testimonial', 'bws-testimonials' ) . '</h2>
 					' . $form_error . '
 					<div class="tstmnls_field_form">
-						<label for="tstmnls_testimonial_author">' . __( 'Your name:', 'bws-testimonials' ) . '
+						<label for="tstmnls_testimonial_author">' . __( 'Name:', 'bws-testimonials' ) . '
 							<span class="tstmnls_required_symbol"> * </span>
 						</label>
 						<input type="text" required name="tstmnls_testimonial_author" id="tstmnls_testimonial_author" value="'. $form_author . '" >
 					</div>
 					<div class="tstmnls_field_form">
-						<label for="tstmnls_testimonial_company_name">'. __( 'Your company:', 'bws-testimonials' ) .'</label>
+						<label for="tstmnls_testimonial_company_name">'. __( 'Company:', 'bws-testimonials' ) .'</label>
 						<input type="text" name="tstmnls_testimonial_company_name" id="tstmnls_testimonial_company_name" value="'. $form_company .'" >
 					</div>
 					<div class="tstmnls_field_form">
-						<label for="tstmnls_testimonial_title">' . __( 'Testimonial title:', 'bws-testimonials' ) . '
+						<label for="tstmnls_testimonial_title">' . __( 'Title:', 'bws-testimonials' ) . '
 							<span class="tstmnls_required_symbol"> * </span>
 						</label>
 						<input type="text" required name="tstmnls_testimonial_title" id="tstmnls_testimonial_title" value="' . $form_title . '" >
@@ -1367,13 +1426,8 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 						$content .= '<div class="tstmnls_field_form">
 							<p class="tstmnls-GDPR-wrap">
 								<label>
-									<input id="tstmnls-GDPR-checkbox" required type="checkbox" name="tstmnls_GDPR" style="vertical-align: middle;"/>'
-									. $tstmnls_options['gdpr_tm_name'];
-									if( ! empty( $tstmnls_options['gdpr_link'] ) ) {
-										$content .= ' ' . '<a href="' . $tstmnls_options['gdpr_link'] . '" target="_blank">' . $tstmnls_options['gdpr_text'] . '</a>';
-									} else {
-										$content .= '<span>' . ' ' . $tstmnls_options['gdpr_text'] . '</span>';
-									}
+									<input id="tstmnls-GDPR-checkbox" required type="checkbox" name="tstmnls_GDPR" style="margin-right: 5px;"/>'
+									. tstmnls_patterns_testimonials();
 								$content .= '</label>
 							</p>
 						</div>';
@@ -1383,7 +1437,7 @@ if ( ! function_exists( 'tstmnls_show_testimonials_form' ) ) {
 						$content .= apply_filters( 'tstmnls_display_recaptcha', '', 'testimonials' );
 					}
 					$content .= wp_nonce_field( 'tstmnls_action', 'tstmnls_field', true, false ) . '
-					<input type="submit" value="' . __( 'Publish', 'bws-testimonials' ) . '">
+					<input type="submit" value="' . __( 'Submit', 'bws-testimonials' ) . '">
 				</form>
 			</div>';
 		}
@@ -1513,16 +1567,18 @@ if ( ! function_exists( 'tstmnls_shortcode_button_content' ) ) {
                 </label>
             </fieldset>
 			<input class="bws_default_shortcode" type="hidden" name="default" value="[bws_testimonials]" />
-			<script type="text/javascript">
+            <?php $tstmnls_shortcode_script = "
 				function tstmnls_shortcode_init() {
 					( function( $ ) {
-						$( '.mce-reset input[name="tstmnls_select"]' ).on( 'change', function() {
-							var shortcode = $( '.mce-reset input[name="tstmnls_select"]:checked' ).val();
+						$( '.mce-reset input[name=\"tstmnls_select\"]' ).on( 'change', function() {
+							var shortcode = $( '.mce-reset input[name=\"tstmnls_select\"]:checked' ).val();
 							$( '.mce-reset #bws_shortcode_display' ).text( '[' + shortcode + ']' );
 						} );
 					} )( jQuery );
-				}
-			</script>
+				}";
+            wp_register_script( 'tstmnls_shortcode_button_script', '' );
+            wp_enqueue_script( 'tstmnls_shortcode_button_script' );
+            wp_add_inline_script( 'tstmnls_shortcode_button_script', sprintf( $tstmnls_shortcode_script ) ); ?>
 			<div class="clear"></div>
 		</div>
 	<?php }
@@ -1638,6 +1694,7 @@ add_action( 'plugins_loaded', 'tstmnls_plugins_loaded' );
 add_action( 'wp_enqueue_scripts', 'tstmnls_register_scripts' );
 
 add_action( 'save_post', 'tstmnls_save_postdata' );
+add_filter( 'post_row_actions', 'tstmnls_modify_list_row_actions', 10, 2 );
 add_action( 'before_delete_post', 'tstmnls_delete_review' );
 add_filter( 'content_save_pre', 'tstmnls_content_save_pre', 10, 1 );
 /* Display Featured Post */
