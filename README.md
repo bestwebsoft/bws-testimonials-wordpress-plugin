@@ -14,6 +14,7 @@
 <li>Add slider with testimonials</li>
 <li>Compatible with <a href="https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=50392a4147eefdfb1d4f7a754ece974c" rel="nofollow ugc">reCaptcha</a></li>
 <li>Compatible with <a href="https://bestwebsoft.com/products/wordpress/plugins/rating/?k=15c9ee1f62b49ee24460cad261e745a8" rel="nofollow ugc">Rating</a></li>
+<li>Compatible with <a href="https://bestwebsoft.com/products/wordpress/plugins/sender/" rel="nofollow ugc">Sender</a></li>  
 <li>Select the one who can submit new testimonials:
 <ul>
 <li>All users</li>
@@ -46,7 +47,7 @@ If you have a feature suggestion or idea you&#8217;d like to see in the plugin, 
 </ul>
 <h4>Documentation &amp; Videos</h4>
 <ul>
-<li><a href="https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/" rel="nofollow ugc">[Doc] Installation</a></li>
+<li><a href="https://bestwebsoft.com/documentation/how-to-install-a-wordpress-product/how-to-install-a-wordpress-plugin/" rel="nofollow ugc">[Doc] Installation</a></li>
 <li><a href="https://www.youtube.com/watch?v=YMPuEmLELfk" rel="nofollow ugc">[Video] Installation Instruction</a></li>
 </ul>
 <h4>Help &amp; Support</h4>
