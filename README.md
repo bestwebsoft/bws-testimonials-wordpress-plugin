@@ -52,6 +52,8 @@ If you have a feature suggestion or idea you&#8217;d like to see in the plugin, 
 </ul>
 <h4>Help &amp; Support</h4>
 <p>Visit our Help Center if you have any questions, our friendly Support Team is happy to help &#8211; <a href="https://support.bestwebsoft.com/" rel="nofollow ugc">https://support.bestwebsoft.com/</a></p>
+<h4>Affiliate Program</h4>
+<p>Earn 20% commission by selling the premium WordPress plugins and themes by BestWebSoft — <a href="https://bestwebsoft.com/affiliate/" rel="nofollow">https://bestwebsoft.com/affiliate/</a></p>
 <h4>Translation</h4>
 <ul>
 <li>Hungarian (hu_HU) (thanks to <a href="mailto:&#x73;&#x6f;&#x6c;&#x61;&#x72;s&#105;&#100;&#101;&#048;&#057;&#064;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;c&#111;&#109;" rel="nofollow ugc">Peter Aprily</a> www.aprily.com)</li>
